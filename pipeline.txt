@@ -1,0 +1,55 @@
+
+-----------------------------------------------------------------------------------------------
+										pending tasks
+										=============
+5. stick graphics and icons as many as possible.
+  -logo
+  -some cartoon images
+1. on userhome page change the line below the profile link
+   "copy the above profile-link and share on social media, tell your friends to share their thoughts about yousecretly."
+
+2. write down the text which "share your profile link on social media, see what your friends have to say to you"
+
+3. give one more round iteration to designing.
+4. add a social media sharable link
+
+
+------------------------------------------------------------------------------------------------
+									Digital Marketing Plan
+									=======================
+1. Make an Facebook new Page with your name
+2. 
+-----------------------------------------------------------------------------------------------------
+                                    Functionalities of GuluGulu
+                                    ===========================
+1. SignUp
+	- user can sign up by entering unique username and password.
+
+2. Login
+	- user can login by entering his/her credentials.
+
+3. visitor
+	- users who dont want to register or login are visitors and they can still send messages to other users and can participitate in group chats.
+	- visitors can not recieve messages.
+	- visitor are random users.
+	- in this case we will set cookies in visitors system to uniquely identify them.
+
+4. ProfileLink share 
+    - for registered users apart from their unique username there will be a unique profile link by which they can invite their friends to write their openinion about you.
+    - messages coming through profile link will be displayed in user indivdual inbox.
+
+5.  User Individual Inbox
+   -in this feature registered user can recieve messages.
+   -user wont be able to know who sent those messsages to him/her.
+   - user can only know when this messages were recieved (time).
+   - there will be a share button on each messages recieved in inbox.
+   - by clicking on share button user can share screen shot of these messages on social media.
+
+6.  Group Chat
+   - In this functionlity registered user can create multiple group chats.
+   - each group chat will have a unique name by per unique user.
+   - there will be only one admin in each GroupChat and that will be the owner of group.
+   - both registered user and visitors can participitate and send messages in group.
+   - if logged in user is sending messages in group, his/her username will be displayed in group along 
+      with his/her messages. in case of visitors we will display username as visitors.
+   - admin can delete group chats, and also the selected messages recieved in groups.
