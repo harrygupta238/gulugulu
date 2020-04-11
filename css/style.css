@@ -1,78 +1,137 @@
 		/* All css goes here */
 
-		* {
-            font-family: "Fredoka One";
-            }
-            body 
-            {
-            margin: 0px;
-            background-color: #ffffff;
-            }
-           
-            #gulugulu{
-                color:white;
-                text-decoration: none;
-                font-size: 32px;
-            }
-            #gulugulu:hover {
-                color:greenyellow;
-                font-size: 34px;
-                
-            }
-    
-            /* header css */
-
-            h5 > span,u{
-                color:inherit;
-                text-decoration: none;
-            }
-            .btnSignup {
-                text-decoration: none;;
-            }
-    
-            #main_clr {
-            background-color: #24305E;
-            font-size: 16px;	
-            }
-            #header_cont,#footer_cont {
-                color: #f0f03a;
-            }
-    
-            /* header css  done */
-    
-    
-            #footer_clr {
-            background-color: #24305E;
-            font-size: 14px;	
-            }
-    
-    
-            .formwidth {
-            width: 55%;
-            background-color: #ffffff;
-            padding: 1em;
-            border: .1px grey;
-            box-shadow: inset 0px 0px 0px 0px #efefe8;
-            border-radius: 3px;
-            }
-            .usrnmmsg {
-            position: absolute;
-            z-index: 10000;
-            font-size: 12px;
-            margin-top: -17px;
-            margin-left: 12px;
-            }
-            .logoimg
-            {
-            width: 4em;
-            }
-            @media screen and (max-width: 720px) {
-            .formwidth {
-            width: 91%;
-            }
-            .logoimg
-            {
-            width: 3em;
-            }
-            }
         
+           /* customization of index page starts: */
+        
+
+                * {
+                font-family: "Fredoka One";
+              }
+              body 
+              {
+                margin: 0px;
+                background-color: #ffffff;;
+              }
+              
+              /* header  customization */
+
+            #header_clr{
+
+              background-color: #24305E;
+              font-size: 16px; 
+              letter-spacing: 2px;
+              }
+
+              #header_cont {
+                color: #F0F03A;
+                font-size: 14px;
+              }
+
+              #gulugulu {
+                color: white;
+                text-decoration: none;
+                font-size: 40px;
+              }
+              #gulugulu:hover {
+                color: #F0F03A;
+                font-size: 42px;
+              }
+
+            /* for the mobile view */
+              @media screen and (max-width:400px){
+              
+              #header_clr{
+              background-color: #24305E;
+              font-size: 14px; 
+              letter-spacing: 1px;
+              }
+
+              #header_cont {
+                color: #F0F03A;
+                font-size: 12px;
+              }
+
+              #gulugulu {
+                color: white;
+                text-decoration: none;
+                font-size: 38px;
+              }
+              #gulugulu:hover {
+                color: #F0F03A;
+                font-size: 36px;
+              }
+            }
+
+            /* body customization */  
+			  .formwidth {
+				    width: 55%;
+				    background-color: #ffffff;
+				    padding: 1em;
+				     border: .1px grey;
+ 					 box-shadow: inset 0px 0px 0px 0px #efefe8;
+ 					 border-radius: 3px;
+				  }
+				  .usrnmmsg {
+				    position: absolute;
+				    z-index: 10000;
+				    font-size: 12px;
+				    margin-top: -17px;
+				    margin-left: 12px;
+				}
+				.logoimg
+				  {
+				  	width: 4em;
+				  }
+				@media screen and (max-width: 720px) {
+				  .formwidth {
+				    width: 91%;
+				  }
+				  .logoimg
+				  {
+				  	width: 3em;
+				  }
+				}
+
+                u {
+                    text-decoration: none;
+                }
+
+                /* footer customization */
+                #footer_clr {
+                    background-color: #24305E;
+                    font-size: 14px; 
+                    letter-spacing: 1px;
+                }
+
+                #footer_cont {
+                       color: #F0F03A;
+                       font-size: 14px;
+                }
+                @media screen and (max-width:400px)  {
+                     #footer_clr {
+                    background-color: #24305E;
+                    font-size: 12px; 
+                    letter-spacing: 1px;
+                }
+                #footer_cont {
+                       color: #F0F03A;
+                       font-size: 12px;
+                }
+            }
+
+           
+
+            /* customization of index page ends: */
+    
+            /* ************************************************************************************************** */
+           
+
+            /* customization of visitor page:*/
+            #visitor_body_part{
+                background-color: rgba(240, 237, 237, 0.65);
+                /* background-color: red; */
+                padding: 1em;
+                border: .1px grey;
+                box-shadow: inset 0px 0px 0px 0px #efefe8;
+                color:inherit;
+            }

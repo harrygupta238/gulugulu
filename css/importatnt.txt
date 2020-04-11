@@ -1,0 +1,21 @@
+ 
+ Gulu-Gulu Theme :
+
+Default-
+color:#6C757D;
+font-size:14px; normal
+
+
+for the box-
+background-color: rgba(240,237,237,0.65);
+
+In header and  footer text-
+color : #F0F03A; for the  yellow
+font-size:14px;
+
+
+button-
+btn btn-primary
+btn btn-secondry
+btn btn-danger
+btn btn-info

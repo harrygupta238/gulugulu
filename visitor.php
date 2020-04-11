@@ -20,34 +20,26 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-		<style type="text/css">
-			* {
-				font-family: "Fredoka One";
-			}
-			body {
-				margin: 0px;
-			}
-		</style>
+		<!-- adding the  style file -->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	
 	</head>
 	<body>
 		<div
-			class="container bg-dark p-3 border text-center text-white"
-			style=""
-		>
-			<h1>Welcome to</h1>
-			<h1>
-				<span class="text-danger">Gulu-Gulu</span>
-			</h1>
-			<p>You are logged in as : <span class="text-info">Visitor  <button type="button" id="logout" class="btn btn-outline-info btn-sm btnplinkhome mt-1">
-					<span class="fas fa-sign-out"></span>logout
-				</button></span></p>
+		<!-- including the  header file: -->
+		<?php include("header.php"); ?>
+			
 		</div>
-		<div class="container bg-dark p-3 border-top text-white">
+
+		<div id="visitor_body_part" class="container p-3 border-top text-secondary">
 			<div class="container">
 				<div class="row d-flex justify-content-center">
 					<div class=" col-lg-8 col-xl-8 col-sm-12 col-md-12">
+					<p class="text-center p-3">You are logged in as : <span class="text-info">Visitor  &nbsp;&nbsp;<button type="button" id="logout" class="btn btn-danger btn-sm btnplinkhome mt-1">
+					<span class="fas fa-sign-out"></span>logout
+				</button></span></p>
 						<p>
-						Hey, what are you waiting for, it's time to do some  
+						Hey, What are you waiting for, it's time to do some  
 							<span class="text-danger">Gulu-Gulu</span> with your loved ones.
 					
 						</p>
@@ -93,27 +85,8 @@
 			</div>
 			<!-- <hr class="bg-warning"> -->
 			</div>
-			<div class="container border-bottom bg-dark p-3 text-white text-center">
-				<ul class="list-group">
-					<li class="list-group-item list-group-item-danger">
-						* To recieve messages you must signup and get your
-						profile share-link.
-					</li>
-					<li class="list-group-item list-group-item-danger">
-						* Share your profile link on social media or with your friends so your<br>
-						friends can share their feelings with you secretly.
-					</li>
-					<li class="list-group-item list-group-item-danger">
-						* Use Gulu-Gulu to share your feelings to your friends
-						secretly.
-					</li>
-				</ul>
-			</div>
-			<div class="container bg-dark border p-3 text-white text-center">
-				<p>
-				Copyright &copy; 2020 All Rights Reserved by Spot<span class="text-danger">Chitt</span>
-				</p>
-			</div>
+			<!-- including the footer: -->
+		<?php include("footer.php"); ?>
 			<script type="text/javascript" src="js/controls.js"></script>
 		</body>
 	</html>
