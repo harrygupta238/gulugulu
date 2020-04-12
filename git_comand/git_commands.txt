@@ -1,0 +1,11 @@
+IMPORTATANT-
+
+"git checkout master"
+
+"git merge frontend" (the name which branch want to merge you have  to name  that branch name and  it will  merge into the  master files)
+
+"git push origin master" is  used  to  push  from the  master  files and  all the  files will be  merged.
+
+"git clone SHH" links to clone.
+
+"git braanch -d branch name"  to delete the  braanch  and you should also checkin that branch in which branch do you want.
