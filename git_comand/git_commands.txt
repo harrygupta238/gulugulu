@@ -9,3 +9,5 @@ IMPORTATANT-
 "git clone SHH" links to clone.
 
 "git braanch -d branch name"  to delete the  braanch  and you should also checkin that branch in which branch do you want.
+
+git push --all master
