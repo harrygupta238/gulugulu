@@ -1,8 +1,8 @@
 		/* All css goes here */
 
         
-           /* customization of index page starts: */
-        
+           
+           /* making the  default sytem themes: */
 
                 * {
                 font-family: "Fredoka One";
@@ -12,6 +12,15 @@
                 margin: 0px;
                 background-color: #ffffff;;
               }
+              .btn {
+                border:none;
+                outline:none;
+        
+                
+                
+              }
+
+              /* customization of index page starts: */
               
               /* header  customization */
 
@@ -127,7 +136,7 @@
            
 
             /* customization of visitor page:*/
-            #visitor_body_part{
+            #visitor_body_part,.userhome_body{
                 background-color: rgba(240, 237, 237, 0.65);
                 /* background-color: red; */
                 padding: 1em;
@@ -135,4 +144,3 @@
                 box-shadow: inset 0px 0px 0px 0px #efefe8;
                 color:inherit;
             }
-           
