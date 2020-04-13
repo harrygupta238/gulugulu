@@ -32,7 +32,7 @@
 		</div>
 
 		<div id="visitor_body_part" class="container p-3 border-top text-secondary">
-			<div class="container">
+			<div class="container bg-white">
 				<div class="row d-flex justify-content-center">
 					<div class=" col-lg-8 col-xl-8 col-sm-12 col-md-12">
 					<p class="text-center p-3">You are logged in as : <span class="text-info">Visitor  &nbsp;&nbsp;<button type="button" id="logout" class="btn btn-danger btn-sm btnplinkhome mt-1">
