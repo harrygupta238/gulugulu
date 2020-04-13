@@ -76,14 +76,14 @@
 					</div>
 					<div class="row d-flex justify-content-center text-center">
 						<div class="form-group col-lg-4 col-xl-4 col-sm-4 col-md-4">
-							<button type="submit" class="btn btn-danger btnMsgSubmit">
+							<button type="submit" class="btn btn-primary btnMsgSubmit">
 								<span class="fas fa-paper-plane"></span> Send
 							</button>
 						</div>
 					</div>
 				</form>
 			</div>
-			<!-- <hr class="bg-warning"> -->
+			
 			</div>
 			<!-- including the footer: -->
 		<?php include("footer.php"); ?>
