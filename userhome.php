@@ -26,10 +26,10 @@ if($auth==false)
 		</div>
 
 
-			<div class="container bg-white">
+			<div class="container">
 				<div class="row d-flex justify-content-center">
-					<div class=" col-lg-8 col-xl-8 col-sm-12 col-md-12">
-						<p id="copy_content" class="bg-white p-5">
+					<div id="copy_content" class="col-lg-8 col-xl-8 col-sm-12 col-md-12">
+						<p id="copy_link" class="bg-white p-5">
 							<span id="profilelink"><span id="profilelinkorigin"></span><span id="un"><?php echo $_SESSION["username"]; ?></span></span>    
 							<button data-toggle="tooltip" data-placement="right" title="copy to clipboard" type="button" class="btn btn-dark btnCopy btn-sm float-right">
 								Copy  <span class="fas fa-copy" aria-hidden="true"></span>
@@ -100,7 +100,7 @@ if($auth==false)
 					</div>
 					<div class="row d-flex justify-content-center">
 						<div class="col-lg-8 col-xl-8 col-sm-12 col-md-12 msgBox">
-							<div id="inboxMsg">
+							<div id="inboxMsg" class="bg-light pt-4">
 								<?php  
 									@$messages=getAllMessageList();
 									//var_dump($messages);
@@ -109,14 +109,14 @@ if($auth==false)
 										{
 									?>
 											
-											<p class="bg-light text-dark border-bottom b-3 p-3">
+											<p class="text-dark border-bottom b-3 p-3 m-4 inbox_content">
 												<i class="fas fa-clock" style="font-size: .7em"> <?php echo date("M d, Y H:i:s a",strtotime($msg->CreateDate));  ?></i><br>
 												<?php echo $msg->Message; ?><br>
 												
 												      
 									    	</p>
 								<?php }} ?> 
-								<p class="bg-white text-dark border-bottom b-3 p-3">
+								<p class="inbox_content text-dark border-bottom pb-3 p-3">
 								     hi <span class="text-success"><?php echo $_SESSION["username"]; ?></span>,<br>
 									 Greetings! from <span class="text-danger">Gulu-Gulu</span> team,
 									 hope you are enjoying this platform. The messages you will recieve will be displayed here.
