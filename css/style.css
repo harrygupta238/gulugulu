@@ -144,3 +144,9 @@
                 box-shadow: inset 0px 0px 0px 0px #efefe8;
                 color:inherit;
             }
+
+
+            .inboxMsg_content {
+              background-color: #bacfe4;
+              border-radius: 15px 0px 15px 15px;
+            }
