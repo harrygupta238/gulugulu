@@ -1,11 +1,13 @@
 var hostorigin = window.location.origin;
-var rootdir="/GuluGulu";
-var userhomehref = hostorigin + rootdir+"/userhome.php";
-var logouthref = hostorigin + rootdir +"/index.php";
-var anonymoususerhref = hostorigin + rootdir +"/visitor.php";
-var groupchatpagehref = hostorigin +rootdir +"/groupchat.php";
+var userhomehref = hostorigin + _constantClient.rootdir+"/userhome.php";
+var logouthref = hostorigin + _constantClient.rootdir +"/index.php";
+var anonymoususerhref = hostorigin + _constantClient.rootdir +"/visitor.php";
+var groupchatpagehref = hostorigin +_constantClient.rootdir +"/groupchat.php";
 var btnloader = '<span class="spinner-border spinner-border-sm"></span>';
-let profilelink = hostorigin + rootdir +"/profilelink.php?u=";
+let profilelink = hostorigin + _constantClient.rootdir +"/profilelink.php?u=";
+let groupsharelink = hostorigin + _constantClient.rootdir +"/groupvisitor.php?g=";
+
+
 $("#profilelinkorigin").text(profilelink);
 $(document).on("click", ".btnLogin", function () {
 	//$(".defaultContent").hide();

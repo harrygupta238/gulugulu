@@ -130,7 +130,6 @@
 	    	</div>
 		</div>
 		<script type="text/javascript" src="js/controls.js"></script>
-		<script type="text/javascript" src="js/constantclient.js"></script>
 		<script type="text/javascript" src="js/groupchat.js"></script>
 			
 				<!-- including the footer: -->

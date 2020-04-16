@@ -102,6 +102,6 @@ if($res=="-")
 				</p>
 			</div>
 			<script type="text/javascript" src="js/controls.js"></script>
-			<script type="text/javascript" src="js/constantclient.js"></script>
+			
 	</body>
 </html>

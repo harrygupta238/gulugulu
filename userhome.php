@@ -13,7 +13,7 @@ if($auth==false)
            
 		<div>
 			<p class="text-center">You are logged in as : <span class="text-success"> 
-			<?php echo $_SESSION["username"]; ?> <br>
+			<?php echo $_SESSION["LoggedInUserName"]; ?> <br>
 				<button type="button" id="logout" class="btn btn-danger btn-sm btnHome mt-1">
 					<span class="fas fa-sign-out-alt" aria-hidden="true"></span> Logout
 				</button>
@@ -28,7 +28,7 @@ if($auth==false)
 				<div class="row d-flex justify-content-center">
 					<div id="copy_content" class="col-lg-8 col-xl-8 col-sm-12 col-md-12">
 						<p id="copy_link" class="bg-white p-5">
-							<span id="profilelink"><span id="profilelinkorigin"></span><span id="un"><?php echo $_SESSION["username"]; ?></span></span>    
+							<span id="profilelink"><span id="profilelinkorigin"></span><span id="un"><?php echo $_SESSION["LoggedInUserName"]; ?></span></span>    
 							<button data-toggle="tooltip" data-placement="right" title="copy to clipboard" type="button" class="btn btn-dark btnCopy btn-sm float-right">
 								Copy  <span class="fas fa-copy" aria-hidden="true"></span>
 							</button>
@@ -103,7 +103,7 @@ if($auth==false)
 									@$messages=getAllMessageList();
 									//var_dump($messages);
 									foreach (@$messages as $msg) {
-										if($msg->To==$_SESSION["username"])
+										if($msg->To==$_SESSION["LoggedInUserName"])
 										{
 									?>
 											
@@ -115,7 +115,7 @@ if($auth==false)
 									    	</p>
 								<?php }} ?> 
 								<p class="inbox_content text-dark border-bottom pb-3 p-3">
-								     hi <span class="text-success"><?php echo $_SESSION["username"]; ?></span>,<br>
+								     hi <span class="text-success"><?php echo $_SESSION["LoggedInUserName"]; ?></span>,<br>
 									 Greetings! from <span class="text-danger">Gulu-Gulu</span> team,
 									 hope you are enjoying this platform. The messages you will recieve will be displayed here.
 									 <br>-thanks and regards
@@ -126,7 +126,7 @@ if($auth==false)
 							<div id="sentboxMsg" style="display: none;">
 								<?php
 								    foreach (@$messages as $msg) {
-										if($msg->From==$_SESSION["username"])
+										if($msg->From==$_SESSION["LoggedInUserName"])
 										{
 								    ?>
 								    <p class="bg-light text-dark border-bottom b-3 p-3">

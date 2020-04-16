@@ -276,4 +276,28 @@
         setcookie("RandomUserName", new MongoDB\BSON\ObjectID, time() + (86400 * 300), "/");
       }
    }
+
+  function deleteGroupByID($groupid){
+      $db=ConnectDB();
+      $DBName=$GLOBALS["DB"].".GGgroups";
+      
+          $bulk = new MongoDB\Driver\BulkWrite;
+          $bulk->update(['_id' =>  new MongoDB\BSON\ObjectID($groupid)],
+                    ['$set' => 
+                      [
+                        'IsActive' => false,
+                      ]
+                    ]);
+          $result=$db->executeBulkWrite($DBName, $bulk);
+          if($result)
+          {
+            $result="deleted";
+            return $result;
+          }
+          else
+          {
+            $result="delete_failed";
+            return $result;
+          }
+  }
  ?>

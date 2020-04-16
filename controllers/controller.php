@@ -234,7 +234,12 @@ if(isset($_POST["getLoggedinUserData"]))
 	}
 }	
 
-
+if(isset($_POST["deleteGroupById"]))
+{
+	$groupid=$_POST["groupid"];
+	$response=deleteGroupByID(new MongoDB\BSON\ObjectID($groupid));
+	echo $response;
+}
 
 
 

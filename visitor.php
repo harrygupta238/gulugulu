@@ -65,6 +65,6 @@ setVisitorCookie();
 			<!-- <hr class="bg-warning"> -->
 			</div>
 			<script type="text/javascript" src="js/controls.js"></script>
-			<script type="text/javascript" src="js/constantclient.js"></script>
+			
 			<!-- including the footer: -->
 		<?php include("footer.php"); ?>

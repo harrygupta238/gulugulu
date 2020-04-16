@@ -72,7 +72,16 @@ function getGroupList(){
 					//console.log(data);
 					let dataid=JSON.stringify(data._id.$oid);
 					//console.log(dataid);
-					grouplistdata+='<li dataid='+dataid+' class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">'+data.GroupName+'<span class="badge badge-warning badge-pill mr-0">12</span><div class="dropdown dropright"><span  class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span><div class="dropdown-menu"><a class="dropdown-item" href="#">share <i class="fa fa-share" aria-hidden="true"></i></a><a class="dropdown-item" href="#">rename <i class="fa fa-edit" aria-hidden="true"></i></a><a class="dropdown-item" href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></div></div> </li>';
+					grouplistdata+='<li dataid='+dataid+' class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">\
+								    '+data.GroupName+'<span class="badge badge-warning badge-pill mr-0">12</span>\
+								    <div style="display:none;" class="dropdown dropright groupMenuDrpdown "><span class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>\
+								        <div class="dropdown-menu">\
+								        	<a class="dropdown-item btnCopyGrouplink" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i></a>\
+								        	<a class="dropdown-item" href="#">Rename <i class="fa fa-edit" aria-hidden="true"></i></a>\
+								        	<a class="dropdown-item btnDeleteGroup" href="#">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>\
+								        </div>\
+								    </div>\
+								</li>';
 					$('.grouplist').html(grouplistdata);
 				}
 			}
@@ -100,13 +109,17 @@ $("#groupMsgForm").submit(function (e) {
 				if (response == "inserted") {
 					displayGroupMessage(groupid);
 					$("#groupMsgForm").find(".txtgrpmsg").val('');
+
 				}
 			}
 		});
 });
 
 $(document).on('click',".grouplist li", function(){
+
 	$('.grouplist li').removeClass('active');
+	$('.groupMenuDrpdown').hide();
+	$(this).find('.groupMenuDrpdown').show();
 	$("#groupMsgForm").find(".txtgroupid").val($(this).attr('dataid'));
 	$(this).addClass('active');
 	displayGroupMessage($(this).attr('dataid'));
@@ -135,20 +148,62 @@ function displayGroupMessage(groupid){
 							 MessageList+='<div class="containerr"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p>'+Messages[i].Message+'</p><span class="time-right">'+Messages[i].CreateDate+'</span></div>';
 						}
 						$('.groupmessagelist').html(MessageList);
+						divScrollBottom($('.groupmessagelist'));
 					}
 				}
 				else
 				{
 					$('.groupmessagelist').html('<center><p style="margin-top: 10em;">this chat is empty.</p></center>');
 				}
-						
-				// <div class="containerr darker">
-						//   <img src="images/pp.jpg" alt="Avatar" class="right" style="width:100%;">
-						//   <p>Hey! I'm fine. Thanks for asking!</p>
-						//   <span class="time-left">11:01</span>
-						// </div>`;
 			}
 		}
 	});
 }
 
+$(document).on('click',".btnGroupRefreshMsg", function(){
+	let groupid=$(this).closest(".row").find(".txtgroupid").val();
+	if(groupid)
+		displayGroupMessage(groupid);
+});
+
+$(document).on('click',".btnCopyGrouplink", function(){
+	let groupid=$(this).closest("li").attr("dataid");
+	var copyText = groupsharelink+groupid;
+	let temp = $("<input>");
+	$("body").append(temp);
+	temp.val(copyText).select();
+	document.execCommand("copy");
+	temp.remove();
+	$(this).attr("title", 'Copied: ' + copyText);
+});
+
+$(document).on('click',".btnDeleteGroup", function(){
+	let groupid=$(this).closest("li").attr("dataid");
+	if(groupid)
+		deleteGroupById(groupid);
+});
+
+function deleteGroupById(groupid ) {
+	let data = { deleteGroupById: true , groupid:groupid};
+	$.ajax({
+		type: "POST",
+		url: "controllers/controller.php",
+		data: data,
+		success: function (response) {
+			if (response=="deleted") {
+				getGroupList();
+			}
+			else if(response=="delete_failed")
+			{
+				alert("something went wrong.");
+			}
+		},
+		error: function (error) {
+			console.log(error);
+		}
+	});
+}
+function divScrollBottom(div){
+    div.scrollTop(div[0].scrollHeight);
+}
+divScrollBottom($('.groupmessagelist'));

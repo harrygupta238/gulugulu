@@ -1,4 +1,5 @@
  const _constantClient={};
+ _constantClient.rootdir="/gulugulu";
 function getLoggedinUserData(){
 	let data = { getLoggedinUserData: true };
 	$.ajax({
