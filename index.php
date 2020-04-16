@@ -1,7 +1,15 @@
-
-
-		<!-- including the  header file: -->
-		<?php include("header.php"); ?>
+	    <?php 
+	    session_start();
+	    require 'controllers/functions.php';
+	    $auth=checkAuth();
+		if($auth==true)
+		{
+			header("Location: userhome.php");
+		}
+	    setVisitorCookie();
+	    include("headerlink.php");
+		include("header.php"); 
+		?>
 
 		<div id="IndexDynamicContent">
 			<div class="container  p-3 border-bottom text-secondary signupContent" style="display:none;background-color: #f0ededa3">
@@ -126,6 +134,7 @@
 		</div>
 	
 		<!-- including the footer: -->
-		<?php include("footer.php"); ?>
+		
 		<script type="text/javascript" src="js/controls.js"></script>
+		<?php include("footer.php"); ?>
 

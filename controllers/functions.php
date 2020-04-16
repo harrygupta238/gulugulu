@@ -1,6 +1,7 @@
 <?php 
- 
  $GLOBALS["DB"] = "mydb";
+  $GLOBALS["LoggedInUserName"] = "LoggedInUserName";
+  $GLOBALS["RandomUserName"] = "RandomUserName";
 
   function ConnectDB(){
   	try{
@@ -20,7 +21,6 @@
          echo "On line:", $e->getLine(), "\n";    
       } 
   }
-
   function signup($user){
 
 	  	$db=ConnectDB();
@@ -40,7 +40,7 @@
 			if($result)
 			{
 				$_SESSION["userid"]=$user["_id"];
-				$_SESSION["username"]=$user["UserName"];
+				$_SESSION["LoggedInUserName"]=$user["UserName"];
 				$result="inserted";
         		return $result;
 			}
@@ -77,7 +77,8 @@
         if(count($rows)>0)
         {
         	$_SESSION["userid"]=$rows[0]->_id;
-        	$_SESSION["username"]=$rows[0]->UserName;
+        	$_SESSION["LoggedInUserName"]=$rows[0]->UserName;
+          setcookie("RandomUserName", "", time() - 3600, "/");
         	$result="success";
         	return $result;
         }
@@ -137,7 +138,7 @@
   function getAllMessageOfLoggedInUser(){
   		$db=ConnectDB();
 	  	$DBName=$GLOBALS["DB"].".Messages";
-      $filter = ['$or' => [['To'=>$_SESSION['username']],['From'=>$_SESSION['username']]]]; 
+      $filter = ['$or' => [['To'=>$_SESSION["LoggedInUserName"]],['From'=>$_SESSION["LoggedInUserName"]]]]; 
       $options = [
           'sort' => ['CreateDate' => -1],
       ];
@@ -173,7 +174,7 @@
   }
   function logout()
   {
-  	unset($_SESSION["username"]);
+  	unset($_SESSION["LoggedInUserName"]);
   	unset($_SESSION["userid"]);
   }
 
@@ -203,11 +204,12 @@
             return $result;
           }
         }
-  }
+}
+
  function getGroupList(){
       $db=ConnectDB();
       $DBName=$GLOBALS["DB"].".GGgroups";
-      $filter = ['Owner'=>$_SESSION['username']]; 
+      $filter = ['Owner'=>$_SESSION["LoggedInUserName"],"IsActive"=>true]; 
       $options = [
           'sort' => ['CreateDate' => -1],
       ];
@@ -218,4 +220,60 @@
           return $rows;
         }
   }
+
+  function saveGroupMessage($groupMSGObj, $groupid){
+      $db=ConnectDB();
+      $DBName=$GLOBALS["DB"].".GGgroups";
+          $bulk = new MongoDB\Driver\BulkWrite;
+          $bulk->update(['_id' =>  new MongoDB\BSON\ObjectID("$groupid")],
+                        ['$push' => ["Messages"=> $groupMSGObj]]);
+          $result=$db->executeBulkWrite($DBName, $bulk);
+          if($result)
+          {
+            $result="inserted";
+            return $result;
+          }
+          else
+          {
+            $result="insert_failed";
+            return $result;
+          }
+  }
+
+   function getGroupMessageList($groupid){
+      $db=ConnectDB();
+      $DBName=$GLOBALS["DB"].".GGgroups";
+      $filter = ['_id'=>$groupid]; 
+      $options = [
+          'projection' => ['_id' => 0,'Messages'=>1],
+      ];
+      $query = new MongoDB\Driver\Query($filter,$options); 
+      $rows = $db->executeQuery($DBName, $query)->toArray();
+      if($rows)
+        {
+          return $rows;
+        }
+  }
+
+  function validate_groupid($groupid){
+        $db=ConnectDB();
+        $DBName=$GLOBALS["DB"].".GGgroups";
+        $query = new MongoDB\Driver\Query(['_id' => $groupid]);     
+          $rows = $db->executeQuery($DBName, $query)->toArray();
+          if(count($rows)>0)
+          {
+            
+            return $rows;
+          }
+          else
+          {
+            return "-"; 
+          }
+    }
+   function setVisitorCookie(){
+      if(!isset($_SESSION["LoggedInUserName"])  && !isset($_COOKIE["RandomUserName"]))
+      {
+        setcookie("RandomUserName", new MongoDB\BSON\ObjectID, time() + (86400 * 300), "/");
+      }
+   }
  ?>

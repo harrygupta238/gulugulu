@@ -3,56 +3,16 @@ session_start();
 $un=$_GET["u"];
 //echo $a;
 require 'controllers/functions.php';
+setVisitorCookie();
 $res=validate_username($un);
 if($res=="-")
 {
 	header("Location: index.php");
 }
-
+        include("headerlink.php");
+		include("header.php"); 
 
  ?>
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Gulu-Gulu</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link
-			rel="stylesheet"
-			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-		/>
-		<link
-			href="https://fonts.googleapis.com/css?family=Acme&display=swap"
-			rel="stylesheet"
-		/>
-		<link
-			href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap"
-			rel="stylesheet"
-		/>
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-		<!-- adding the  style file -->
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<style type="text/css">
-			* {
-				font-family: "Fredoka One";
-			}
-			body {
-				margin: 0px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container bg-dark p-3 border text-center text-white">
-			<h1>Welcome to</h1>
-			<h1><span class="text-danger">Gulu-Gulu</span></h1>
-			<p>
-				Send messages to your friends secretly. To recieve messages
-				signup and get your profile share-link.
-			</p>
-		</div>
 		<div class="container bg-dark p-3 border-top text-white text-center">
 			<div class="container">
 				<div class="row d-flex justify-content-center">
@@ -62,7 +22,9 @@ if($res=="-")
 						feelings with their friends secretly.
 						</h4>
 						<p>
-							
+							<!-- <button type="button" class="btn btn-outline-danger btnplinkhome">
+								Signup
+							</button> -->
 							<button type="button" class="btn btn-outline-danger btnplinkhome">
 							<span class="fas fa-home"></span>	Home
 							</button>
@@ -140,5 +102,6 @@ if($res=="-")
 				</p>
 			</div>
 			<script type="text/javascript" src="js/controls.js"></script>
+			<script type="text/javascript" src="js/constantclient.js"></script>
 	</body>
 </html>

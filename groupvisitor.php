@@ -1,24 +1,34 @@
 <?php 
-session_start();
-require 'controllers/functions.php';
-$auth=checkAuth();
-if($auth==false)
-{
-	header("Location: index.php");
-}  
-		include("headerlink.php");
-		include("header.php"); 
+	
+	session_start();
+	$gid=$_GET["g"];
+	require 'controllers/functions.php';
+	setVisitorCookie();
+
+	$res=validate_groupid(new MongoDB\BSON\ObjectID($gid));
+	if($res=="-")
+	{
+		header("Location: index.php");
+	}
+	$auth=checkAuth();
+	if($auth==true)
+	{
+		header("Location: groupchat.php");
+	} 
+	    include("headerlink.php");
+		include("header.php");  
  ?>
 
-		
-		<div class="container p-3 text-center text-secondary" style="margin-bottom: -2em;background-color: #f0ededa3">
+			<div class="container p-3 text-center text-secondary" style="margin-bottom: -2em;background-color: #f0ededa3">
 			<p>
 				<button type="button" class="btn btn-outline-secondary btn-sm btnHome">
 				<span class="fas fa-user"></span>	Home
 				</button>
-				<button type="button" class="btn btn-outline-secondary btn-sm btnNewGroup">
+				<p>Group: <?php echo  $res[0]->GroupName; ?></p>
+				<p>This Group is Created By: <?php echo  $res[0]->Owner; ?></p>
+				<!-- <button type="button" class="btn btn-outline-secondary btn-sm btnNewGroup">
 				<span class="fas fa-user"></span>	Create New Group
-				</button>
+				</button> -->
 			</p>
 			
 		</div>
@@ -64,27 +74,51 @@ if($auth==false)
 		</div>
 		<div class="container  p-3 border-bottom text-secondary loginContent" style="background-color: #f0ededa3">
 			<div class="row">
-			      <div class="col-sm-4">
+			     <!--  <div class="col-sm-4">
 			      	  <ul class="list-group grouplist anyClass">
 			      	  			<center><p style="margin-top: 10em;">You have no groups.</p></center>
 			          </ul>
-			      </div>
-			      <div class="col-sm-8" style="background-color: ghostwhite;">
+			      </div> -->
+			      <div class="col-sm-12" style="background-color: ghostwhite;">
 			      	<div class="anyClass groupmessagelist">
-			      		<center><p style="margin-top: 10em;">Group's Messages will be displayed here.</p></center>
+			      		<!-- <center><p style="margin-top: 10em;">Group's Messages will be displayed here.</p></center> -->
+			      	<?php 
+			      		if($res!="-")
+			      		{
+			      			$Messages=$res[0]->Messages;
+			      			foreach ($Messages as $message) {
+			      				if($message->From==@$_COOKIE['RandomUserName'])
+			      				{
+			      				# code...
+			      	 ?>
+			      		<div class="containerr darker"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p><?php echo $message->Message; ?></p><span class="time-right"><?php echo $message->CreateDate; ?></span></div>
+
+			      		<!-- <div class="containerr"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p>krishna nand</p><span class="time-right">2020-04-11 20:31:44</span></div> -->
+		      		<?php 
+		      					}
+		      				    else
+		      				    {
+		      		?>
+		      				<div class="containerr"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p><?php echo $message->Message; ?></p><span class="time-right"><?php echo $message->CreateDate; ?></span></div>
+		      		<?php
+
+		      				    }
+		      				}
+		      			}
+		      		 ?>
 			      	</div>
 			      	<form action="#" class="needs-validation" id="groupMsgForm" method="post">
 			      	<div class="row d-flex border-top pt-2 justify-content-center">
 			      			<div class="form-group col-lg-11 col-xl-11 col-sm-11 col-md-11">
-			      				<input type="hidden" name="" class="txtgroupid">
+			      				<input type="hidden" name="" class="txtgroupid" value="<?php echo @$gid; ?>">
 								<input
-							type="text"
-							class="form-control txtgrpmsg"
-							minlength="6"
-							placeholder="Type Your Message here.."
-							name="pswd"
-							required
-							/>
+								type="text"
+								class="form-control txtgrpmsg"
+								minlength="6"
+								placeholder="Type Your Message here.."
+								name="pswd"
+								required
+								/>
 							</div>
 							<div class="form-group col-lg-1 col-xl-1 col-sm-1 col-md-1" style="margin-left: -1.5em;">
 								<button type="submit" class="btn btn-secondary btngroupMsgFormSubmit">
@@ -95,8 +129,9 @@ if($auth==false)
 			      </div>
 	    	</div>
 		</div>
-		
 		<script type="text/javascript" src="js/controls.js"></script>
 		<script type="text/javascript" src="js/constantclient.js"></script>
 		<script type="text/javascript" src="js/groupchat.js"></script>
-		<?php include("footer.php"); ?>
+			
+				<!-- including the footer: -->
+			<?php include("footer.php"); ?>

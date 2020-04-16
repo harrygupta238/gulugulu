@@ -6,11 +6,9 @@ if($auth==false)
 {
 	header("Location: index.php");
 }
+		include("headerlink.php");
+		include("header.php"); 
  ?>
- 		<!-- including the  header file: -->
-		 <?php include("header.php"); ?>
-		
-		
 		<div class="container p-3 border-top text-secondary userhome_body">
            
 		<div>
@@ -143,12 +141,5 @@ if($auth==false)
 					</div>
 				</div>
 			</div>
-
-		</div>
-
-		
-			<!-- footer addede -->
-			<?php include("footer.php"); ?>
 			<script type="text/javascript" src="js/controls.js"></script>
-		</body>
-	</html>
+			<?php include('footer.php'); ?>

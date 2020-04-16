@@ -61,9 +61,13 @@ if(isset($_POST["sendMsg"]))
 {
 	$toUsername=$_POST["toUsername"];
 	$message=$_POST["message"];
-	if(isset($_SESSION["username"]))
+	if(isset($_SESSION["LoggedInUserName"]))
 	{
-		$fromUsername=$_SESSION["username"];
+		$fromUsername=$_SESSION["LoggedInUserName"];
+	}
+	else if($_COOKIE["RandomUserName"])
+	{
+		$fromUsername=$_COOKIE["RandomUserName"];
 	}
 	else
 	{
@@ -93,7 +97,7 @@ if(isset($_POST["getAllMessageList"]))
 	<div id="inboxMsg"> 
 <?php
 		foreach ($messages as $msg) {
-			if($msg->To==$_SESSION["username"])
+			if($msg->To==$_SESSION["LoggedInUserName"])
 			{
 		?>
 				
@@ -103,7 +107,7 @@ if(isset($_POST["getAllMessageList"]))
 		    	</p>
 	<?php }} ?> 
 	<p class="bg-light text-dark border-bottom b-3 p-3">
-	     hi <span class="text-info"><?php echo $_SESSION["username"]; ?></span>,<br>
+	     hi <span class="text-info"><?php echo $_SESSION["LoggedInUserName"]; ?></span>,<br>
 		 Greetings! from <span class="text-danger">Gulu-Gulu</span> team,
 		 hope you are enjoying this platform. The messages you will recieve will be displayed here.
 		 <br>-thanks and regards							        
@@ -112,7 +116,7 @@ if(isset($_POST["getAllMessageList"]))
 <div id="sentboxMsg">
 	<?php
 	    foreach ($messages as $msg) {
-			if($msg->From==$_SESSION["username"])
+			if($msg->From==$_SESSION["LoggedInUserName"])
 			{
 	    ?>
 	    <p class="bg-light text-dark border-bottom b-3 p-3">
@@ -128,9 +132,13 @@ if(isset($_POST["getAllMessageList"]))
 if(isset($_POST["creategroup"]))
 {
 	$groupname=$_POST["groupname"];
-	if(isset($_SESSION["username"]))
+	if(isset($_SESSION["LoggedInUserName"]))
 	{
-		$owner=$_SESSION["username"];
+		$owner=$_SESSION["LoggedInUserName"];
+	}
+	else if($_COOKIE["RandomUserName"])
+	{
+		$owner=$_COOKIE["RandomUserName"];
 	}
 	else
 	{
@@ -150,11 +158,84 @@ if(isset($_POST["creategroup"]))
 		echo $response;
 	}
 }
+
 if(isset($_POST["getGroupList"]))
 {
 	$response=getGroupList();
 	echo json_encode($response);
 	//echo json_decode(json_encode($response), FALSE);
 }
+
+if(isset($_POST["savegroupmsg"]))
+{
+	$groupMSG=$_POST["groupMSG"];
+	$groupid=$_POST["groupid"];
+	if(isset($_SESSION["LoggedInUserName"]))
+	{
+		$owner=$_SESSION["LoggedInUserName"];
+	}
+	else if($_COOKIE["RandomUserName"])
+	{
+		$owner=$_COOKIE["RandomUserName"];
+	}
+	else
+	{
+		$owner="Anonymous";
+	}
+	$groupMSGObj =
+	  [
+	  	'_id'=> new MongoDB\BSON\ObjectID,
+	    'Message'=> $groupMSG,
+	    "From"=>$owner,
+	    "CreateDate"=> date('Y-m-d H:i:s')
+	  ];	 
+	$response=saveGroupMessage($groupMSGObj, $groupid);
+	if($response)
+	{
+		echo $response;
+	}
+}
+
+if(isset($_POST["getGroupMessageList"]))
+{
+	$groupid=$_POST["groupid"];
+	$response=getGroupMessageList(new MongoDB\BSON\ObjectID($groupid));
+	echo json_encode($response);
+	//echo json_decode(json_encode($response), FALSE);
+}
+
+if(isset($_POST["getLoggedinUserData"]))
+{
+	if(isset($_SESSION['LoggedInUserName']))
+	{
+		$userdata =
+	  [
+	  	'_id'=> $_SESSION["userid"],
+	    'username'=> $_SESSION["LoggedInUserName"],
+	    'type'=>'loggedin'
+	 
+	  ];
+	  echo json_encode($userdata);
+
+	}
+	else if(isset($_COOKIE["RandomUserName"]))
+	{
+		$userdata =
+	  [
+	  	'type'=>'visitor',
+	    'username'=> $_COOKIE["RandomUserName"]
+	 
+	  ];
+	  echo json_encode($userdata);
+	}
+	else
+	{
+		echo "";
+	}
+}	
+
+
+
+
 
 ?>

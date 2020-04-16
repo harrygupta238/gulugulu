@@ -1,137 +1,218 @@
-		/* All css goes here */
+/* All css goes here */
 
+
+/* customization of index page starts: */
+
+
+  * {
+  font-family: "Fredoka One";
+}
+body 
+{
+  margin: 0px;
+  background-color: #ffffff;;
+}
+
+/* header  customization */
+
+#header_clr{
+
+background-color: #24305E;
+font-size: 16px; 
+letter-spacing: 2px;
+}
+
+#header_cont {
+  color: #F0F03A;
+  font-size: 14px;
+}
+
+#gulugulu {
+  color: white;
+  text-decoration: none;
+  font-size: 40px;
+}
+#gulugulu:hover {
+  color: #F0F03A;
+  font-size: 42px;
+}
+
+/* for the mobile view */
+@media screen and (max-width:400px){
+
+#header_clr{
+background-color: #24305E;
+font-size: 14px; 
+letter-spacing: 1px;
+}
+
+#header_cont {
+  color: #F0F03A;
+  font-size: 12px;
+}
+
+#gulugulu {
+  color: white;
+  text-decoration: none;
+  font-size: 38px;
+}
+#gulugulu:hover {
+  color: #F0F03A;
+  font-size: 36px;
+}
+}
+
+/* body customization */  
+.formwidth {
+width: 55%;
+background-color: #ffffff;
+padding: 1em;
+border: .1px grey;
+box-shadow: inset 0px 0px 0px 0px #efefe8;
+border-radius: 3px;
+}
+.usrnmmsg {
+position: absolute;
+z-index: 10000;
+font-size: 12px;
+margin-top: -17px;
+margin-left: 12px;
+}
+.logoimg
+{
+width: 4em;
+}
+@media screen and (max-width: 720px) {
+.formwidth {
+width: 91%;
+}
+.logoimg
+{
+width: 3em;
+}
+}
+
+  u {
+      text-decoration: none;
+  }
+
+  /* footer customization */
+  #footer_clr {
+      background-color: #24305E;
+      font-size: 14px; 
+      letter-spacing: 1px;
+  }
+
+  #footer_cont {
+         color: #F0F03A;
+         font-size: 14px;
+  }
+  @media screen and (max-width:400px)  {
+       #footer_clr {
+      background-color: #24305E;
+      font-size: 12px; 
+      letter-spacing: 1px;
+  }
+  #footer_cont {
+         color: #F0F03A;
+         font-size: 12px;
+  }
+}
+
+
+
+/* customization of index page ends: */
+
+/* ************************************************************************************************** */
+
+
+/* customization of visitor page:*/
+#visitor_body_part{
+  background-color: rgba(240, 237, 237, 0.65);
+  /* background-color: red; */
+  padding: 1em;
+  border: .1px grey;
+  box-shadow: inset 0px 0px 0px 0px #efefe8;
+  color:inherit;
+}
+.anyClass {
+        height:452px;
+        overflow-y: scroll;
+      }
+            
         
-           
-           /* making the  default sytem themes: */
+        
+        .formwidth {
+            width: 55%;
+            background-color: #ffffff;;
+            padding: 1em;
+             border: .1px grey;
+           box-shadow: inset 0px 0px 0px 0px #efefe8;
+           border-radius: 3px;
+          }
+          .usrnmmsg {
+            position: absolute;
+            z-index: 10000;
+            font-size: 12px;
+            margin-top: -17px;
+            margin-left: 12px;
+        }
+        .logoimg
+          {
+            width: 4em;
+          }
+        @media screen and (max-width: 720px) {
+          .formwidth {
+            width: 91%;
+          }
+          .logoimg
+          {
+            width: 3em;
+          }
+        }
+        .containerr {
+          border: 2px solid #dedede;
+          background-color: #f1f1f1;
+          border-radius: 5px;
+          padding: 10px;
+          margin: 10px 0;
+        }
 
-                * {
-                font-family: "Fredoka One";
-              }
-              body {
-                margin: 0px;
-                background-color: #ffffff;
-              }
-              .btn {
-                border: none;
-                outline:none;
-              }
+        .darker {
+          border-color: #ccc;
+          background-color: #ced8dc;
+        }
 
-              /* customization of index page starts: */
-              
-              /* header  customization */
+        .containerr::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
 
-            #header_clr{
+        .containerr img {
+          float: left;
+          max-width: 60px;
+          width: 100%;
+          margin-right: 20px;
+          border-radius: 50%;
+        }
 
-              background-color: #24305E;
-              font-size: 16px; 
-              letter-spacing: 2px;
-              }
+        .containerr img.right {
+          float: right;
+          margin-left: 20px;
+          margin-right:0;
+        }
 
-              #header_cont {
-                color: #F0F03A;
-                font-size: 14px;
-              }
+        .time-right {
+          float: right;
+          color: #aaa;
+        }
 
-              #gulugulu {
-                color: white;
-                text-decoration: none;
-                font-size: 40px;
-              }
-              #gulugulu:hover {
-                color: #F0F03A;
-                font-size: 42px;
-              }
-
-            /* for the mobile view */
-              @media screen and (max-width:400px){
-              
-              #header_clr{
-              background-color: #24305E;
-              font-size: 14px; 
-              letter-spacing: 1px;
-              }
-
-              #header_cont {
-                color: #F0F03A;
-                font-size: 12px;
-              }
-
-              #gulugulu {
-                color: white;
-                text-decoration: none;
-                font-size: 38px;
-              }
-              #gulugulu:hover {
-                color: #F0F03A;
-                font-size: 36px;
-              }
-            }
-
-            /* body customization */  
-			  .formwidth {
-				    width: 55%;
-				    background-color: #ffffff;
-				    padding: 1em;
-				     border: .1px grey;
- 					 box-shadow: inset 0px 0px 0px 0px #efefe8;
- 					 border-radius: 3px;
-				  }
-				  .usrnmmsg {
-				    position: absolute;
-				    z-index: 10000;
-				    font-size: 12px;
-				    margin-top: -17px;
-				    margin-left: 12px;
-				}
-				.logoimg
-				  {
-				  	width: 4em;
-				  }
-				@media screen and (max-width: 720px) {
-				  .formwidth {
-				    width: 91%;
-				  }
-				  .logoimg
-				  {
-				  	width: 3em;
-				  }
-				}
-
-                u {
-                    text-decoration: none;
-                }
-
-                /* footer customization */
-                #footer_clr {
-                    background-color: #24305E;
-                    font-size: 14px; 
-                    letter-spacing: 1px;
-                }
-
-                #footer_cont {
-                       color: #F0F03A;
-                       font-size: 14px;
-                }
-                @media screen and (max-width:400px)  {
-                     #footer_clr {
-                    background-color: #24305E;
-                    font-size: 12px; 
-                    letter-spacing: 1px;
-                }
-                #footer_cont {
-                       color: #F0F03A;
-                       font-size: 12px;
-                }
-            }
-
-           
-
-            /* customization of index page ends: */
-    
-            /* ************************************************************************************************** */
-           
-
-            /* customization of visitor page:*/
+        .time-left {
+          float: left;
+          color: #999;
+        }
+ /* customization of visitor page:*/
             #visitor_body_part,.userhome_body{
                 background-color: rgba(240, 237, 237, 0.65);
                 /* background-color: red; */
@@ -154,4 +235,4 @@
               color:blue;
               font-size: 14px;
             }
-            
+        
