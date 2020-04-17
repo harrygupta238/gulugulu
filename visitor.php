@@ -34,7 +34,7 @@ setVisitorCookie();
 					<div class="row d-flex justify-content-center">
 						<div class="form-group col-lg-8 col-xl-8 col-sm-12 col-md-12" >
 							<span class="text-danger errormsg"></span><br>
-							<label for="uname">Username:</label>
+							<!-- <label for="uname">Username:</label> -->
 							<input
 							type="text"
 							class="form-control username"
@@ -49,7 +49,7 @@ setVisitorCookie();
 					</div>
 					<div class="row d-flex justify-content-center">
 						<div class="form-group col-lg-8 col-xl-8 col-sm-12 col-md-12">
-							<label for="pwd">Message:</label>
+							<!-- <label for="pwd">Message:</label> -->
 							<textarea class="form-control message" rows="5" id="comment" placeholder="Write the message you want to share.."></textarea>
 						</div>
 					</div>

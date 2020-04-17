@@ -51,7 +51,7 @@ if($auth==false)
 					<div class="row d-flex justify-content-center">
 						<div class="form-group col-lg-8 col-xl-8 col-sm-12 col-md-12" >
 							<span class="text-danger errormsg"></span><br>
-							<label for="uname">Username:</label>
+							<!-- <label for="uname">Username:</label> -->
 							<input
 							type="text"
 							class="form-control username"
@@ -66,7 +66,7 @@ if($auth==false)
 					</div>
 					<div class="row d-flex justify-content-center">
 						<div class="form-group col-lg-8 col-xl-8 col-sm-12 col-md-12">
-							<label for="pwd">Message:</label>
+							<!-- <label for="pwd">Message:</label> -->
 							<textarea class="form-control message" rows="5" id="comment" placeholder="Write the message you want to share.."></textarea>
 						</div>
 					</div>
@@ -98,7 +98,7 @@ if($auth==false)
 					</div>
 					<div class="row d-flex justify-content-center">
 						<div class="col-lg-8 col-xl-8 col-sm-12 col-md-12 msgBox">
-							<div id="inboxMsg" class="bg-light pt-4">
+							<div id="inboxMsg" class="pt-4">
 								<?php  
 									@$messages=getAllMessageList();
 									//var_dump($messages);
@@ -129,7 +129,7 @@ if($auth==false)
 										if($msg->From==$_SESSION["LoggedInUserName"])
 										{
 								    ?>
-								    <p class="bg-light text-dark border-bottom b-3 p-3">
+								    <p class="sent_content text-dark border-bottom b-3 p-3">
 								    	<i class="fas fa-clock" style="font-size: .7em"> <?php echo date("M d, Y H:i:s a",strtotime($msg->CreateDate));  ?></i><br>
 								    	To : <span class="text-info"><?php echo $msg->To; ?></span><br>
 										Message :	<?php echo $msg->Message; ?><br>					

@@ -101,12 +101,12 @@ if(isset($_POST["getAllMessageList"]))
 			{
 		?>
 				
-				<p class="bg-light text-dark border-bottom b-3 p-3">
+				<p class="text-dark border-bottom b-3 p-3 inbox_content">
 					<i class="fas fa-clock" style="font-size: .7em"> <?php echo date("M d, Y H:i:s a",strtotime($msg->CreateDate));  ?></i><br>
 					<?php echo $msg->Message; ?><br>					        
 		    	</p>
 	<?php }} ?> 
-	<p class="bg-light text-dark border-bottom b-3 p-3">
+	<p class="inbox_content text-dark border-bottom b-3 p-3">
 	     hi <span class="text-info"><?php echo $_SESSION["LoggedInUserName"]; ?></span>,<br>
 		 Greetings! from <span class="text-danger">Gulu-Gulu</span> team,
 		 hope you are enjoying this platform. The messages you will recieve will be displayed here.
@@ -119,7 +119,7 @@ if(isset($_POST["getAllMessageList"]))
 			if($msg->From==$_SESSION["LoggedInUserName"])
 			{
 	    ?>
-	    <p class="bg-light text-dark border-bottom b-3 p-3">
+	    <p class="sent_content text-dark border-bottom b-3 p-3">
 	    	<i class="fas fa-clock" style="font-size: .7em"> <?php echo date("M d, Y H:i:s a",strtotime($msg->CreateDate));  ?></i><br>
 	    	To : <span class="text-info"><?php echo $msg->To; ?></span><br>
 			Message :	<?php echo $msg->Message; ?><br>					        

@@ -222,17 +222,42 @@ width: 3em;
                 color:inherit;
             }
 
-
-
             .inbox_content {
               background-color: #bacfe4;
               border-radius: 10px 0 10px 10px;
               border:none;
+              padding: 1em;
+              margin:24px;
+              font-size:14px;
               box-shadow: 5px 5px 2px 1px rgba(182, 182, 187, 0.2);
             }
 
+            .sent_content {
+              background-color: #ffff99;
+              border-radius: 10px 0 10px 10px;
+              border:none;
+              padding: 1em;
+              margin:24px;
+              font-size:14px;
+              box-shadow: 5px 5px 2px 1px rgba(182, 182, 187, 0.2);
+            }
+           
+            /* copy button customization: */
             #copy_content > #copy_link {
               color:blue;
-              font-size: 14px;
+              font-size: 16px;
             }
+            /* responsive  for the copy links: */
+        @media screen and (max-width:400px) {
+          #copy_content > #copy_link {
+            color:blue;
+            font-size: 12px;
+            margin-left:-10px;
+          }
+          .btnCopy {
+            font-size:12px;
+          }
+        }
+
+
         
