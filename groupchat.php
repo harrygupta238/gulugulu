@@ -114,4 +114,5 @@ if($auth==false)
 		
 		<script type="text/javascript" src="js/controls.js"></script>
 		<script type="text/javascript" src="js/groupchat.js"></script>
+		
 		<?php include("footer.php"); ?>

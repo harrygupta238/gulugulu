@@ -229,7 +229,6 @@ width: 3em;
  /* customization of visitor page:*/
             #visitor_body_part,.userhome_body{
                 background-color: rgba(240, 237, 237, 0.65);
-                /* background-color: red; */
                 padding: 1em;
                 border: .1px grey;
                 box-shadow: inset 0px 0px 0px 0px #efefe8;
@@ -271,6 +270,14 @@ width: 3em;
           .btnCopy {
             font-size:12px;
           }
+        } 
+         
+        .profilelink_page {
+          background-color: rgba(240, 237, 237, 0.65);
+          padding: 1em;
+          border: .1px grey;
+          box-shadow: inset 0px 0px 0px 0px #efefe8;
+          color:#495057;
         }
         #pop-window{
          position: fixed;
@@ -293,5 +300,5 @@ width: 3em;
     margin-left: 20em;
     }
 
-
+        
         
