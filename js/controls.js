@@ -359,7 +359,16 @@ $(document).on("click", ".btnplinkhome", function () {
 	window.location.href = logouthref;
 });
 //$(location).attr('href',url);
-
+$(document).on("click", ".btnPopup", function () {
+	
+		let abc=$("<div id='pop-window'></div>");
+		abc.appendTo('body');
+		$("#pop-window").html('<div class="popcontent"><div class="d-flex justify-content-center">\
+  <div class="spinner-border" role="status">\
+    <span class="sr-only">Loading...</span>\
+  </div>\
+</div></div>');
+});
 
 
 

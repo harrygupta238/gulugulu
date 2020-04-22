@@ -245,7 +245,7 @@
       $DBName=$GLOBALS["DB"].".GGgroups";
       $filter = ['_id'=>$groupid]; 
       $options = [
-          'projection' => ['_id' => 0,'Messages'=>1],
+          'projection' => ['_id' => 0,'Messages'=>1,'GroupName'=>1],
       ];
       $query = new MongoDB\Driver\Query($filter,$options); 
       $rows = $db->executeQuery($DBName, $query)->toArray();

@@ -20,6 +20,9 @@ if($auth==false)
 				<button type="button" id="btnGroupChatpage" class="btn btn-info btn-sm btnGroupChatpage mt-1">
 					<span class="fas fa-users" aria-hidden="true"></span> GroupChat
 				</button>
+				<button type="button" id="btnPopup" class="btn btn-info btn-sm btnPopup mt-1">
+					<span class="fas fa-users" aria-hidden="true"></span> popup
+				</button>
 			</p>
 		</div>
 

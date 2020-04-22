@@ -74,15 +74,19 @@
 		</div>
 		<div class="container  p-3 border-bottom text-secondary loginContent" style="background-color: #f0ededa3">
 			<div class="row">
-			     <!--  <div class="col-sm-4">
-			      	  <ul class="list-group grouplist anyClass">
-			      	  			<center><p style="margin-top: 10em;">You have no groups.</p></center>
-			          </ul>
-			      </div> -->
-			      <div class="col-sm-12" style="background-color: ghostwhite;">
-			      	<div class="anyClass groupmessagelist">
-			      		<!-- <center><p style="margin-top: 10em;">Group's Messages will be displayed here.</p></center> -->
-			      	<?php 
+			      <div class="col-sm-12" style="padding-left: 0px;
+    padding-right: 0px;background-color: ghostwhite;">
+    				<div class="groupmessageBox border-bottom">
+    					<div class="groupmsgBox-header" style="background-color: #dae0e5!important;width: 100%;
+	    				height: 33px;">
+	    					<div class="d-flex justify-content-between bg-secondary">
+							    <div class="p-1 text-light"></div>
+							    <div class="p-1 text-light">Group Name will be display here</div>
+							    <div class="p-1 text-light"><i class="pr-2 fa fa-cog" aria-hidden="true"></i></div>
+							</div>
+						</div>
+				      	<div class="anyClass groupmessagelist" id="groupmessagelist">
+				      		<?php 
 			      		if($res!="-")
 			      		{
 			      			$Messages=$res[0]->Messages;
@@ -106,9 +110,11 @@
 		      				}
 		      			}
 		      		 ?>
+
+				      	</div> 
 			      	</div>
 			      	<form action="#" class="needs-validation" id="groupMsgForm" method="post">
-			      	<div class="row d-flex border-top pt-2 justify-content-center">
+			      	<div class="row pl-2 pr-2 d-flex border-top pt-2 justify-content-center">
 			      			<div class="form-group col-lg-10 col-xl-10 col-sm-10 col-md-10">
 			      				<input type="hidden" name="" class="txtgroupid" value="<?php echo @$gid; ?>">
 								<input

@@ -123,8 +123,19 @@ $(document).on('click',".grouplist li", function(){
 	$("#groupMsgForm").find(".txtgroupid").val($(this).attr('dataid'));
 	$(this).addClass('active');
 	displayGroupMessage($(this).attr('dataid'));
+	if($(window).width()<=576)
+	{
+		$('.groupmessagecontainer').show();
+		$('.grouplist').hide();
+	}
 })
-
+$(document).on('click',".groupmessageBox .fa-chevron-left", function(){
+	if($(window).width()<=576)
+	{
+		$('.groupmessagecontainer').hide();
+		$('.grouplist').show();
+	}
+})
 function displayGroupMessage(groupid){
 	let data = { getGroupMessageList: true ,groupid:groupid};
 	$.ajax({
@@ -135,11 +146,20 @@ function displayGroupMessage(groupid){
 			if (response) {
 				let result=response;
 				result=JSON.parse(result);
+				let groupmsgbox_header='<div class="groupmsgBox-header" groupid="'+groupid+'" style="background-color: #dae0e5!important;width: 100%;\
+	    				height: 33px;">\
+	    					<div class="d-flex justify-content-between bg-secondary">\
+							    <div class="p-1 text-light"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>\
+							    <div class="p-1 text-light">'+result[0].GroupName+'</div>\
+							    <div class="p-1 text-light"><i class=" pr-2 fa fa-cog" aria-hidden="true"></i></div>\
+							</div>\
+						</div>';
 				if(result[0].Messages!=undefined)
 				{
 					let Messages=result[0].Messages;
 					if(result && result.length>0)
-					{
+					{ 
+						
 						let MessageList='';
 						for(let i=0;i<Messages.length;i++)
 						{	 if(Messages[i].From==_constantClient.UserName)
@@ -147,13 +167,19 @@ function displayGroupMessage(groupid){
 						     else
 							 MessageList+='<div class="containerr"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p>'+Messages[i].Message+'</p><span class="time-right">'+Messages[i].CreateDate+'</span></div>';
 						}
-						$('.groupmessagelist').html(MessageList);
+						let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist">\
+				      		'+MessageList+'\
+				      	</div>';
+						$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);
 						divScrollBottom($('.groupmessagelist'));
 					}
 				}
 				else
 				{
-					$('.groupmessagelist').html('<center><p style="margin-top: 10em;">this chat is empty.</p></center>');
+					let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist">\
+				      		<center><p style="margin-top: 10em;">this chat is empty.</p></center>\
+				      	</div>';
+					$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);
 				}
 			}
 		}
@@ -166,7 +192,8 @@ $(document).on('click',".btnGroupRefreshMsg", function(){
 		displayGroupMessage(groupid);
 });
 
-$(document).on('click',".btnCopyGrouplink", function(){
+$(document).on('click',".btnCopyGrouplink", function(e){
+	e.stopImmediatePropagation();
 	let groupid=$(this).closest("li").attr("dataid");
 	var copyText = groupsharelink+groupid;
 	let temp = $("<input>");
@@ -177,7 +204,8 @@ $(document).on('click',".btnCopyGrouplink", function(){
 	$(this).attr("title", 'Copied: ' + copyText);
 });
 
-$(document).on('click',".btnDeleteGroup", function(){
+$(document).on('click',".btnDeleteGroup", function(e){
+	e.stopImmediatePropagation();
 	let groupid=$(this).closest("li").attr("dataid");
 	if(groupid)
 		deleteGroupById(groupid);
@@ -204,6 +232,7 @@ function deleteGroupById(groupid ) {
 	});
 }
 function divScrollBottom(div){
-    div.scrollTop(div[0].scrollHeight);
+     div.scrollTop(div[0].scrollHeight);
 }
-divScrollBottom($('.groupmessagelist'));
+if($('.groupmessagelist').length>0)
+ divScrollBottom($('.groupmessagelist'));
