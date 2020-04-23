@@ -241,6 +241,14 @@ if(isset($_POST["deleteGroupById"]))
 	echo $response;
 }
 
+if(isset($_POST["deleteGroupMsgById"]))
+{
+	$groupid=$_POST["groupid"];
+	$msgid=$_POST["msgid"];
+	$response=deleteGroupMsgByID(new MongoDB\BSON\ObjectID($groupid),new MongoDB\BSON\ObjectID($msgid));
+	echo $response;
+}
+
 
 
 ?>

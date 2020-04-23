@@ -162,10 +162,11 @@ function displayGroupMessage(groupid){
 						
 						let MessageList='';
 						for(let i=0;i<Messages.length;i++)
-						{	 if(Messages[i].From==_constantClient.UserName)
-							 MessageList+='<div class="containerr darker"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p>'+Messages[i].Message+'</p><span class="time-right">'+Messages[i].CreateDate+'</span></div>';
+						{	 
+							if(Messages[i].From==_constantClient.UserName)
+							 MessageList+='<div class="containerr darker" data-id="'+Messages[i]._id.$oid+'"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p>'+Messages[i].Message+'</p><span class="time-right">'+Messages[i].CreateDate+'</span><span class="fas fa-trash btnGpMsgDelete"></span></div>';
 						     else
-							 MessageList+='<div class="containerr"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p>'+Messages[i].Message+'</p><span class="time-right">'+Messages[i].CreateDate+'</span></div>';
+							 MessageList+='<div class="containerr" data-id="'+Messages[i]._id.$oid+'"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p>'+Messages[i].Message+'</p><span class="time-right">'+Messages[i].CreateDate+'</span><span class="fas fa-trash btnGpMsgDelete"></span></div>';
 						}
 						let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist">\
 				      		'+MessageList+'\
@@ -234,5 +235,29 @@ function deleteGroupById(groupid ) {
 function divScrollBottom(div){
      div.scrollTop(div[0].scrollHeight);
 }
+
 if($('.groupmessagelist').length>0)
  divScrollBottom($('.groupmessagelist'));
+
+$(document).on('click',".btnGpMsgDelete", function(){
+	let groupid=$(this).closest(".groupmessageBox").find(".groupmsgBox-header").attr("groupid");
+	let msgid=$(this).closest(".containerr").attr("data-id");
+	let data = { deleteGroupMsgById: true , groupid:groupid,msgid:msgid};
+	$.ajax({
+		type: "POST",
+		url: "controllers/controller.php",
+		data: data,
+		success: function (response) {
+			if (response=="deleted") {
+				displayGroupMessage(groupid);
+			}
+			else if(response=="delete_failed")
+			{
+				alert("something went wrong.");
+			}
+		},
+		error: function (error) {
+			console.log(error);
+		}
+	});
+});

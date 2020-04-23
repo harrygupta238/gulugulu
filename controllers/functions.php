@@ -300,4 +300,31 @@
             return $result;
           }
   }
+   function deleteGroupMsgByID($groupid,$msgid){
+      $db=ConnectDB();
+      $DBName=$GLOBALS["DB"].".GGgroups";
+          $bulk = new MongoDB\Driver\BulkWrite;
+          $bulk->update(['_id' =>  new MongoDB\BSON\ObjectID($groupid)],
+                    ['$pull' => 
+                      [
+
+                        'Messages' =>
+                        [
+                          "_id"=>  $msgid
+                        ]
+                       
+                      ]
+                    ]);
+          $result=$db->executeBulkWrite($DBName, $bulk);
+          if($result)
+          {
+            $result="deleted";
+            return $result;
+          }
+          else
+          {
+            $result="delete_failed";
+            return $result;
+          }
+  }
  ?>
