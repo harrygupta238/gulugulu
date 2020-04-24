@@ -280,14 +280,14 @@ width: 3em;
           color:#495057;
         }
         #pop-window{
-         position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 9999;
-    background: #6161c7;
-    opacity: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 9999;
+        background: #6161c7;
+        opacity: 100%;
     }
     .popcontent
     {
@@ -296,9 +296,61 @@ width: 3em;
       height: 300px;
       background-color: white;
       align-self: center;
-          margin-top: 10em;
-    margin-left: 20em;
+      margin-top: 10em;
+      margin-left: 20em;
     }
 
         
-        
+    /* Customization of the group chat pages */
+    .txtgrpmsg {
+      font-size: 14px;
+      
+    }
+    
+    .containerr {
+      width: 65%;
+      float: left;
+      border: none;
+      margin-left: 30px;
+      min-height: 30px;
+      font-size: 14px;
+      padding: 20px;
+      letter-spacing: 1px;
+      border-radius: 10px 0px 10px 10px;
+      background-color: rgba(0, 123, 255, 0.23);
+    }
+    .btnGpMsgDelete {
+      color: red;
+      float:right;
+    }
+    .time-right {
+      margin-top: -40px;
+      top: 0;
+      font-size: 10px;
+    }
+    
+    .btngroupMsgFormSubmit{
+      font-size: 12px;
+      margin-left: 50px;
+      margin-top: 0px;
+    }
+    .btnGroupRefreshMsg {
+      font-size: 12px;
+      margin-left: 10px;
+      margin-top: 0px;
+    }
+    .grouplist {
+      font-size: 14px;
+      color: green;
+    } 
+    .list-group-item{
+      font-size: 13px;
+    }
+    /* testing  some things: */
+    .group_msg_content {
+      font-size: 13px;
+      padding-left:30px;
+      padding-right:40px;
+      color: green;
+
+    }

@@ -75,7 +75,7 @@ function getGroupList(){
 					grouplistdata+='<li dataid='+dataid+' class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">\
 								    '+data.GroupName+'<span class="badge badge-warning badge-pill mr-0">12</span>\
 								    <div style="display:none;" class="dropdown dropright groupMenuDrpdown "><span class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>\
-								        <div class="dropdown-menu">\
+								        <div class="dropdown-menu m-4" style=font-size:13px;>\
 								        	<a class="dropdown-item btnCopyGrouplink" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i></a>\
 								        	<a class="dropdown-item" href="#">Rename <i class="fa fa-edit" aria-hidden="true"></i></a>\
 								        	<a class="dropdown-item btnDeleteGroup" href="#">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>\
@@ -149,7 +149,7 @@ function displayGroupMessage(groupid){
 				let groupmsgbox_header='<div class="groupmsgBox-header" groupid="'+groupid+'" style="background-color: #dae0e5!important;width: 100%;\
 	    				height: 33px;">\
 	    					<div class="d-flex justify-content-between bg-secondary">\
-							    <div class="p-1 text-light"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>\
+							    <div class="p-1 text-light"></div>\
 							    <div class="p-1 text-light">'+result[0].GroupName+'</div>\
 							    <div class="p-1 text-light"><i class=" pr-2 fa fa-cog" aria-hidden="true"></i></div>\
 							</div>\
