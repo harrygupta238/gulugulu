@@ -13,5 +13,6 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<script type="text/javascript" src="js/constantclient.js"></script>
+		<script type="text/javascript" src="js/websocket.js"></script>
 	</head>
 	<body>

@@ -370,6 +370,13 @@ $(document).on("click", ".btnPopup", function () {
 </div></div>');
 });
 
+function restrictVisitor()
+{
+	if(_constantClient.UserType=='visitor')
+	{
+		$(".restrictVisitor").remove();
+	}
+}
 
 
 

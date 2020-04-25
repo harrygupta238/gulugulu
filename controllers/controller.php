@@ -192,7 +192,8 @@ if(isset($_POST["savegroupmsg"]))
 	$response=saveGroupMessage($groupMSGObj, $groupid);
 	if($response)
 	{
-		echo $response;
+		$groupMSGObj["response"]=$response;
+		echo json_encode($groupMSGObj);
 	}
 }
 

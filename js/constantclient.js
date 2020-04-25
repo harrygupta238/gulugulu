@@ -1,5 +1,5 @@
  const _constantClient={};
- _constantClient.rootdir="/gulugulu";
+
 function getLoggedinUserData(){
 	let data = { getLoggedinUserData: true };
 	$.ajax({
@@ -12,10 +12,12 @@ function getLoggedinUserData(){
 			{	
 			_constantClient.UserID=userdata._id.$oid;
 			_constantClient.UserName=userdata.username;
+			_constantClient.UserType='loggedin';
 			}
 			else if(userdata.type=='visitor')
 			{
 				_constantClient.UserName=userdata.username;
+				_constantClient.UserType='visitor';
 			}
 			
 			
@@ -23,3 +25,8 @@ function getLoggedinUserData(){
 	});
 }
 getLoggedinUserData();
+_constantClient.rootdir="/gulugulu";
+_constantClient.OneWayFeedback="OneWayFeedback";
+_constantClient.GroupChat="GroupChat";
+_constantClient.OneToOneChat="OneToOneChat";
+

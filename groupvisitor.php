@@ -24,7 +24,7 @@
 				<button type="button" class="btn btn-outline-secondary btn-sm btnHome">
 				<span class="fas fa-user"></span>	Home
 				</button>
-				<p>Group: <?php echo  $res[0]->GroupName; ?></p>
+				<!-- <p>Group: <?php // echo  $res[0]->GroupName; ?></p> -->
 				<p>This Group is Created By: <?php echo  $res[0]->Owner; ?></p>
 				<!-- <button type="button" class="btn btn-outline-secondary btn-sm btnNewGroup">
 				<span class="fas fa-user"></span>	Create New Group
@@ -77,11 +77,11 @@
 			      <div class="col-sm-12" style="padding-left: 0px;
     padding-right: 0px;background-color: ghostwhite;">
     				<div class="groupmessageBox border-bottom">
-    					<div class="groupmsgBox-header" style="background-color: #dae0e5!important;width: 100%;
+    					<div class="groupmsgBox-header" groupid="<?php echo @$gid; ?>"  style="background-color: #dae0e5!important;width: 100%;
 	    				height: 33px;">
 	    					<div class="d-flex justify-content-between bg-secondary">
 							    <div class="p-1 text-light"></div>
-							    <div class="p-1 text-light">Group Name will be display here</div>
+							    <div class="p-1 text-light"><?php echo  $res[0]->GroupName; ?></div>
 							    <div class="p-1 text-light"><i class="pr-2 fa fa-cog" aria-hidden="true"></i></div>
 							</div>
 						</div>

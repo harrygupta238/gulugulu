@@ -1,4 +1,6 @@
 /*-------------------------------------------GroupChat js------------------------------------------------------ */
+
+
 $(document).on("click", ".btnNewGroup", function () {
 	$("#createGroupForm").find(".groupname").val("");
 	$(".usrnmmsg").html("");
@@ -105,11 +107,20 @@ $("#groupMsgForm").submit(function (e) {
 			type: "POST",
 			url: "controllers/controller.php",
 			data: data,
-			success: function (response) {
-				if (response == "inserted") {
-					displayGroupMessage(groupid);
+			success: function (result) {
+					let result2=JSON.parse(result);
+				if (result2.response == "inserted") {
 					$("#groupMsgForm").find(".txtgrpmsg").val('');
-
+					displayGroupMessage(groupid);
+					var messageJSON = {
+						MessageType: _constantClient.GroupChat,
+						MessageID:result2._id.$oid,
+						MessageTime: result2.CreateDate,
+						GroupID : groupid,
+						SenderUserName:_constantClient.UserName,
+						Message: groupMSG
+					};
+					websocket.send(JSON.stringify(messageJSON));
 				}
 			}
 		});
@@ -164,15 +175,22 @@ function displayGroupMessage(groupid){
 						for(let i=0;i<Messages.length;i++)
 						{	 
 							if(Messages[i].From==_constantClient.UserName)
-							 MessageList+='<div class="containerr darker" data-id="'+Messages[i]._id.$oid+'"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p>'+Messages[i].Message+'</p><span class="time-right">'+Messages[i].CreateDate+'</span><span class="fas fa-trash btnGpMsgDelete"></span></div>';
+							 MessageList+='<div class="containerr darker" data-id="'+Messages[i]._id.$oid+'">\
+							<p>'+Messages[i].Message+'</p>\
+							<span class="time-right">'+Messages[i].CreateDate+'</span>\
+							<span class="fas fa-trash btnGpMsgDelete restrictVisitor"></span></div>';
 						     else
-							 MessageList+='<div class="containerr" data-id="'+Messages[i]._id.$oid+'"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p>'+Messages[i].Message+'</p><span class="time-right">'+Messages[i].CreateDate+'</span><span class="fas fa-trash btnGpMsgDelete"></span></div>';
+							 MessageList+='<div class="containerr" data-id="'+Messages[i]._id.$oid+'">\
+							<p>'+Messages[i].Message+'</p>\
+							<span class="time-right">'+Messages[i].CreateDate+'</span>\
+							<span class="fas fa-trash btnGpMsgDelete restrictVisitor"></span></div>';
 						}
 						let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist">\
 				      		'+MessageList+'\
 				      	</div>';
 						$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);
 						divScrollBottom($('.groupmessagelist'));
+						restrictVisitor();
 					}
 				}
 				else
@@ -181,6 +199,7 @@ function displayGroupMessage(groupid){
 				      		<center><p style="margin-top: 10em;">this chat is empty.</p></center>\
 				      	</div>';
 					$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);
+
 				}
 			}
 		}
@@ -239,25 +258,25 @@ function divScrollBottom(div){
 if($('.groupmessagelist').length>0)
  divScrollBottom($('.groupmessagelist'));
 
-$(document).on('click',".btnGpMsgDelete", function(){
-	let groupid=$(this).closest(".groupmessageBox").find(".groupmsgBox-header").attr("groupid");
-	let msgid=$(this).closest(".containerr").attr("data-id");
-	let data = { deleteGroupMsgById: true , groupid:groupid,msgid:msgid};
-	$.ajax({
-		type: "POST",
-		url: "controllers/controller.php",
-		data: data,
-		success: function (response) {
-			if (response=="deleted") {
-				displayGroupMessage(groupid);
+	$(document).on('click',".btnGpMsgDelete", function(){
+		let groupid=$(this).closest(".groupmessageBox").find(".groupmsgBox-header").attr("groupid");
+		let msgid=$(this).closest(".containerr").attr("data-id");
+		let data = { deleteGroupMsgById: true , groupid:groupid,msgid:msgid};
+		$.ajax({
+			type: "POST",
+			url: "controllers/controller.php",
+			data: data,
+			success: function (response) {
+				if (response=="deleted") {
+					displayGroupMessage(groupid);
+				}
+				else if(response=="delete_failed")
+				{
+					alert("something went wrong.");
+				}
+			},
+			error: function (error) {
+				console.log(error);
 			}
-			else if(response=="delete_failed")
-			{
-				alert("something went wrong.");
-			}
-		},
-		error: function (error) {
-			console.log(error);
-		}
+		});
 	});
-});
