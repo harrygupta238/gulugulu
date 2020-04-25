@@ -11,111 +11,105 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     
-    /* The sender part: */
-
-     .reciever {
-      width: 60%;
-      height: 60px,auto;
-      background-color: rgba(0, 123, 255, 0.23);
-      margin-left: 20px;
-      float: left;
-      border-radius: 10px 0px 10px 10px;
-      letter-spacing: 1px;
-      font-size: 14px;
-    }
-    .user_pic {
-      width: 50px;
-      height: 50px;
-      float: left;
-      margin: 10px;
-      border-radius:50px;
-    }
-    .timings,.fa-ellipsis-v{
-      float: right;
-      font-size:12px;
-      margin-top: 20px;
-      margin-right: 20px;
-    }
-    .msgs_from_users {
-      margin-left: 30px;
-      margin-right: 30px;
-    }
-    /* resposnsive all chatbox: */
-    @media screen (max-width:400px) {
-       .reciever {
-      width: 40%;
-      height: 40px,auto;
-      background-color: rgba(0, 123, 255, 0.23);
-      margin-left: 20px;
-      float: left;
-      border-radius: 10px 0px 10px 10px;
-      letter-spacing: 1px;
-      font-size: 14px;
-    }
-    .user_pic {
-      width: 30px;
-      height: 30px;
-      float: left;
-      margin: 5px;
-      border-radius:50px;
-    }
-    .timings{
-      float: right;
-      font-size:12px;
-      margin-top: 10px;
-      margin-right: 10px;
-    }
-
-    .msgs_from_users {
-      margin-left: 20px;
-      margin-right: 20px;
-    }
+    /* customizing the group chats */
+  /* default and common css */
+  .fa-trash {
+    float: right;
+    margin: 10px;
+    color: black;
   }
-
+  .msgs_from_sender {
+    margin-left: 10px;
+     margin-right: 30px;
+  }
   /* the sender part: */
-     .sender {
-      width: 60%;
+
+    .sender_msg {
+      width: 50%;
       height: 60px,auto;
-      background-color: orange;
+      background-color: lightblue;
       margin-left: 20px;
-      float: right;
+      float: left;
       border-radius: 10px 0px 10px 10px;
       letter-spacing: 1px;
       font-size: 14px;
-      margin-top: 20px;
+      margin-top:-10px;
     }
+  .sender_user_name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #7c847c;
+    letter-spacing: 2px;
+    margin-left: 20px;
+  
+  }
+  .sender_timings {
+    font-size: 10px;
+    font-weight: 500;
+    color: blue;
+    margin-top: 6px;
+    letter-spacing: 2px;
+    margin-left: 10px;
+    
+     
+  }
 
     @media screen (max-width:400px) {
-      .sender {
-      width: 40%;
+    .sender_msg {
+      width: 80%;
       height: 40px,auto;
-      background-color: orange;
+      background-color: lightblue;
       margin-left: 20px;
-      float: right;
+      float: left;
       border-radius: 10px 0px 10px 10px;
       letter-spacing: 1px;
       font-size: 14px;
       margin-top: 10px;
-    }
-    .user_pic {
-      width: 30px;
-      height: 30px;
-      float: left;
-      margin: 5px;
-      border-radius:50px;
-    }
-    .timings{
-      float: right;
-      font-size:12px;
-      margin-top: 10px;
-      margin-right: 10px;
-    }
-
-    .msgs_from_users {
-      margin-left: 20px;
-      margin-right: 20px;
-    }
+    } 
   }
+
+  /* the reciever paert */
+  .reciever_msgs {
+      width: 50%;
+      height: 60px,auto;
+      background-color: orange;
+      margin-right: 20px;
+      float: right;
+      border-radius: 10px 10px 10px 0px;
+      letter-spacing: 1px;
+      font-size: 14px;
+      margin-top:-10px;
+    }
+  .reciever_user_name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #7c847c;
+    letter-spacing: 2px;
+    margin-right: 20px;
+  }
+  .reciever_timings {
+    font-size: 10px;
+    font-weight: 500;
+    color: blue;
+    letter-spacing: 2px;
+    margin-right: 10px;
+    margin-top: 6px;
+  }
+
+    @media screen (max-width:400px) {
+      .reciever_msgs {
+      width: 80%;
+      height: 40px,auto;
+      background-color: orange;
+      margin-right: 20px;
+      float: right;
+      border-radius: 10px 10px 10px 0px;
+      letter-spacing: 1px;
+      font-size: 14px;
+      margin-top: 10px;
+    } 
+  }
+ 
 
 
 
@@ -124,51 +118,56 @@
 </head>
 <body>
 <div class="container">
-  <div class="reciever">
-    <div class="row">
-      <div class="col-md-5 col-sm-5 col-5">
-        <img class="user_pic" src="images/pp.jpg" alt="avtar">
-      </div>
-      <div class="col-md-5 col-sm-5 col-5">
-        <p class="timings">
+   <!-- sender  contents: -->
+      <div class="row">
+            <div class="sender_box">
+      <div class="row justify-content-start">
+        <p class="sender_user_name">Harry00</p>
+         <p class="sender_timings">
           <b>
-            10:40AM
-          </b>
-        </p>
+          10:20PM
+        </b>
+      </p>
       </div>
-      <div class="col-md-2 col-sm-2 col-2">
-        <i class="fa fa-ellipsis-v"></i>
-      </div>
+       <div class="sender_msg">
+        <i class="fa fa-trash"></i>
       <div class="col-md-12 col-sm-12 col-12">
-        <p class="msgs_from_users">
+        <p class="msgs_from_sender mt-3">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus magnam id consequatur perspiciatis corporis sit obcaecati ab omnis minus nisi facere recusandae ex, neque maiores eum quia error eligendi incidunt!
         </p>
       </div>
     </div>
+    </div>
   </div>
+  
 
-
-    <div class="sender">
-    <div class="row">
-      <div class="col-md-5 col-sm-5 col-5">
-        <img class="user_pic" src="images/pp.jpg" alt="avtar">
+ <!-- reciever  contents: -->
+  <div class="row">
+    <div class="rcvr_box">
+      <div class="row justify-content-end">
+         <p class="reciever_timings">
+          <b>
+          11:30PM
+        </b>
+      </p>
+      <p class="reciever_user_name">Aadi0204</p>
       </div>
-      <div class="col-md-5 col-sm-5 col-5">
-        <p class="timings">
-          <b>11:20AM</b>
-        </p>
-      </div>
-      <div class="col-md-2 col-sm-2 col-2">
-        <i class="fa fa-ellipsis-v"></i>
-      </div>
+       <div class="reciever_msgs">
+        <i class="fa fa-trash"></i>
       <div class="col-md-12 col-sm-12 col-12">
-        <p class="msgs_from_users">
+        <p class="msgs_from_sender mt-3">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus magnam id consequatur perspiciatis corporis sit obcaecati ab omnis minus nisi facere recusandae ex, neque maiores eum quia error eligendi incidunt!
         </p>
       </div>
     </div>
+    </div>
+    </div>
+
+  
+  
+    
+
   </div>
-</div>
 
 </body>
 </html>
