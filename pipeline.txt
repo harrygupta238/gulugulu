@@ -13,7 +13,7 @@
 3. give one more round iteration to designing.
 4. add a social media sharable link
 
-
+ php -q websocket/php-socket.php
 ------------------------------------------------------------------------------------------------
 									Digital Marketing Plan
 									=======================
