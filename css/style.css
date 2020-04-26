@@ -2,6 +2,10 @@
 
 
 /* customization of index page starts: */
+.margin_bottom_0
+{
+  margin-bottom: 0;
+}
 
 
   * {

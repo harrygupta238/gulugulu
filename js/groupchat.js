@@ -160,7 +160,7 @@ function displayGroupMessage(groupid){
 				let groupmsgbox_header='<div class="groupmsgBox-header" groupid="'+groupid+'" style="background-color: #dae0e5!important;width: 100%;\
 	    				height: 33px;">\
 	    					<div class="d-flex justify-content-between bg-secondary">\
-							    <div class="p-1 text-light"></div>\
+							    <div class="p-1 text-light"><span class="fa fa-chevron-left restrictVisitor"></span></div>\
 							    <div class="p-1 text-light">'+result[0].GroupName+'</div>\
 							    <div class="p-1 text-light"><i class=" pr-2 fa fa-cog" aria-hidden="true"></i></div>\
 							</div>\
@@ -175,14 +175,14 @@ function displayGroupMessage(groupid){
 						for(let i=0;i<Messages.length;i++)
 						{	 
 							if(Messages[i].From==_constantClient.UserName)
-							 MessageList+='<div class="containerr recbground" data-id="'+Messages[i]._id.$oid+'">\
-							<p style="padding-left: 7px;padding-top: 7px;">'+Messages[i].Message+'</p>\
+							 MessageList+='<div class="containerr sendbground" data-id="'+Messages[i]._id.$oid+'">\
+							<p class="margin_bottom_0">'+Messages[i].Message+'<span class="fas fa-trash btnGpMsgDelete restrictVisitor"></span></p>\
 							<span class="time-right">'+""+'</span>\
 							\
 							</div>';
 						     else
-							 MessageList+='<div class="containerr sendbground" data-id="'+Messages[i]._id.$oid+'">\
-							<p style="padding-left: 7px;padding-top: 7px;">'+Messages[i].Message+'</p>\
+							 MessageList+='<div class="containerr recbground " data-id="'+Messages[i]._id.$oid+'">\
+							<p class="margin_bottom_0">'+Messages[i].Message+'<span class="fas fa-trash btnGpMsgDelete restrictVisitor"></span></p>\
 							<span class="time-right">'+""+'</span>\
 							\
 							</div>';

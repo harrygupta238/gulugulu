@@ -95,7 +95,7 @@
 			      				{
 			      				# code...
 			      	 ?>
-			      		<div class="containerr darker"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p><?php echo $message->Message; ?></p><span class="time-right"><?php echo $message->CreateDate; ?></span></div>
+			      		<div class="containerr sendbground"><p class="margin_bottom_0"><?php echo $message->Message; ?></p></div>
 
 			      		<!-- <div class="containerr"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p>krishna nand</p><span class="time-right">2020-04-11 20:31:44</span></div> -->
 		      		<?php 
@@ -103,7 +103,7 @@
 		      				    else
 		      				    {
 		      		?>
-		      				<div class="containerr"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p><?php echo $message->Message; ?></p><span class="time-right"><?php echo $message->CreateDate; ?></span></div>
+		      				<div class="containerr recbground"><p class="margin_bottom_0"><?php echo $message->Message; ?></p></div>
 		      		<?php
 
 		      				    }
