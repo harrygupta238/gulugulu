@@ -175,15 +175,17 @@ function displayGroupMessage(groupid){
 						for(let i=0;i<Messages.length;i++)
 						{	 
 							if(Messages[i].From==_constantClient.UserName)
-							 MessageList+='<div class="containerr darker" data-id="'+Messages[i]._id.$oid+'">\
-							<p>'+Messages[i].Message+'</p>\
-							<span class="time-right">'+Messages[i].CreateDate+'</span>\
-							<span class="fas fa-trash btnGpMsgDelete restrictVisitor"></span></div>';
+							 MessageList+='<div class="containerr recbground" data-id="'+Messages[i]._id.$oid+'">\
+							<p style="padding-left: 7px;padding-top: 7px;">'+Messages[i].Message+'</p>\
+							<span class="time-right">'+""+'</span>\
+							\
+							</div>';
 						     else
-							 MessageList+='<div class="containerr" data-id="'+Messages[i]._id.$oid+'">\
-							<p>'+Messages[i].Message+'</p>\
-							<span class="time-right">'+Messages[i].CreateDate+'</span>\
-							<span class="fas fa-trash btnGpMsgDelete restrictVisitor"></span></div>';
+							 MessageList+='<div class="containerr sendbground" data-id="'+Messages[i]._id.$oid+'">\
+							<p style="padding-left: 7px;padding-top: 7px;">'+Messages[i].Message+'</p>\
+							<span class="time-right">'+""+'</span>\
+							\
+							</div>';
 						}
 						let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist">\
 				      		'+MessageList+'\
