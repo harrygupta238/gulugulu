@@ -79,25 +79,20 @@ if($auth==false)
 			      	</div>
 			      	<form action="#" class="needs-validation" id="groupMsgForm" method="post">
 			      	<div class="row d-flex pt-2 justify-content-center">
-			      			<div class="form-group col-lg-10 col-xl-10 col-sm-10 col-md-10">
+			      			<div class="form-group col-lg-11 col-xl-11 col-sm-11 col-md-11 col-11">
 			      				<input type="hidden" name="" class="txtgroupid">
-								<input
+								<textarea
 							type="text"
 							class="form-control txtgrpmsg"
 							placeholder="Type Your Message here.."
 							name="pswd"
-							required
-							/>
+							required>
+							</textarea>
 							</div>
-							<div class="form-group col-lg-2 col-xl-2 col-sm-2 col-md-2" style="margin-left: -1.5em;">
-								<div class="row">
-									<button type="submit" class="btn btn-primary btngroupMsgFormSubmit">
+							<div class="form-group col-lg-1 col-xl-1 col-sm-1 col-md-1 col-1">
+								<button type="submit" class="btn btn-primary btngroupMsgFormSubmit">
 									<span class="fas fa-paper-plane"></span>
 								</button>
-								<span class="btn btn-warning btnGroupRefreshMsg">
-									<span class="fas fa-sync-alt"> </span>
-								</span>
-								</div>
 							</div>
 						</div>
 			      </div>

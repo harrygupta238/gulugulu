@@ -175,16 +175,32 @@ function displayGroupMessage(groupid){
 						for(let i=0;i<Messages.length;i++)
 						{	 
 							if(Messages[i].From==_constantClient.UserName)
-							 MessageList+='<div class="containerr sendbground" data-id="'+Messages[i]._id.$oid+'">\
-							<p class="margin_bottom_0">'+Messages[i].Message+'<span class="fas fa-trash btnGpMsgDelete restrictVisitor"></span></p>\
-							<span class="time-right">'+""+'</span>\
-							\
+							 MessageList+='<div class="d-flex row main_sender_div">\
+							<div class="col-md-6 col-sm-6 col-4"></div>\
+							<div class="col-md-3 col-sm-3 col-4 sender_timing">\
+							<p class="float-right p_time">12:40PM</p>\
+							</div>\
+							<div class="col-md-3 col-sm-3 col-4 sender_name"><p>Aadi0204</p></div>\
+							<div class="containerr col-md-10 col-sm-10 col-10 sendbground" data-id="'+Messages[i]._id.$oid+'">\
+							<p class="sender_msgs" style="margin-left:10px">'+Messages[i].Message+'</p>\
+							</div>\
+							<div class="col-md-1 col-sm-1 col-1 send_del_btn">\
+							<i class="fas btnGpMsgDelete">&#xf2ed;</i>\
+							</div>\
 							</div>';
 						     else
-							 MessageList+='<div class="containerr recbground " data-id="'+Messages[i]._id.$oid+'">\
-							<p class="margin_bottom_0">'+Messages[i].Message+'<span class="fas fa-trash btnGpMsgDelete restrictVisitor"></span></p>\
-							<span class="time-right">'+""+'</span>\
-							\
+							 MessageList+='<div class="d-flex row main_reciever_div">\
+							<div class="col-md-3 col-sm-3 col-4  reciver_name"><p>Harry00,</p>\
+							</div>\
+							<div class="col-md-3 col-sm-3 col-4  reciever_timing">\
+							<p class="text-left">11:20PM</p></div>\
+							<div class="col-md-6 col-sm-6 col-4"></div>\
+							 <div class="containerr col-md-10 col-sm-10 col-10 recbground" data-id="'+Messages[i]._id.$oid+'">\
+							<p class="reciever_msgs" style="margin-left:10px">'+Messages[i].Message+'</p>\
+							</div>\
+							 <div class="col-md-1 col-sm-1 col-1  recieve_del_btn">\
+							 <i class="fas btnGpMsgDelete">&#xf2ed;</i>\
+							 </div>\
 							</div>';
 						}
 						let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist">\
