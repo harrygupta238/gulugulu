@@ -18,6 +18,7 @@ $(document).on("click", ".btnCancelNewGroup", function () {
 	$(".errormsg").html("");
 	$("#IndexDynamicContent").hide();
 });
+ 
 $("#createGroupForm").submit(function (e) {
 	e.preventDefault();
 	let el = $("#createGroupForm").find(".error").length;
