@@ -421,7 +421,7 @@ $(document).find('[dwnld-id]').each(function(){
 				let tt=element.closest("#inboxMsg").find("[data-id='"+dataid+"']");
 			    tt.attr("download","abcdefg.png").attr( 
 			    "href", imgageData);
-			    element.hide();
+			    //element.hide();
 		} 
 	}); 
 });
