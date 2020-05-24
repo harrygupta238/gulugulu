@@ -10,38 +10,38 @@ if($auth==false)
 		include("header.php"); 
  ?>
 		<div class="container p-3 border-top text-secondary userhome_body">
-           
-		<div>
 			<p class="text-center">You are logged in as : <span class="text-success"> 
-			<?php echo $_SESSION["LoggedInUserName"]; ?> <br>
-				<button type="button" id="logout" class="btn btn-danger btn-sm btnHome mt-1">
-					<span class="fas fa-sign-out-alt" aria-hidden="true"></span> Logout
+			<?php echo $_SESSION["LoggedInUserName"]; ?> </span><br>
+				<span class="profilelink bg-white" style="padding:5px;"><button data-toggle="tooltip" data-placement="right" title="copy to clipboard" type="button" class="btn btn-dark btnCopy btn-sm ml-1">
+								  <span class="fas fa-copy" aria-hidden="true"></span>
+							</button></span><br>
+			    <button type="button" data-toggle="tooltip" data-placement="top" title="New Message"  class="btn btn-info btn-sm mt-1 btnNewMsgBox">
+					<span class="fas fa-edit" aria-hidden="true"></span> 
 				</button>
-				<button type="button" id="btnGroupChatpage" class="btn btn-info btn-sm btnGroupChatpage mt-1">
-					<span class="fas fa-users" aria-hidden="true"></span> GroupChat
+				<button type="button" data-toggle="tooltip" data-placement="top" title="Inbox Messages"  class="btn active btn-info btn-sm mt-1 btnInBox">
+					Inbox <span class="fas fa-envelope" aria-hidden="true"></span> 
 				</button>
-				<button type="button" id="btnPopup" class="btn btn-info btn-sm btnPopup mt-1">
-					<span class="fas fa-users" aria-hidden="true"></span> popup
+				<button type="button" data-toggle="tooltip" data-placement="top" title="Sent Messages"  class="btn btn-info btn-sm mt-1 btnSentBox">
+					Sent  
 				</button>
+				<button type="button" id="btnGroupChatpage" data-toggle="tooltip" data-placement="top" title="Group Chat" class="btn btn-info btn-sm btnGroupChatpage mt-1">
+					GroupChat <span class="fas fa-users" aria-hidden="true"></span> 
+				</button>
+				<button type="button" id="logout" data-toggle="tooltip" data-placement="top" title="logout" class="btn btn-danger btn-sm btnHome mt-1">
+				 <span class="fas fa-sign-out-alt" aria-hidden="true"></span> 
+				</button>
+				
 			</p>
 		</div>
-
-
+		<div class="container p-3 border-top text-secondary newMsgBox userhome_body" style="display: none;">
 			<div class="container">
 				<div class="row d-flex justify-content-center">
 					<div id="copy_content" class="col-lg-8 col-xl-8 col-sm-12 col-md-12">
-						<p id="copy_link" class="bg-white p-5">
-							<span id="profilelink"><span id="profilelinkorigin"></span><span id="un"><?php echo $_SESSION["LoggedInUserName"]; ?></span></span>    
-							<button data-toggle="tooltip" data-placement="right" title="copy to clipboard" type="button" class="btn btn-dark btnCopy btn-sm float-right">
-								Copy  <span class="fas fa-copy" aria-hidden="true"></span>
-							</button>
-						</p>
-						
-						<p>copy the above profile-link and share on social media, tell your friends to share their thoughts about you secretly. </p>
 						<p>
 						Hey, what are you waiting for, it's time to do some  
 						<span class="text-danger">Gulu-Gulu</span> with your loved ones.
 						</p>
+						<p>Copy the above profile-link and share on social media, tell your friends to share their thoughts about you secretly. </p>
 						<p>
 						Enter the username of your friend in username field, and fill up the message box with your message you want to tell your friend secretly.
 						</p>
@@ -83,22 +83,10 @@ if($auth==false)
 				</form>
 			</div>
 			<hr>
-			</div>
-			<div class="container border-bottom p-3 text-white userhome_body">
-				<div class="container">
-					<div class="row d-flex mb-3 justify-content-center text-center">
-						<div class="col-lg-8 col-xl-8 col-sm-12 col-md-12">
-							<button type="button" class="btn btn-primary active btnInBox">
-								<span class="fas fa-envelope"> </span> Inbox
-							</button>
-							<button type="button" class="btn btn-warning btnSentBox">
-								<span class="fas fa-envelope"> </span> Sent
-							</button>
-							<button type="button" class="btn btn-dark btnInBox">
-								<span class="fas fa-sync-alt"> </span>
-							</button>
-						</div>
-					</div>
+		</div>
+
+			<div class="container border-top border-bottom p-3 inboxsentbox text-white userhome_body">
+				<div class="">
 					<div class="row d-flex justify-content-center">
 						<div class="col-lg-8 col-xl-8 col-sm-12 col-md-12 msgBox">
 							<div id="inboxMsg" class="pt-4">
@@ -111,10 +99,20 @@ if($auth==false)
 									?>
 											
 											<p class="text-dark border-bottom b-3 p-3 m-4 inbox_content">
-												<i class="fas fa-clock" style="font-size: .7em"> <?php echo date("M d, Y H:i:s a",strtotime($msg->CreateDate));  ?></i><br>
+												<i class="fas fa-clock" style="font-size: .7em"> <?php
+												echo calDatetimeDiff($msg->CreateDate);
+												// echo date("M d, Y H:i:s a",strtotime($msg->CreateDate));  ?></i><br>
 												<?php echo $msg->Message; ?><br>
-												
+												<a href="#" class="btnpreviewfeedback" data-id="<?php echo $msg->_id; ?>" ><i style="cursor: pointer;" class=" fas fa-download float-right" style="font-size: 1em"></i></a>
 												      
+									    	</p>
+									    	<p style="display: none;" dwnld-id="<?php echo $msg->_id; ?>" class="downloadfeedbackbox bg-info p-3 text-center rounded-lg">
+									    			<span class="text-light"><a href="index.php">Gulu<i class="fas fa-comments"></i>Gulu</a></span>
+									    		<br>
+									    		<span class="" >
+									    			<?php echo $msg->Message; ?>
+									    		</span>
+									    		<!-- <a href="images/logo4.png" class="btndownloadfeedback" ><i style="cursor: pointer;" class=" fas fa-download float-right" style="font-size: 1em"></i></a> -->
 									    	</p>
 								<?php }} ?> 
 								<p class="inbox_content text-dark border-bottom pb-3 p-3">

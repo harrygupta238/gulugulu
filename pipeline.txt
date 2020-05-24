@@ -1,4 +1,4 @@
- php -q websocket/php-socket.php
+ php -q controllers/php-socket.php
 -----------------------------------------------------------------------------------------------
 										pending tasks
 										=============

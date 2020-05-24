@@ -2,6 +2,13 @@
 date_default_timezone_set('Asia/Kolkata');
 session_start();
 include 'functions.php';
+// $datetime1 = new DateTime();
+// $datetime2 = new DateTime('2020-05-16 17:13:00');
+// $interval = $datetime1->diff($datetime2);
+// var_dump($interval);
+// $elapsed = $interval->format('%hh ago');
+// echo $elapsed;
+
 if(isset($_POST["username_validation"]))
 {
 	$username=$_POST["username"];
@@ -132,31 +139,49 @@ if(isset($_POST["getAllMessageList"]))
 if(isset($_POST["creategroup"]))
 {
 	$groupname=$_POST["groupname"];
+	$groupid=$_POST["groupid"];
+	$mode=$_POST["mode"];
 	if(isset($_SESSION["LoggedInUserName"]))
+		{
+			$owner=$_SESSION["LoggedInUserName"];
+		}
+		else if($_COOKIE["RandomUserName"])
+		{
+			$owner=$_COOKIE["RandomUserName"];
+		}
+		else
+		{
+			$owner="Anonymous";
+		}
+	if($mode=="create")
 	{
-		$owner=$_SESSION["LoggedInUserName"];
+		
+		$group =
+		  [
+		  	'_id'=> new MongoDB\BSON\ObjectID,
+		    'GroupName'=> $groupname,
+		    "Owner"=>$owner,
+		    "CreateDate"=> date('Y-m-d H:i:s'),
+		    "IsActive"=>true
+		  ];
+		$response=createGroup($group);
+		if($response)
+		{
+			echo $response;
+		}
 	}
-	else if($_COOKIE["RandomUserName"])
+	else if($mode=="edit")
 	{
-		$owner=$_COOKIE["RandomUserName"];
+		$group =
+		  [
+		  	'_id'=> new MongoDB\BSON\ObjectID($groupid),
+		    'GroupName'=> $groupname,
+		    "Owner"=>$owner
+		  ];
+		$response=updateGroupName($group);
+	    echo $response;
 	}
-	else
-	{
-		$owner="Anonymous";
-	}
-	$group =
-	  [
-	  	'_id'=> new MongoDB\BSON\ObjectID,
-	    'GroupName'=> $groupname,
-	    "Owner"=>$owner,
-	    "CreateDate"=> date('Y-m-d H:i:s'),
-	    "IsActive"=>true
-	  ];
-	$response=createGroup($group);
-	if($response)
-	{
-		echo $response;
-	}
+
 }
 
 if(isset($_POST["getGroupList"]))
@@ -250,6 +275,12 @@ if(isset($_POST["deleteGroupMsgById"]))
 	echo $response;
 }
 
-
+if(isset($_POST["updateGroupName"]))
+{
+	$groupid=$_POST["groupid"];
+	$gname=$_POST["gname"];
+	$response=updateGroupName(new MongoDB\BSON\ObjectID($groupid),$gname);
+	echo $response;
+}
 
 ?>

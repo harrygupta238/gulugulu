@@ -2,10 +2,15 @@
 
 
 $(document).on("click", ".btnNewGroup", function () {
-	$("#createGroupForm").find(".groupname").val("");
-	$(".usrnmmsg").html("");
-	$(".errormsg").html("");
-	$("#IndexDynamicContent").show();
+	let form=$(document).find("#IndexDynamicContent");
+	form.find("h6").html("New Group");
+	form.find("[name='mode']").val("create");
+	form.find(".groupname").val("");
+	form.find("[name='groupid']").val("");
+	form.find(".btncreateGroupSubmit").html("submit");
+	form.find(".usrnmmsg").html("");
+	form.find(".errormsg").html("");
+	form.show();
 });
 $(document).on("click", ".btnCancelNewGroup", function () {
 	$("#createGroupForm").find(".groupname").val("");
@@ -13,8 +18,6 @@ $(document).on("click", ".btnCancelNewGroup", function () {
 	$(".errormsg").html("");
 	$("#IndexDynamicContent").hide();
 });
-
-
 $("#createGroupForm").submit(function (e) {
 	e.preventDefault();
 	let el = $("#createGroupForm").find(".error").length;
@@ -22,8 +25,11 @@ $("#createGroupForm").submit(function (e) {
 		return;
 	}
 	let groupname = $("#createGroupForm").find(".groupname").val().toLowerCase().trim();
+	let mode = $("#createGroupForm").find("[name='mode']").val();
+	let groupid = $("#createGroupForm").find("[name='groupid']").val();
+	
 		$(".btncreateGroupSubmit").append(btnloader);
-		let data = { creategroup: true, groupname: groupname };
+		let data = { creategroup: true, groupname: groupname , mode : mode,groupid:groupid};
 		$.ajax({
 			type: "POST",
 			url: "controllers/controller.php",
@@ -42,6 +48,7 @@ $("#createGroupForm").submit(function (e) {
 					$("#createGroupForm").find(".errormsg").html(message);
 					$("#createGroupForm").find(".groupname").val("");
 					getGroupList();
+					displayGroupMessage(groupid);
 					$("#IndexDynamicContent").hide();
 				}
 				else if (response == "insert_failed") {
@@ -74,15 +81,11 @@ function getGroupList(){
 					//console.log(data);
 					let dataid=JSON.stringify(data._id.$oid);
 					//console.log(dataid);
+					// grouplistdata+='<li dataid='+dataid+' class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">\
+					// 			    '+data.GroupName+'<span class="badge badge-warning badge-pill mr-0">12</span>\
+					// 			</li>';
 					grouplistdata+='<li dataid='+dataid+' class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">\
-								    '+data.GroupName+'<span class="badge badge-warning badge-pill mr-0">12</span>\
-								    <div style="display:none;" class="dropdown dropright groupMenuDrpdown "><span class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>\
-								        <div class="dropdown-menu m-4" style=font-size:13px;>\
-								        	<a class="dropdown-item btnCopyGrouplink" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i></a>\
-								        	<a class="dropdown-item" href="#">Rename <i class="fa fa-edit" aria-hidden="true"></i></a>\
-								        	<a class="dropdown-item btnDeleteGroup" href="#">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>\
-								        </div>\
-								    </div>\
+								    '+data.GroupName+'\
 								</li>';
 					$('.grouplist').html(grouplistdata);
 				}
@@ -101,7 +104,8 @@ $("#groupMsgForm").submit(function (e) {
 	}
 	let groupMSG = $("#groupMsgForm").find(".txtgrpmsg").val();
 	let groupid = $("#groupMsgForm").find(".txtgroupid").val();
-	
+	$(".groupmessageBox").append(`<center><span class="spinner-border spinner-border-sm"></span></center>`);
+			
 		let data = { savegroupmsg: true, groupMSG: groupMSG ,groupid : groupid};
 		$.ajax({
 			type: "POST",
@@ -161,8 +165,16 @@ function displayGroupMessage(groupid){
 	    				height: 33px;">\
 	    					<div class="d-flex justify-content-between bg-secondary">\
 							    <div class="p-1 text-light"><span class="fa fa-chevron-left restrictVisitor"></span></div>\
-							    <div class="p-1 text-light">'+result[0].GroupName+'</div>\
-							    <div class="p-1 text-light"><i class=" pr-2 fa fa-cog" aria-hidden="true"></i></div>\
+							    <div class="p-1 text-light hgroupname">'+result[0].GroupName+'</div>\
+							    <div class="p-1 text-light dropleft dropdown">\
+									<span class="" data-toggle="dropdown"><i class="fa fa-cog" aria-hidden="true"></i></span>\
+										<div class="dropdown-menu" style=font-size:13px;>\
+									    	<a class="dropdown-item btnCopyGrouplink" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i></a>\
+									    	<a class="dropdown-item btnRenameGroup" href="#">Rename <i class="fa fa-edit" aria-hidden="true"></i></a>\
+									    	<a class="dropdown-item btnDeleteGroup" href="#">Delete Group<i class="fa fa-trash" aria-hidden="true"></i></a>\
+									    </div>\
+									</i>\
+								</div>\
 							</div>\
 						</div>';
 				if(result[0].Messages!=undefined)
@@ -175,17 +187,31 @@ function displayGroupMessage(groupid){
 						for(let i=0;i<Messages.length;i++)
 						{	 
 							if(Messages[i].From==_constantClient.UserName)
-							 MessageList+='<div class="containerr sendbground" data-id="'+Messages[i]._id.$oid+'">\
-							<p class="margin_bottom_0">'+Messages[i].Message+'<span class="fas fa-trash btnGpMsgDelete restrictVisitor"></span></p>\
-							<span class="time-right">'+""+'</span>\
-							\
-							</div>';
+							 MessageList+='\
+							<div class="containerr-r" data-id="'+Messages[i]._id.$oid+'">\
+				      			<span style="margin-right: 1em;float: right;">\
+			      						<span class="text-success" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> 1m ago </i> <span class="fa fa-chevron-down restrictVisitor dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+											<div class="dropdown-menu" style="padding:0">\
+											  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
+											</div>\
+			      				</span><br>\
+				      			<div class="containerr sendbground">\
+				      				<p class="margin_bottom_0">'+Messages[i].Message+'</p>\
+				      			</div>\
+			      			</div>';
 						     else
-							 MessageList+='<div class="containerr recbground " data-id="'+Messages[i]._id.$oid+'">\
-							<p class="margin_bottom_0">'+Messages[i].Message+'<span class="fas fa-trash btnGpMsgDelete restrictVisitor"></span></p>\
-							<span class="time-right">'+""+'</span>\
-							\
-							</div>';
+							 MessageList+='\
+							<div class="containerr-l" data-id="'+Messages[i]._id.$oid+'">\
+		      					<span style="margin-left: 1em;">\
+		      						<span class="text-success" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> 1m ago </i> <span class="fa fa-chevron-down restrictVisitor dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+									<div class="dropdown-menu" style="padding:0">\
+									  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
+									</div>\
+		      					</span>\
+		      					<div class="containerr recbground">\
+		      						<p class="margin_bottom_0">'+Messages[i].Message+'</p>\
+		      					</div>\
+		      				</div>';
 						}
 						let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist">\
 				      		'+MessageList+'\
@@ -216,7 +242,7 @@ $(document).on('click',".btnGroupRefreshMsg", function(){
 
 $(document).on('click',".btnCopyGrouplink", function(e){
 	e.stopImmediatePropagation();
-	let groupid=$(this).closest("li").attr("dataid");
+	let groupid=$(this).closest("[groupid]").attr("groupid");
 	var copyText = groupsharelink+groupid;
 	let temp = $("<input>");
 	$("body").append(temp);
@@ -228,7 +254,7 @@ $(document).on('click',".btnCopyGrouplink", function(e){
 
 $(document).on('click',".btnDeleteGroup", function(e){
 	e.stopImmediatePropagation();
-	let groupid=$(this).closest("li").attr("dataid");
+	let groupid=$(this).closest("[groupid]").attr("groupid");
 	if(groupid)
 		deleteGroupById(groupid);
 });
@@ -242,6 +268,7 @@ function deleteGroupById(groupid ) {
 		success: function (response) {
 			if (response=="deleted") {
 				getGroupList();
+				$(".groupmessageBox").html(`<center><p style="padding-top: 11em;">Group's Messages will be displayed here.</p></center>`);
 			}
 			else if(response=="delete_failed")
 			{
@@ -262,7 +289,7 @@ if($('.groupmessagelist').length>0)
 
 	$(document).on('click',".btnGpMsgDelete", function(){
 		let groupid=$(this).closest(".groupmessageBox").find(".groupmsgBox-header").attr("groupid");
-		let msgid=$(this).closest(".containerr").attr("data-id");
+		let msgid=$(this).closest("[data-id]").attr("data-id");
 		let data = { deleteGroupMsgById: true , groupid:groupid,msgid:msgid};
 		$.ajax({
 			type: "POST",
@@ -282,3 +309,20 @@ if($('.groupmessagelist').length>0)
 			}
 		});
 	});
+
+$(document).on('click',".btnRenameGroup", function(){
+
+	//alert("hello");
+    let groupid=$(this).closest(".groupmessageBox").find(".groupmsgBox-header").attr("groupid");
+	let groupname=$(this).closest(".groupmessageBox").find(".hgroupname").text();
+	let form=$(document).find("#IndexDynamicContent");
+	form.show();
+	form.find("h6").html("Update Group Name");
+	form.find("[name='mode']").val("edit");
+	form.find("[name='groupid']").val(groupid);
+	form.find(".groupname").val(groupname);
+	form.find(".btncreateGroupSubmit").html("update");
+	form.find(".usrnmmsg").html("");
+	form.find(".errormsg").html("");
+	
+});

@@ -17,9 +17,15 @@
 		        	let isGroupChatBoxOpen = $(".groupmessageBox").find("[groupid='"+ Data.GroupID +"']").length;
 		        		if(isGroupChatBoxOpen>0 && Data.SenderUserName!=_constantClient.UserName)
 		        		{
-		        			MessageHtml='<div class="containerr recbground" data-id="'+Data.MessageID+'">\
-		            					<p class="margin_bottom_0">'+Data.Message+'<span class="fas fa-trash btnGpMsgDelete restrictVisitor"></span></p>\
-		            			</div>';
+		        			MessageHtml='\
+		        			<div class="containerr-l" data-id="'+Data.MessageID+'">\
+		      					<span style="margin-left: 1em;">\
+		      						<span class="text-success" style="font-size: .7em;">'+Data.SenderUserName+'</span>, <i class="fas fa-clock" style="font-size: .7em"> 1m ago </i>\
+		      					</span>\
+		      					<div class="containerr recbground">\
+		      						<p class="margin_bottom_0">'+Data.Message+'<span class="fas fa-trash btnGpMsgDelete restrictVisitor"></span></p>\
+		      					</div>\
+		      				</div>';
 		            		$('.groupmessagelist').append(MessageHtml);
 		            		restrictVisitor();
 		            		divScrollBottom($('.groupmessagelist'));

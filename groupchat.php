@@ -27,8 +27,8 @@ if($auth==false)
 				<div class="container formwidth" >
 					<div class="text-center">
 						<span>
-							<h6 >
-								<u>New Group</u>
+							<h6>
+								New Group
 							</h6>
 						</span>
 					</div>
@@ -36,6 +36,8 @@ if($auth==false)
 						<div class="row d-flex justify-content-center">
 							<div class="form-group col-lg-9 col-xl-9 col-sm-12 col-md-12" >
 								<span class="text-danger errormsg"></span><br>
+								<input type="hidden" name="mode" value="create">
+								<input type="hidden" name="groupid">
 								<input
 							type="text"
 							class="form-control groupname"
@@ -48,15 +50,17 @@ if($auth==false)
 						</div>
 						
 						<div class="row d-flex justify-content-center text-center">
-							<div class="form-group col-lg-3 col-xl-3 col-sm-3 col-md-3">
-								<div class="row">
-									<button type="submit" class="btn btn-primary btn-sm btncreateGroupSubmit m-1">
+							
+								<div class="row" style="display: contents;">
+									
+										<button type="submit" class="btn btn-primary btn-sm btncreateGroupSubmit m-1">
 									Submit
 								</button>
 								<button type="submit" class="btn btn-danger btn-sm btnCancelNewGroup m-1">
 									Cancel
 								</button>
-								</div>
+									
+							
 							</div><br>
 							 
 						</div>
@@ -78,28 +82,25 @@ if($auth==false)
 				   	
 			      	</div>
 			      	<form action="#" class="needs-validation" id="groupMsgForm" method="post">
-			      	<div class="row d-flex pt-2 justify-content-center">
-			      			<div class="form-group col-lg-10 col-xl-10 col-sm-10 col-md-10">
-			      				<input type="hidden" name="" class="txtgroupid">
-								<input
+			      	<div class="row d-flex pt-2 justify-content-center" style="
+    
+    width: 100%;
+    margin-left: 0px;
+    height: auto;">
+			      				 <input type="hidden" name="" class="txtgroupid">
+								<textarea
 							type="text"
 							class="form-control txtgrpmsg"
 							placeholder="Type Your Message here.."
 							name="pswd"
-							required
-							/>
-							</div>
-							<div class="form-group col-lg-2 col-xl-2 col-sm-2 col-md-2" style="margin-left: -1.5em;">
-								<div class="row">
-									<button type="submit" class="btn btn-primary btngroupMsgFormSubmit">
+							required></textarea>
+							
+							
+								<button type="submit" class="btn btn-primary btngroupMsgFormSubmit">
 									<span class="fas fa-paper-plane"></span>
 								</button>
-								<span class="btn btn-warning btnGroupRefreshMsg">
-									<span class="fas fa-sync-alt"> </span>
-								</span>
-								</div>
-							</div>
-						</div>
+							
+					</div>
 			      </div>
 	    	</div>
 		</div>

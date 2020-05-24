@@ -18,14 +18,18 @@
 	    include("headerlink.php");
 		include("header.php");  
  ?>
-
+ 
 			<div class="container p-3 text-center text-secondary" style="margin-bottom: -2em;background-color: #f0ededa3">
 			<p>
-				<button type="button" class="btn btn-outline-secondary btn-sm btnHome">
-				<span class="fas fa-user"></span>	Home
-				</button>
+				<div class="row">
+					<div class="col-md-3 col-sm-3 col-xs-3"><p>Admin: <span class="text-success"><?php echo  $res[0]->Owner; ?></span></p></div>
+					<div class="col-md-6 col-sm-6 col-xs-6"><button type="button" class="btn btn-success btn-sm btnHome">
+				<span class="fas fa-home"></span>
+				</button></div>
+					<div class="col-md-3 col-sm-3 col-xs-3"><p>You: <span class="text-success genVisitorUsername"><?php echo  @$_COOKIE["RandomUserName"]; ?></span></div>
+				</div>
 				<!-- <p>Group: <?php // echo  $res[0]->GroupName; ?></p> -->
-				<p>This Group is Created By: <?php echo  $res[0]->Owner; ?></p>
+				
 				<!-- <button type="button" class="btn btn-outline-secondary btn-sm btnNewGroup">
 				<span class="fas fa-user"></span>	Create New Group
 				</button> -->
@@ -95,15 +99,30 @@
 			      				{
 			      				# code...
 			      	 ?>
-			      		<div class="containerr sendbground"><p class="margin_bottom_0"><?php echo $message->Message; ?></p></div>
 
-			      		<!-- <div class="containerr"><img src="images/pp.jpg" alt="Avatar" style="width:100%;"><p>krishna nand</p><span class="time-right">2020-04-11 20:31:44</span></div> -->
+			      		<div class="containerr-r">
+			      			<span style="margin-right: 1em;float: right;">
+		      						<span class="text-success" style="font-size: .7em;"><?php echo $message->From;?></span>, <i class="fas fa-clock" style="font-size: .7em"> <?php echo calDatetimeDiff($message->CreateDate); ?></i>
+		      				</span><br>
+			      			<div class="containerr sendbground">
+			      				<p class="margin_bottom_0"><?php echo $message->Message; ?></p>
+			      			</div>
+			      		</div>
 		      		<?php 
 		      					}
 		      				    else
 		      				    {
-		      		?>
-		      				<div class="containerr recbground"><p class="margin_bottom_0"><?php echo $message->Message; ?></p></div>
+		      		?>      
+		      				
+		      				<div class="containerr-l">
+		      					<span style="margin-left: 1em;">
+		      						<span class="text-success" style="font-size: .7em;"><?php echo $message->From;?></span>, <i class="fas fa-clock" style="font-size: .7em"> <?php echo calDatetimeDiff($message->CreateDate); ?></i>
+		      					</span>
+		      					<div class="containerr recbground">
+		      						<p class="margin_bottom_0"><?php echo $message->Message; ?>
+		      						</p>
+		      					</div>
+		      				</div>
 		      		<?php
 
 		      				    }
@@ -139,6 +158,9 @@
 		</div>
 		<script type="text/javascript" src="js/controls.js"></script>
 		<script type="text/javascript" src="js/groupchat.js"></script>
-			
+		<script type="text/javascript">
+			if($(".genVisitorUsername").html()=="")
+				window.location.reload();
+		</script>
 				<!-- including the footer: -->
 			<?php include("footer.php"); ?>

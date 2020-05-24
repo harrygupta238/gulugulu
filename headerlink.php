@@ -14,5 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<script type="text/javascript" src="js/constantclient.js"></script>
 		<script type="text/javascript" src="js/websocket.js"></script>
+		<script src= 
+"https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script>
 	</head>
 	<body>

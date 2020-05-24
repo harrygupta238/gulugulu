@@ -1,4 +1,5 @@
 <?php 
+date_default_timezone_set('Asia/Kolkata');
  $GLOBALS["DB"] = "mydb";
   $GLOBALS["LoggedInUserName"] = "LoggedInUserName";
   $GLOBALS["RandomUserName"] = "RandomUserName";
@@ -273,32 +274,70 @@
    function setVisitorCookie(){
       if(!isset($_SESSION["LoggedInUserName"])  && !isset($_COOKIE["RandomUserName"]))
       {
-        setcookie("RandomUserName", new MongoDB\BSON\ObjectID, time() + (86400 * 300), "/");
+        setcookie("RandomUserName", "visitor-".randomNumberGenerator(), time() + (86400 * 300), "/");
       }
    }
 
   function deleteGroupByID($groupid){
       $db=ConnectDB();
       $DBName=$GLOBALS["DB"].".GGgroups";
+      $bulk = new MongoDB\Driver\BulkWrite;
+      $bulk->update(['_id' =>  new MongoDB\BSON\ObjectID($groupid)],
+                ['$set' => 
+                  [
+                    'IsActive' => false,
+                  ]
+                ]);
+      $result=$db->executeBulkWrite($DBName, $bulk);
+      if($result)
+      {
+        $result="deleted";
+        return $result;
+      }
+      else
+      {
+        $result="delete_failed";
+        return $result;
+      }
+  }
+
+  function updateGroupName($group){
+    $db=ConnectDB();
+      $DBName=$GLOBALS["DB"].".GGgroups";
+      $query = new MongoDB\Driver\Query(['GroupName' => $group["GroupName"],"Owner"=>$group["Owner"],"IsActive"=>true]);     
+        $rows = $db->executeQuery($DBName, $query)->toArray();
+        if(count($rows)>0)
+        {
+          $result="groupname_exists";
+          return $result;
+        }
+        else
+        {
+           $bulk = new MongoDB\Driver\BulkWrite;
+            $bulk->update(['_id' =>  $group["_id"]],
+                      ['$set' => 
+                        [
+                          'GroupName' => $group["GroupName"],
+                        ]
+                      ]);
+            $result=$db->executeBulkWrite($DBName, $bulk);
+            if($result)
+            {
+              $result="inserted";
+              return $result;
+            }
+            else
+            {
+              $result="insert_failed";
+              return $result;
+            }
+        }
+
+
+
+ 
       
-          $bulk = new MongoDB\Driver\BulkWrite;
-          $bulk->update(['_id' =>  new MongoDB\BSON\ObjectID($groupid)],
-                    ['$set' => 
-                      [
-                        'IsActive' => false,
-                      ]
-                    ]);
-          $result=$db->executeBulkWrite($DBName, $bulk);
-          if($result)
-          {
-            $result="deleted";
-            return $result;
-          }
-          else
-          {
-            $result="delete_failed";
-            return $result;
-          }
+
   }
    function deleteGroupMsgByID($groupid,$msgid){
       $db=ConnectDB();
@@ -327,4 +366,39 @@
             return $result;
           }
   }
+
+  function randomNumberGenerator(){
+    $a=1;
+    for($i=0;$i<6;$i++){
+      //echo $a."<br>";
+      $a=$a*rand(1,10); 
+      //echo $a."<br>";
+    }
+    return $a;
+  }
+
+  function calDatetimeDiff($datetime){
+    $datetime1 = new DateTime();
+    $datetime2 = new DateTime($datetime);
+    //var_dump($datetime2);echo "<br><br><br>";
+    $interval = $datetime1->diff($datetime2);
+    //var_dump($interval);echo "<br><br><br>";
+    if($interval->y>0 || $interval->m>0 || $interval->d>0 )
+    {
+      return date("M d, Y",strtotime($datetime));
+    }
+    else if($interval->h>0)
+    {
+      return $interval->format('%hh ago');
+    }
+    else if($interval->i>0)
+    {
+      return $interval->format('%im ago');
+    }
+    else if($interval->s>0)
+    {
+      return $interval->format('%ss ago');
+    }
+  }
+///calDatetimeDiff("2020-05-17 12:22:03");
  ?>

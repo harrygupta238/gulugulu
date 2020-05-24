@@ -4,11 +4,10 @@ var logouthref = hostorigin + _constantClient.rootdir +"/index.php";
 var anonymoususerhref = hostorigin + _constantClient.rootdir +"/visitor.php";
 var groupchatpagehref = hostorigin +_constantClient.rootdir +"/groupchat.php";
 var btnloader = '<span class="spinner-border spinner-border-sm"></span>';
-let profilelink = hostorigin + _constantClient.rootdir +"/profilelink.php?u=";
 let groupsharelink = hostorigin + _constantClient.rootdir +"/groupvisitor.php?g=";
 
 
-$("#profilelinkorigin").text(profilelink);
+
 $(document).on("click", ".btnLogin", function () {
 	//$(".defaultContent").hide();
 	$(".signupContent").hide();
@@ -30,17 +29,6 @@ $(document).on("click", ".btnSignup", function () {
 	$(".btnLogin").removeClass("active");
 	$(".errormsg").html("");
 });
-
-// $(document).on("click", ".btnHome", function () {
-// 	$(".loginContent").hide();
-// 	$(".signupContent").hide();
-// 	//$(".defaultContent").show();
-
-// 	//$(".btnHome").addClass("active");
-// 	$(".btnSignup").removeClass("active");
-// 	$(".btnLogin").removeClass("active");
-// 	$(".errormsg").html("");
-// });
 
 $(document).on("click", "#logout", function () {
 	$("#logout").append(btnloader);
@@ -259,6 +247,13 @@ $(document).on("input", ".password, .cpassword", function () {
 // 	$("#sentboxMsg").hide();
 // });
 $(document).on("click", ".btnInBox, .btnSentBox", function () {
+	$(".btnInBox").removeClass("active");
+	$(".btnSentBox").removeClass("active");
+	$(".btnNewMsgBox").removeClass("active");
+	$(this).addClass("active");
+	$(".newMsgBox").hide();
+	$(".inboxsentbox").show();
+
 	let data = { getAllMessageList: true };
 	let btnMsgCtrl = $(this);
 	$(".errormsg").html("");
@@ -346,7 +341,7 @@ $("#sndmsgForm").submit(function (e) {
 });
 
 $(document).on("click", ".btnCopy", function () {
-	var copyText = $("#profilelink").text();
+	var copyText = $(this).closest(".profilelink").text();
 	let temp = $("<input>");
 	$("body").append(temp);
 	temp.val(copyText).select();
@@ -378,6 +373,58 @@ function restrictVisitor()
 	}
 }
 
+
+$(document).on("click",".btnNewMsgBox", function(){
+	$(".btnInBox").removeClass("active");
+	$(".btnSentBox").removeClass("active");
+	$(this).addClass("active");
+
+	$(".inboxsentbox").hide();
+	$(".newMsgBox").show();
+});
+
+	var getCanvas; 
+$(document).on("click",".btnpreviewfeedback", function(){
+	let t=$(this);
+	let dataid=t.attr("data-id");
+	t.closest("#inboxMsg").find("[dwnld-id]").hide();
+	t.closest("#inboxMsg").find("[dwnld-id='"+dataid+"']").show();
+});
+var cc=1;
+$(document).on("click",".btndownloadfeedback", function(){
+	let element=$(this).closest("p");
+	let tt=$(this);
+	html2canvas(element, { 
+		onrendered: function(canvas) {  
+			getCanvas = canvas; 
+			var imgageData =getCanvas.toDataURL("image/png").replace( 
+			    /^data:image\/png/, "data:application/octet-stream"); 
+			    tt.attr("download","abcdefg.png").attr( 
+			    "href", imgageData);
+			    //let c++;
+			    if(cc<3){
+			    	cc++;
+			    	tt.click();
+			    }
+    
+		} 
+	}); 
+});
+$(document).find('[dwnld-id]').each(function(){
+	$(this).show();
+	let element=$(this);
+	let dataid=element.attr("dwnld-id");
+	html2canvas(element, { 
+		onrendered: function(canvas) {   
+			var imgageData =canvas.toDataURL("image/png").replace( 
+			    /^data:image\/png/, "data:application/octet-stream");
+				let tt=element.closest("#inboxMsg").find("[data-id='"+dataid+"']");
+			    tt.attr("download","abcdefg.png").attr( 
+			    "href", imgageData);
+			    element.hide();
+		} 
+	}); 
+});
 
 
 
