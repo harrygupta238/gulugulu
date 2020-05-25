@@ -103,17 +103,22 @@ if($auth==false)
 												echo calDatetimeDiff($msg->CreateDate);
 												// echo date("M d, Y H:i:s a",strtotime($msg->CreateDate));  ?></i><br>
 												<?php echo $msg->Message; ?><br>
-												<a href="#" class="btnpreviewfeedback" data-id="<?php echo $msg->_id; ?>" ><i style="cursor: pointer;" class=" fas fa-download float-right" style="font-size: 1em"></i></a>
+												<a href="images/logo.png" class="btnpreviewfeedback" data-id="<?php echo $msg->_id; ?>" ><i class="fa fa-arrow-down" style="font-size: 1em"></i></a>
 												      
 									    	</p>
-									    	<p style="display: none;" dwnld-id="<?php echo $msg->_id; ?>" class="downloadfeedbackbox bg-info p-3 text-center rounded-lg">
-									    			<span class="text-light"><a href="index.php">Gulu<i class="fas fa-comments"></i>Gulu</a></span>
-									    		<br>
-									    		<span class="" >
-									    			<?php echo $msg->Message; ?>
-									    		</span>
+											
+                                                <div dwnld-id="<?php echo $msg->_id; ?>" class="card-deck card-text downloadfeedbackbox rounded-lg" style="display: none;">
+                                                  <div class="card-body text-center">
+												<h1>
+			                                         <span class="dwnld_msg_logo">Gulu<i class="fas fa-comments"></i>Gulu<span>
+											    </h1>
+	                                                <p><span class="" ><?php echo $msg->Message; ?></span>
 									    		<!-- <a href="images/logo4.png" class="btndownloadfeedback" ><i style="cursor: pointer;" class=" fas fa-download float-right" style="font-size: 1em"></i></a> -->
 									    	</p>
+                                            </div>
+                                        </div>
+									 
+											<!-- </div> -->
 								<?php }} ?> 
 								<p class="inbox_content text-dark border-bottom pb-3 p-3">
 								     hi <span class="text-success"><?php echo $_SESSION["LoggedInUserName"]; ?></span>,<br>

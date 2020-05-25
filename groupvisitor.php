@@ -133,24 +133,24 @@
 				      	</div> 
 			      	</div>
 			      	<form action="#" class="needs-validation" id="groupMsgForm" method="post">
-			      	<div class="row pl-2 pr-2 d-flex border-top pt-2 justify-content-center">
-			      			<div class="form-group col-lg-10 col-xl-10 col-sm-10 col-md-10">
+			      	<div class="row pl-2 pr-2 d-flex pt-2 justify-content-center">
+			      			<div class="form-group col-lg-10 col-xl-10 col-sm-10 col-md-10 col-10">
 			      				<input type="hidden" name="" class="txtgroupid" value="<?php echo @$gid; ?>">
 								<input
 								type="text"
-								class="form-control txtgrpmsg"
+								class="form-control txtgrpmsg_grp_visitor"
 								placeholder="Type Your Message here.."
 								name="pswd"
 								required
 								/>
 							</div>
-							<div class="form-group col-lg-2 col-xl-2 col-sm-2 col-md-2" style="margin-left: -1.5em;">
-								<button type="submit" class="btn btn-secondary btngroupMsgFormSubmit">
+							<div class="form-group col-lg-2 col-xl-2 col-sm-2 col-md-2 col-2" style="margin-left: -1.5em;">
+								<button type="submit" class="btn btn-primary btn_visitor_submit">
 									<span class="fas fa-paper-plane"></span>
 								</button>
-								<span class="btn btn-secondary btnGroupRefreshMsg">
+								<!-- <span class="btn btn-secondary btnGroupRefreshMsg">
 									<span class="fas fa-sync-alt"> </span>
-								</span>
+								</span> -->
 							</div>
 						</div>
 			      </div>
