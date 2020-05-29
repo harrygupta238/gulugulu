@@ -106,7 +106,7 @@ if($auth==false)
 												<a href="#" class="btnpreviewfeedback" data-id="<?php echo $msg->_id; ?>" ><i style="cursor: pointer;" class=" fas fa-download float-right" style="font-size: 1em"></i></a>
 												      
 									    	</p>
-									    	<p style="display: none;" dwnld-id="<?php echo $msg->_id; ?>" class="downloadfeedbackbox bg-info p-3 text-center rounded-lg">
+									    	<p style="display: block;" dwnld-id="<?php echo $msg->_id; ?>" class="downloadfeedbackbox bg-info p-3 text-center rounded-lg">
 									    			<span class="text-light"><a href="index.php">Gulu<i class="fas fa-comments"></i>Gulu</a></span>
 									    		<br>
 									    		<span class="" >

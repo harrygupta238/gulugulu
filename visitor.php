@@ -14,12 +14,12 @@ setVisitorCookie();
 			<div class="container">
 				<div class="row d-flex justify-content-center">
 					<div class=" col-lg-8 col-xl-8 col-sm-12 col-md-12">
-					<p class="text-center p-3">You are logged in as : <span class="text-info">Visitor  &nbsp;&nbsp;<button type="button" id="logout" class="btn btn-danger btn-sm btnplinkhome mt-1">
-					<span class="fas fa-sign-out"></span>logout
+					<p class="text-center p-3">You are logged in as : <span class="text-info">Visitor  &nbsp;&nbsp;<button type="button" id="logout" data-toggle="tooltip" data-placement="top" title="logout" class="btn btn-danger btn-sm btnHome mt-1">
+				 <span class="fas fa-sign-out-alt" aria-hidden="true"></span> 
 				</button></span></p>
 						<p>
 						Hey, What are you waiting for, it's time to do some  
-							<span class="text-danger">Gulu-Gulu</span> with your loved ones.
+							<span class="" style="color: #24305E">Gulu-Gulu</span> with your loved ones.
 					
 						</p>
 						<p>
@@ -55,7 +55,7 @@ setVisitorCookie();
 					</div>
 					<div class="row d-flex justify-content-center text-center">
 						<div class="form-group col-lg-4 col-xl-4 col-sm-4 col-md-4">
-							<button type="submit" class="btn btn-danger btnMsgSubmit">
+							<button type="submit" class="btn btn-primary btnMsgSubmit">
 								<span class="fas fa-paper-plane"></span> Send
 							</button>
 						</div>

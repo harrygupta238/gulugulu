@@ -20,14 +20,28 @@
  ?>
  
 			<div class="container p-3 text-center text-secondary" style="margin-bottom: -2em;background-color: #f0ededa3">
+				<!-- <div class="d-flex justify-content-center ">
+				    <div class="p-2 "> <p>Admin: <span class="text-success"><?php echo  $res[0]->Owner; ?></span></p></div>
+				    <div class="p-2 "><button type="button" class="btn btn-success btn-sm btnHome">
+				<span class="fas fa-home"></span>
+				</button></div>
+				    <div class="p-2 "><p>You: <span class="text-success genVisitorUsername"><?php echo  @$_COOKIE["RandomUserName"]; ?></span></p></div>
+				  </div> -->
+				  <div class="d-flex justify-content-between ">
+				    <div class="p-2 "> <p>Admin: <span class="text-success"><?php echo  $res[0]->Owner; ?></span></p></div>
+				    <div class="p-2 "><button type="button" class="btn btn-success btn-sm btnHome">
+				<span class="fas fa-home"></span>
+				</button></div>
+				    <div class="p-2 "><p>You: <span class="text-success genVisitorUsername"><?php echo  @$_COOKIE["RandomUserName"]; ?></span></p></div>
+				  </div>
 			<p>
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-3 col-sm-3 col-xs-3"><p>Admin: <span class="text-success"><?php echo  $res[0]->Owner; ?></span></p></div>
 					<div class="col-md-6 col-sm-6 col-xs-6"><button type="button" class="btn btn-success btn-sm btnHome">
 				<span class="fas fa-home"></span>
 				</button></div>
-					<div class="col-md-3 col-sm-3 col-xs-3"><p>You: <span class="text-success genVisitorUsername"><?php echo  @$_COOKIE["RandomUserName"]; ?></span></div>
-				</div>
+					<div class="col-md-3 col-sm-3 col-xs-3"><p>You: <span class="text-success genVisitorUsername"><?php echo  @$_COOKIE["RandomUserName"]; ?></span></p></div>
+				</div> -->
 				<!-- <p>Group: <?php // echo  $res[0]->GroupName; ?></p> -->
 				
 				<!-- <button type="button" class="btn btn-outline-secondary btn-sm btnNewGroup">
@@ -133,9 +147,9 @@
 				      	</div> 
 			      	</div>
 			      	<form action="#" class="needs-validation" id="groupMsgForm" method="post">
-			      	<div class="row pl-2 pr-2 d-flex border-top pt-2 justify-content-center">
+			      	<!-- <div class="row pl-2 pr-2 d-flex border-top pt-2 justify-content-center">
 			      			<div class="form-group col-lg-10 col-xl-10 col-sm-10 col-md-10">
-			      				<input type="hidden" name="" class="txtgroupid" value="<?php echo @$gid; ?>">
+			      				<input type="hidden" name="" class="txtgroupid" value="<?php //echo @$gid; ?>">
 								<input
 								type="text"
 								class="form-control txtgrpmsg"
@@ -152,7 +166,25 @@
 									<span class="fas fa-sync-alt"> </span>
 								</span>
 							</div>
-						</div>
+						</div> -->
+						<div class="row d-flex pt-2 justify-content-center" style="
+						    width: 100%;
+						    margin-left: 0px;
+						    height: auto;">
+			      				 <input type="hidden" name="" class="txtgroupid">
+								<textarea
+							type="text"
+							class="form-control txtgrpmsg"
+							placeholder="Type Your Message here.."
+							name="pswd"
+							required></textarea>
+							
+							
+								<button type="submit" class="btn btn-primary btngroupMsgFormSubmit">
+									<span class="fas fa-paper-plane"></span>
+								</button>
+							
+					</div>
 			      </div>
 	    	</div>
 		</div>

@@ -83,10 +83,9 @@ if($auth==false)
 			      	</div>
 			      	<form action="#" class="needs-validation" id="groupMsgForm" method="post">
 			      	<div class="row d-flex pt-2 justify-content-center" style="
-    
-    width: 100%;
-    margin-left: 0px;
-    height: auto;">
+						    width: 100%;
+						    margin-left: 0px;
+						    height: auto;">
 			      				 <input type="hidden" name="" class="txtgroupid">
 								<textarea
 							type="text"
