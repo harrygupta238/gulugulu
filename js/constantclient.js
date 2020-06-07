@@ -30,4 +30,23 @@ function getLoggedinUserData(){
 }
 getLoggedinUserData();
 
+function calDatetimeDiff(dt1) 
+ {
+ let dt3=new Date(dt1);
+  let dt2=new Date();
+  var diff =(dt2.getTime() - dt3.getTime()) / 1000;//seconds
+
+  //diff /= 60;
+  if(diff<60)
+  return Math.abs(Math.round(diff))+"s ago";
+  else if(diff/60<60) //minutes
+  return Math.abs(Math.round(diff/60))+"m ago";
+  else if(diff/3600<24) //hours
+  return Math.abs(Math.round(diff/3600))+"h ago";
+  else if(diff/86400<30) //days
+  return Math.abs(Math.round(diff/86400))+"d ago";
+  else  //months
+  return Math.abs(Math.round(diff/2592000))+"month ago";
+  
+ }
 

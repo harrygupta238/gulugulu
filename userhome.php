@@ -10,11 +10,18 @@ if($auth==false)
 		include("header.php"); 
  ?>
 		<div class="container p-3 border-top text-secondary userhome_body">
-			<p class="text-center">You are logged in as : <span class="text-success"> 
+			<p class="text-center">You are logged in as : <span class="text-info"> 
 			<?php echo $_SESSION["LoggedInUserName"]; ?> </span><br>
-				<span class="profilelink bg-white" style="padding:5px;"><button data-toggle="tooltip" data-placement="right" title="copy to clipboard" type="button" class="btn btn-dark btnCopy btn-sm ml-1">
-								  <span class="fas fa-copy" aria-hidden="true"></span>
-							</button></span><br>
+			
+			<span class="text-center"> Click button to copy your profile link:
+				<span class="profilelink bg-white" style="padding:5px;display: none">
+			    </span>
+				<button data-toggle="tooltip" data-placement="right" title="Click here to copy your profile link" type="button" class="btn btn-dark btnCopy btn-sm ml-1">
+					<span class="fas fa-copy" aria-hidden="true"></span>
+				</button>
+				 
+			</span><br>
+				
 			    <button type="button" data-toggle="tooltip" data-placement="top" title="New Message"  class="btn btn-info btn-sm mt-1 btnNewMsgBox">
 					<span class="fas fa-edit" aria-hidden="true"></span> 
 				</button>
@@ -89,7 +96,7 @@ if($auth==false)
 				<div class="">
 					<div class="row d-flex justify-content-center">
 						<div class="col-lg-8 col-xl-8 col-sm-12 col-md-12 msgBox">
-							<div id="inboxMsg" class="pt-4">
+							<div id="inboxMsg" class="">
 								<?php  
 									@$messages=getAllMessageList();
 									//var_dump($messages);
@@ -98,31 +105,31 @@ if($auth==false)
 										{
 									?>
 											
-											<p class="text-dark border-bottom b-3 p-3 m-4 inbox_content">
+											<p class="text-light border-bottom b-3 p-3 m-4 inbox_content">
 												<i class="fas fa-clock" style="font-size: .7em"> <?php
 												echo calDatetimeDiff($msg->CreateDate);
-												// echo date("M d, Y H:i:s a",strtotime($msg->CreateDate));  ?></i><br>
+												  ?></i><br>
 												<?php echo $msg->Message; ?><br>
-												<a href="images/logo.png" class="btnpreviewfeedback" data-id="<?php echo $msg->_id; ?>" ><i class="fa fa-arrow-down" style="font-size: 1em"></i></a>
+												<a href="#" class="btnpreviewfeedback" data-id="<?php echo $msg->_id; ?>" ><i class="fa fa-download" style="font-size: 1em;margin-top: -40px;cursor: pointer;float: right;"></i></a>
 												      
 									    	</p>
-											
-                                                <div dwnld-id="<?php echo $msg->_id; ?>" class="card-deck card-text downloadfeedbackbox rounded-lg" style="display: none;">
-                                                  <div class="card-body text-center">
-												<h1>
-			                                         <span class="dwnld_msg_logo">Gulu<i class="fas fa-comments"></i>Gulu<span>
-											    </h1>
-	                                                <p><span class="" ><?php echo $msg->Message; ?></span>
-									    		<!-- <a href="images/logo4.png" class="btndownloadfeedback" ><i style="cursor: pointer;" class=" fas fa-download float-right" style="font-size: 1em"></i></a> -->
-									    	</p>
-                                            </div>
-                                        </div>
+											<div class="ppppp" style="width: 100%;text-align: center;">
+												<div dwnld-id="<?php echo $msg->_id; ?>" class="card-deck card-text downloadfeedbackbox rounded-lg" style="display: inline-block; width: 60%">
+													<div class="card-body text-center" style="min-height: 100px;">
+														<p><?php echo $msg->Message; ?></p>
+													</div>
+													<div class="text-center">
+				                                         <span class="dwnld_msg_logo">Gulu<i class="fas fa-comments"></i>Gulu<span>
+                                                    </div>
+                                                </div>
+											</div>
+                                                
 									 
 											<!-- </div> -->
 								<?php }} ?> 
-								<p class="inbox_content text-dark border-bottom pb-3 p-3">
-								     hi <span class="text-success"><?php echo $_SESSION["LoggedInUserName"]; ?></span>,<br>
-									 Greetings! from <span class="text-danger">Gulu-Gulu</span> team,
+								<p class="inbox_content text-light border-bottom pb-3 p-3">
+								     hi <span class="text-info"><?php echo $_SESSION["LoggedInUserName"]; ?></span>,<br>
+									 Greetings! from <span class="" style="color: #b8f7f6;">Gulu-Gulu</span> team,
 									 hope you are enjoying this platform. The messages you will recieve will be displayed here.
 									 <br>-thanks and regards
 
@@ -136,8 +143,8 @@ if($auth==false)
 										{
 								    ?>
 								    <p class="sent_content text-dark border-bottom b-3 p-3">
-								    	<i class="fas fa-clock" style="font-size: .7em"> <?php echo date("M d, Y H:i:s a",strtotime($msg->CreateDate));  ?></i><br>
-								    	To : <span class="text-info"><?php echo $msg->To; ?></span><br>
+								    	<i class="fas fa-clock" style="font-size: .7em"> <?php echo calDatetimeDiff($msg->CreateDate);  ?></i><br>
+								    	To : <span class="text-success"><?php echo $msg->To; ?></span><br>
 										Message :	<?php echo $msg->Message; ?><br>					
 
 									    	</p>

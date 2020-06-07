@@ -108,14 +108,25 @@ if(isset($_POST["getAllMessageList"]))
 			{
 		?>
 				
-				<p class="text-dark border-bottom b-3 p-3 inbox_content">
-					<i class="fas fa-clock" style="font-size: .7em"> <?php echo date("M d, Y H:i:s a",strtotime($msg->CreateDate));  ?></i><br>
-					<?php echo $msg->Message; ?><br>					        
+				<p class="text-light border-bottom b-3 p-3 inbox_content">
+					<i class="fas fa-clock" style="font-size: .7em"> <?php echo calDatetimeDiff($msg->CreateDate);  ?></i><br>
+					<?php echo $msg->Message; ?><br>
+					<a href="#" class="btnpreviewfeedback" data-id="<?php echo $msg->_id; ?>" ><i class="fa fa-download" style="font-size: 1em;margin-top: -40px;cursor: pointer;float: right;"></i></a>					        
 		    	</p>
+		    	<div class="ppppp" style="width: 100%;text-align: center;display: none;">
+					<div dwnld-id="<?php echo $msg->_id; ?>" class="card-deck card-text downloadfeedbackbox rounded-lg" style="display: inline-block; width: 60%">
+						<div class="card-body text-center" style="min-height: 100px;">
+							<p><?php echo $msg->Message; ?></p>
+						</div>
+						<div class="text-center">
+                             <span class="dwnld_msg_logo">Gulu<i class="fas fa-comments"></i>Gulu<span>
+                        </div>
+                    </div>
+				</div>
 	<?php }} ?> 
-	<p class="inbox_content text-dark border-bottom b-3 p-3">
+	<p class="inbox_content text-light border-bottom b-3 p-3">
 	     hi <span class="text-info"><?php echo $_SESSION["LoggedInUserName"]; ?></span>,<br>
-		 Greetings! from <span class="text-danger">Gulu-Gulu</span> team,
+		 Greetings! from <span class="text-warning">Gulu-Gulu</span> team,
 		 hope you are enjoying this platform. The messages you will recieve will be displayed here.
 		 <br>-thanks and regards							        
 		    	</p>  
@@ -127,7 +138,7 @@ if(isset($_POST["getAllMessageList"]))
 			{
 	    ?>
 	    <p class="sent_content text-dark border-bottom b-3 p-3">
-	    	<i class="fas fa-clock" style="font-size: .7em"> <?php echo date("M d, Y H:i:s a",strtotime($msg->CreateDate));  ?></i><br>
+	    	<i class="fas fa-clock" style="font-size: .7em"> <?php echo calDatetimeDiff($msg->CreateDate);  ?></i><br>
 	    	To : <span class="text-info"><?php echo $msg->To; ?></span><br>
 			Message :	<?php echo $msg->Message; ?><br>					        
 		    	</p>

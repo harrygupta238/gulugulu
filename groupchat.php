@@ -13,10 +13,10 @@ if($auth==false)
 		
 		<div class="container p-3 text-center text-secondary" style="margin-bottom: -2em;background-color: #f0ededa3">
 			<p>
-				<button type="button" class="btn btn-success btn-sm btnHome">
+				<button type="button" class="btn btn-info btn-sm btnHome">
 				<span class="fas fa-home"></span>
 				</button>
-				<button type="button" class="btn btn-warning btn-sm btnNewGroup">
+				<button type="button" class="btn btn-info btn-sm btnNewGroup">
 				<span class="fas fa-plus"></span> New Group
 				</button>
 			</p>

@@ -1,6 +1,13 @@
+var protocol = 'ws://'; 
+if (window.location.protocol === 'https:') {
+            protocol = 'wss://';
+   }
 
+ //var wsUri =protocol+ "ec2-3-16-124-106.us-east-2.compute.amazonaws.com/controllers/php-socket.php";
+var wsUri =protocol+ "localhost:8090/controllers/php-socket.php";
 
-		var websocket = new WebSocket("ws://localhost:8090/gulugulu/controllers/php-socket.php"); 
+		var websocket = new WebSocket(wsUri); 
+	//var websocket = new WebSocket("wss://localhost:8090/controllers/php-socket.php"); 
 		websocket.onopen = function(event) { 
 			//showMessage("<div class='chat-connection-ack'>Connection is established!</div>");
 			console.log("Connection is established between socket and server!");	
@@ -20,10 +27,13 @@
 		        			MessageHtml='\
 		        			<div class="containerr-l" data-id="'+Data.MessageID+'">\
 		      					<span style="margin-left: 1em;">\
-		      						<span class="text-success" style="font-size: .7em;">'+Data.SenderUserName+'</span>, <i class="fas fa-clock" style="font-size: .7em"> 1m ago </i>\
+		      						<span class="text-success" style="font-size: .7em;">'+Data.SenderUserName+'</span>, <i class="fas fa-clock" style="font-size: .7em"> 1m ago </i> <span class="fa fa-chevron-down restrictVisitor dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+									<div class="dropdown-menu" style="padding:0">\
+									  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
+									</div>\
 		      					</span>\
 		      					<div class="containerr recbground">\
-		      						<p class="margin_bottom_0">'+Data.Message+'<span class="fas fa-trash btnGpMsgDelete restrictVisitor"></span></p>\
+		      						<p class="margin_bottom_0">'+Data.Message+'</p>\
 		      					</div>\
 		      				</div>';
 		            		$('.groupmessagelist').append(MessageHtml);
@@ -44,7 +54,8 @@
 		};
 		
 		websocket.onerror = function(event){
-			console.log("<div class='error'>Problem due to some Error</div>");
+			console.log(event);
+			console.log(event+"<div class='error'>Problem due to some Error</div>");
 
 		};
 		websocket.onclose = function(event){

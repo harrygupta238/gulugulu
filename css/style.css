@@ -34,8 +34,8 @@
     margin-top: 0px;
     padding: 10px 15px 10px 15px;
     float: left;
-    height: 63px;
-    margin-left: -52px;
+        height: 44px;
+    margin-left: -48px;
         border-radius: 0px 5px 5px 0px;
             z-index: 9;
     }
@@ -78,7 +78,7 @@
       margin-top: 0px;
       float: right;
       margin-right: 8px;
-      height:54px;
+      height:45px;
       margin-bottom: 10px;
           z-index: 9;
      }
@@ -109,7 +109,7 @@ letter-spacing: 2px;
 }
 
 #header_cont {
-  color: #F0F03A;
+  color: #b8f7f6;
   font-size: 14px;
 }
 
@@ -133,7 +133,7 @@ letter-spacing: 1px;
 }
 
 #header_cont {
-  color: #F0F03A;
+  color: #b8f7f6;
   font-size: 12px;
 }
 
@@ -142,10 +142,10 @@ letter-spacing: 1px;
   text-decoration: none;
   font-size: 38px;
 }
-#gulugulu:hover {
+/*#gulugulu:hover {
   color: #F0F03A;
   font-size: 36px;
-}
+}*/
 
 }
 @media screen and (max-width:576px){
@@ -200,7 +200,7 @@ width: 3em;
   }
 
   #footer_cont {
-         color: #F0F03A;
+         color: #b8f7f6;
          font-size: 14px;
   }
   @media screen and (max-width:400px)  {
@@ -209,10 +209,10 @@ width: 3em;
       font-size: 12px; 
       letter-spacing: 1px;
   }
-  #footer_cont {
+  /*#footer_cont {
          color: #F0F03A;
          font-size: 12px;
-  }
+  }*/
 }
 
 
@@ -281,7 +281,7 @@ width: 3em;
             }
 
             .inbox_content {
-              background-color: #bacfe4;
+              background-color: #24305ec9;
               border-radius: 10px 0 10px 10px;
               border:none;
               padding: 1em;
@@ -291,7 +291,7 @@ width: 3em;
             }
 
             .sent_content {
-              background-color: #ffff99;
+              background-color: #b8f7f6;
               border-radius: 10px 0 10px 10px;
               border:none;
               padding: 1em;
@@ -359,7 +359,7 @@ width: 3em;
       min-height: 30px;
       font-size: 14px;
       padding:  0px 0px;
-      letter-spacing: 1px;
+      
     }
     .containerr-r {
       width: 65%;
@@ -369,26 +369,26 @@ width: 3em;
       min-height: 30px;
       font-size: 14px;
       padding:  0px 0px;
-      letter-spacing: 1px;
+      
     }
     .containerr {
       width: fit-content;
       min-height: 30px;
       font-size: 14px;
       padding:  0px 0px;
-      letter-spacing: 1px;
+      
       padding: 10px;
           margin: 0px 10px;
               min-width: 105px;
     }
 
     .recbground{
-      background-color: #c4f3f8;
+      background-color: #e2fcff;
           border-radius: 0px 10px 10px 10px;
     }
     .sendbground
     {
-      background-color: #f2ae48;
+      background-color: #f2f2f2;
       float:right;
       border-radius: 10px 10px 0px 10px;
     }
@@ -426,8 +426,9 @@ width: 3em;
   /* customizing the inbox msg image download: */
   .downloadfeedbackbox {
     display: none;
-    height:300px;
-    background-color: #e75183;
+    
+        height: fit-content;
+    background-color: #24305E;
     color:white;
     z-index:1;
     text-align: center;
@@ -438,53 +439,15 @@ width: 3em;
     float: right;
   }
 .dwnld_msg_logo {
-  color:rgb(197, 161, 161, 1);
-  font-size: 22px;;
+  color:rgb(246, 246, 246);
+  font-size: 11px;;
 }
-
-/* customizating groupvisitor page: */
-.containerr-r {
-  float:right;
-  margin:10px 40px 10px 40px;
+.groupmsgBox-header{
+  background-color: #17a2b8!important;
 }
-.containerr-l {
-  float:left;
-  margin:10px 40px 10px 40px;
-}
-
-@media screen and (max-width:420px) {
-  /* customizating groupvisitor page: */
-.containerr-r {
-  float:right;
-  margin:5px 10px 5px 10px;
-}
-.containerr-l {
-  float:left;
-  margin:5px 10px 5px 10px;
- }
-}
-
-.txtgrpmsg_grp_visitor {
-  width:110%;
-  margin-left:25px;
-}
-.btn_visitor_submit {
-    margin-top: 0px;
-    padding: 5px 10px 5px 10px;
-    float: right;
-    height: 38px;
-    border-radius: 0px 5px 5px 0px;   
-}
-@media screen and (max-width:400px) {
-  .txtgrpmsg_grp_visitor {
-    width:95%;
-    margin-left:0;
-  }
-  .btn_visitor_submit {
-      margin:0;
-      padding: 5px 10px 5px 10px;
-      float: right;
-      height: 38px;
-      border-radius: 0px 5px 5px 0px;   
-  }
+.list-group-item.active {
+    z-index: 2;
+     color: #6c757d;
+    background-color: #e7f2fc;
+     border-color: rgba(0,0,0,.125);
 }

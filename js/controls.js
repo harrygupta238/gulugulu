@@ -240,13 +240,10 @@ $(document).on("input", ".password, .cpassword", function () {
 // 	$("#sentboxMsg").show();
 // });
 
-// $(document).on("click",".btnInBox", function(){
-// 	$(".btnInBox").addClass("active");
-// 	$(".btnSentBox").removeClass("active");
-// 	$("#inboxMsg").show();
-// 	$("#sentboxMsg").hide();
-// });
-$(document).on("click", ".btnInBox, .btnSentBox", function () {
+$(document).on("click",".btnInBox", function(){
+	window.location.reload();
+});
+$(document).on("click", ".btnSentBox", function () {
 	$(".btnInBox").removeClass("active");
 	$(".btnSentBox").removeClass("active");
 	$(".btnNewMsgBox").removeClass("active");
@@ -278,6 +275,7 @@ $(document).on("click", ".btnInBox, .btnSentBox", function () {
 				$("#inboxMsg").hide();
 				$("#sentboxMsg").show();
 			}
+			
 		}
 	});
 });
@@ -341,7 +339,7 @@ $("#sndmsgForm").submit(function (e) {
 });
 
 $(document).on("click", ".btnCopy", function () {
-	var copyText = $(this).closest(".profilelink").text();
+	var copyText = $(document).find(".profilelink").text();
 	let temp = $("<input>");
 	$("body").append(temp);
 	temp.val(copyText).select();
@@ -390,27 +388,10 @@ $(document).on("click",".btnpreviewfeedback", function(){
 	t.closest("#inboxMsg").find("[dwnld-id]").hide();
 	t.closest("#inboxMsg").find("[dwnld-id='"+dataid+"']").show();
 });
-var cc=1;
-$(document).on("click",".btndownloadfeedback", function(){
-	let element=$(this).closest("p");
-	let tt=$(this);
-	html2canvas(element, { 
-		onrendered: function(canvas) {  
-			getCanvas = canvas; 
-			var imgageData =getCanvas.toDataURL("image/png").replace( 
-			    /^data:image\/png/, "data:application/octet-stream"); 
-			    tt.attr("download","abcdefg.png").attr( 
-			    "href", imgageData);
-			    //let c++;
-			    if(cc<3){
-			    	cc++;
-			    	tt.click();
-			    }
-    
-		} 
-	}); 
-});
-$(document).find('[dwnld-id]').each(function(){
+
+function generateImageOfMsg(){
+	let lengthh=$(document).find('[dwnld-id]').length;
+	$(document).find('[dwnld-id]').each(function(){
 	$(this).show();
 	let element=$(this);
 	let dataid=element.attr("dwnld-id");
@@ -425,6 +406,8 @@ $(document).find('[dwnld-id]').each(function(){
 		} 
 	}); 
 });
+}
+generateImageOfMsg();
 
 
 

@@ -162,9 +162,9 @@ function displayGroupMessage(groupid){
 			if (response) {
 				let result=response;
 				result=JSON.parse(result);
-				let groupmsgbox_header='<div class="groupmsgBox-header" groupid="'+groupid+'" style="background-color: #dae0e5!important;width: 100%;\
+				let groupmsgbox_header='<div class="groupmsgBox-header" groupid="'+groupid+'" style="width: 100%;\
 	    				height: 33px;">\
-	    					<div class="d-flex justify-content-between bg-secondary">\
+	    					<div class="d-flex justify-content-between">\
 							    <div class="p-1 text-light"><span class="fa fa-chevron-left restrictVisitor"></span></div>\
 							    <div class="p-1 text-light hgroupname">'+result[0].GroupName+'</div>\
 							    <div class="p-1 text-light dropleft dropdown">\
@@ -191,7 +191,7 @@ function displayGroupMessage(groupid){
 							 MessageList+='\
 							<div class="containerr-r" data-id="'+Messages[i]._id.$oid+'">\
 				      			<span style="margin-right: 1em;float: right;">\
-			      						<span class="text-success" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> 1m ago </i> <span class="fa fa-chevron-down restrictVisitor dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+			      						<span class="" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictVisitor dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
 											<div class="dropdown-menu" style="padding:0">\
 											  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
 											</div>\
@@ -204,7 +204,7 @@ function displayGroupMessage(groupid){
 							 MessageList+='\
 							<div class="containerr-l" data-id="'+Messages[i]._id.$oid+'">\
 		      					<span style="margin-left: 1em;">\
-		      						<span class="text-success" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> 1m ago </i> <span class="fa fa-chevron-down restrictVisitor dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+		      						<span class="" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictVisitor dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
 									<div class="dropdown-menu" style="padding:0">\
 									  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
 									</div>\
@@ -214,7 +214,7 @@ function displayGroupMessage(groupid){
 		      					</div>\
 		      				</div>';
 						}
-						let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist">\
+						let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">\
 				      		'+MessageList+'\
 				      	</div>';
 						$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);
@@ -224,7 +224,7 @@ function displayGroupMessage(groupid){
 				}
 				else
 				{
-					let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist">\
+					let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">\
 				      		<center><p style="margin-top: 10em;">this chat is empty.</p></center>\
 				      	</div>';
 					$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);

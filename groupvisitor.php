@@ -20,35 +20,13 @@
  ?>
  
 			<div class="container p-3 text-center text-secondary" style="margin-bottom: -2em;background-color: #f0ededa3">
-				<!-- <div class="d-flex justify-content-center ">
-				    <div class="p-2 "> <p>Admin: <span class="text-success"><?php echo  $res[0]->Owner; ?></span></p></div>
-				    <div class="p-2 "><button type="button" class="btn btn-success btn-sm btnHome">
+			<div class="d-flex justify-content-between mb-3">
+    <div class="p-2 "><p>Admin: <span class="text-info"><?php echo  $res[0]->Owner; ?></span></p></div>
+    <div class="p-2 "><button type="button" class="btn btn-info btn-sm btnHome">
 				<span class="fas fa-home"></span>
 				</button></div>
-				    <div class="p-2 "><p>You: <span class="text-success genVisitorUsername"><?php echo  @$_COOKIE["RandomUserName"]; ?></span></p></div>
-				  </div> -->
-				  <div class="d-flex justify-content-between ">
-				    <div class="p-2 "> <p>Admin: <span class="text-success"><?php echo  $res[0]->Owner; ?></span></p></div>
-				    <div class="p-2 "><button type="button" class="btn btn-success btn-sm btnHome">
-				<span class="fas fa-home"></span>
-				</button></div>
-				    <div class="p-2 "><p>You: <span class="text-success genVisitorUsername"><?php echo  @$_COOKIE["RandomUserName"]; ?></span></p></div>
-				  </div>
-			<p>
-				<!-- <div class="row">
-					<div class="col-md-3 col-sm-3 col-xs-3"><p>Admin: <span class="text-success"><?php echo  $res[0]->Owner; ?></span></p></div>
-					<div class="col-md-6 col-sm-6 col-xs-6"><button type="button" class="btn btn-success btn-sm btnHome">
-				<span class="fas fa-home"></span>
-				</button></div>
-					<div class="col-md-3 col-sm-3 col-xs-3"><p>You: <span class="text-success genVisitorUsername"><?php echo  @$_COOKIE["RandomUserName"]; ?></span></p></div>
-				</div> -->
-				<!-- <p>Group: <?php // echo  $res[0]->GroupName; ?></p> -->
-				
-				<!-- <button type="button" class="btn btn-outline-secondary btn-sm btnNewGroup">
-				<span class="fas fa-user"></span>	Create New Group
-				</button> -->
-			</p>
-			
+    <div class="p-2 "><p>You: <span class="text-info genVisitorUsername"><?php echo  @$_COOKIE["RandomUserName"]; ?></span></p></div>
+  </div>
 		</div>
 		<div id="IndexDynamicContent" style="display:none;">
 			<div class="container  p-3 border-bottom text-secondary loginContent" style="background-color: #f0ededa3">
@@ -95,15 +73,15 @@
 			      <div class="col-sm-12" style="padding-left: 0px;
     padding-right: 0px;background-color: ghostwhite;">
     				<div class="groupmessageBox border-bottom">
-    					<div class="groupmsgBox-header" groupid="<?php echo @$gid; ?>"  style="background-color: #dae0e5!important;width: 100%;
+    					<div class="groupmsgBox-header" groupid="<?php echo @$gid; ?>"  style="width: 100%;
 	    				height: 33px;">
-	    					<div class="d-flex justify-content-between bg-secondary">
+	    					<div class="d-flex justify-content-between">
 							    <div class="p-1 text-light"></div>
 							    <div class="p-1 text-light"><?php echo  $res[0]->GroupName; ?></div>
 							    <div class="p-1 text-light"><i class="pr-2 fa fa-cog" aria-hidden="true"></i></div>
 							</div>
 						</div>
-				      	<div class="anyClass groupmessagelist" id="groupmessagelist">
+				      	<div class="anyClass groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">
 				      		<?php 
 			      		if($res!="-")
 			      		{
@@ -116,7 +94,7 @@
 
 			      		<div class="containerr-r">
 			      			<span style="margin-right: 1em;float: right;">
-		      						<span class="text-success" style="font-size: .7em;"><?php echo $message->From;?></span>, <i class="fas fa-clock" style="font-size: .7em"> <?php echo calDatetimeDiff($message->CreateDate); ?></i>
+		      						<span class="" style="font-size: .7em;"><?php echo $message->From;?></span>, <i class="fas fa-clock" style="font-size: .7em"> <?php echo calDatetimeDiff($message->CreateDate); ?></i>
 		      				</span><br>
 			      			<div class="containerr sendbground">
 			      				<p class="margin_bottom_0"><?php echo $message->Message; ?></p>
@@ -130,7 +108,7 @@
 		      				
 		      				<div class="containerr-l">
 		      					<span style="margin-left: 1em;">
-		      						<span class="text-success" style="font-size: .7em;"><?php echo $message->From;?></span>, <i class="fas fa-clock" style="font-size: .7em"> <?php echo calDatetimeDiff($message->CreateDate); ?></i>
+		      						<span class="" style="font-size: .7em;"><?php echo $message->From;?></span>, <i class="fas fa-clock" style="font-size: .7em"> <?php echo calDatetimeDiff($message->CreateDate); ?></i>
 		      					</span>
 		      					<div class="containerr recbground">
 		      						<p class="margin_bottom_0"><?php echo $message->Message; ?>
@@ -147,31 +125,11 @@
 				      	</div> 
 			      	</div>
 			      	<form action="#" class="needs-validation" id="groupMsgForm" method="post">
-			      	<!-- <div class="row pl-2 pr-2 d-flex border-top pt-2 justify-content-center">
-			      			<div class="form-group col-lg-10 col-xl-10 col-sm-10 col-md-10">
-			      				<input type="hidden" name="" class="txtgroupid" value="<?php //echo @$gid; ?>">
-								<input
-								type="text"
-								class="form-control txtgrpmsg_grp_visitor"
-								placeholder="Type Your Message here.."
-								name="pswd"
-								required
-								/>
-							</div>
-							<div class="form-group col-lg-2 col-xl-2 col-sm-2 col-md-2 col-2" style="margin-left: -1.5em;">
-								<button type="submit" class="btn btn-primary btn_visitor_submit">
-									<span class="fas fa-paper-plane"></span>
-								</button>
-								 <span class="btn btn-secondary btnGroupRefreshMsg">
-									<span class="fas fa-sync-alt"> </span>
-								</span> 
-							</div>
-						</div> -->
-						<div class="row d-flex pt-2 justify-content-center" style="
+			      	<div class="row d-flex pt-2 justify-content-center" style="
 						    width: 100%;
 						    margin-left: 0px;
 						    height: auto;">
-			      				 <input type="hidden" name="" class="txtgroupid">
+			      				 <input type="hidden" name="" class="txtgroupid" value="<?php echo @$gid; ?>">
 								<textarea
 							type="text"
 							class="form-control txtgrpmsg"
