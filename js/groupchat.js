@@ -150,10 +150,11 @@ $(document).on('click',".grouplist li", function(){
 	$('.grouplist li').removeClass('active');
 	$('.groupMenuDrpdown').hide();
 	$(this).find('.groupMenuDrpdown').show();
-	$("#groupMsgForm").show();
+	$(".groupmessageBox").html('<center><img src="images/Spin-1s-200px.gif" width="200" height="200" style="margin-top: 5em;"></center>');
 	$("#groupMsgForm").find(".txtgroupid").val($(this).attr('dataid'));
 	$(this).addClass('active');
 	displayGroupMessage($(this).attr('dataid'));
+	$("#groupMsgForm").show();
 	if($(window).width()<=576)
 	{
 		$('.groupmessagecontainer').show();
@@ -266,6 +267,7 @@ $(document).on('click',".btnCopyGrouplink", function(e){
 	document.execCommand("copy");
 	temp.remove();
 	$(this).attr("title", 'Copied: ' + copyText);
+	buildModal({type:"alert",content:"Your Profile Link has been copied."});
 });
 
 $(document).on('click',".btnDeleteGroup", function(e){
@@ -345,45 +347,7 @@ $(document).on('click',".btnRenameGroup", function(){
  
 $(document).on('click',".kkk", function(){
 	// type=["form, notification", alert]
-	let modal=buildModal();
+	let modal=buildModal({type:"notification", content:"Your Profile Link has been copied."});
 	
  }); 
 
- function buildModal()
- {
- 	let modal=$(`<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-				  <div class="modal-dialog" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							          <span aria-hidden="true">&times;</span>
-				        </button>
-				      </div>
-				     
-				    </div>
-				  </div>
-				</div>`);
- 	$("body").append(modal);
- 	addStyleInModal(modal);
- 	return modal;
- }
-
-function addStyleInModal(modal)
-{
-	modal.removeAttr("aria-hidden");
-	modal.attr("aria-modal","true");
-	modal.css({"padding-right":"15px","display":"block"});
-	modal.addClass("show");
-	$("body").append('<div class="modal-backdrop fade show"></div>').addClass("modal-open");
-	modal.on("click",".close",function(){
-		modal.remove();
-		$("body").find(".modal-backdrop").remove();
-		$("body").removeClass("modal-open").removeAttr("style");	
-	});
-}

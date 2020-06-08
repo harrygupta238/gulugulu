@@ -9,6 +9,7 @@
       padding: 8px 28px 8px 28px;
       margin-left: 10px;
       margin-bottom: 10px;
+      border-radius: 15px 15px 15px 15px;
     }
    
     .btngroupMsgFormSubmit{
@@ -17,7 +18,7 @@
       margin-right: 8px;
       height:54px;
       margin-bottom: 10px;
-          border-radius: 0px 5px 5px 0px;
+          border-radius: 15px 15px 15px 15px;
               z-index: 9;
      }
     }
@@ -29,6 +30,7 @@
       height:44px !important;
       padding: 10px 42px 10px 13px;
       margin-left: 5px;
+      border-radius: 15px 15px 15px 15px;
     }
     .btngroupMsgFormSubmit{
     margin-top: 0px;
@@ -36,7 +38,7 @@
     float: left;
         height: 44px;
     margin-left: -48px;
-        border-radius: 0px 5px 5px 0px;
+        border-radius: 15px 15px 15px 15px;
             z-index: 9;
     }
      @media screen and (max-width:780px) {
@@ -48,18 +50,19 @@
     height: 45px !important;
     padding: 10px 10px 10px 10px;
     margin-left: 28px;
+    border-radius: 15px 15px 15px 15px;
     margin-bottom: 10px;
 }
     
    
     .btngroupMsgFormSubmit{
       margin-top: 0px;
-    padding: 10px 10px 10px 10px;
+    padding: 5px 13px 5px 13px;
     float: left;
     height: 44px;
     margin-left: -38px;
     margin-bottom: 10px;
-        border-radius: 0px 5px 5px 0px;
+        border-radius: 15px 15px 15px 15px;
             z-index: 9;
      }
     }
@@ -69,9 +72,10 @@
       width: 88%;
       resize: none;
       height:20px;
-      padding: 8px 28px 8px 28px;
+      padding: 10px 10px 10px 10px;
       margin-left: 10px;
       margin-bottom: 10px;
+      border-radius: 15px 15px 15px 15px;
     }
    
     .btngroupMsgFormSubmit{
@@ -80,6 +84,7 @@
       margin-right: 8px;
       height:45px;
       margin-bottom: 10px;
+      border-radius: 15px 15px 15px 15px;
           z-index: 9;
      }
     }

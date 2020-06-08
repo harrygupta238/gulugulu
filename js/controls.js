@@ -321,13 +321,15 @@ $("#sndmsgForm").submit(function (e) {
 			if (response == "failed") {
 				let message = '<small>Message sending failed, please try again.</small>';
 				$(".errormsg").removeClass("text-success").addClass("text-danger");
-				$(".errormsg").html(message);
+				//$(".errormsg").html(message);
+				buildModal({type:"alert",content:message});
 				$(".btnMsgSubmit").find(".spinner-border").remove();
 			}
 			else if (response == "inserted") {
 				let message = 'Your message successfully sent to : ' + toUsername + '';
 				$(".errormsg").removeClass("text-danger").addClass("text-success");
-				$(".errormsg").html(message);
+				//$(".errormsg").html(message);
+				buildModal({type:"alert",content:message});
 				$(".btnMsgSubmit").find(".spinner-border").remove();
 				$("#sndmsgForm").find(".message").val("");
 			}
@@ -346,6 +348,7 @@ $(document).on("click", ".btnCopy", function () {
 	document.execCommand("copy");
 	temp.remove();
 	$(this).attr("title", 'Copied: ' + copyText);
+	buildModal({type:"alert", content:"Your Profile Link has been copied."})
 });
 
 $(document).on("click", ".btnplinkhome", function () {

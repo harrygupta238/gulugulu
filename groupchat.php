@@ -79,7 +79,6 @@ if($auth==false)
                        padding-right: 0px;background-color: ghostwhite;">
     				<div class="groupmessageBox border-bottom">
     					<center><p style="padding-top: 11em;">Group's Messages will be displayed here.</p></center>
-				   	
 			      	</div>
 			      	<form action="#" class="needs-validation" id="groupMsgForm" method="post" style="display: none;">
 			      	<div class="row d-flex pt-2 justify-content-center" style="
