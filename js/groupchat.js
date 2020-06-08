@@ -267,7 +267,7 @@ $(document).on('click',".btnCopyGrouplink", function(e){
 	document.execCommand("copy");
 	temp.remove();
 	$(this).attr("title", 'Copied: ' + copyText);
-	buildModal({type:"alert",content:"Your Profile Link has been copied."});
+	buildModal({type:"alert",content:"Group Link has been copied. Invite your friends to join this Groupchat."});
 });
 
 $(document).on('click',".btnDeleteGroup", function(e){
