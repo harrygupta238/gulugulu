@@ -1,77 +1,134 @@
-<html>
-<head>
-	<style>
-	body{width:600px;font-family:calibri;}
-	.error {color:#FF0000;}
-	.chat-connection-ack{color: #26af26;}
-	.chat-message {border-bottom-left-radius: 4px;border-bottom-right-radius: 4px;
-	}
-	#btnSend {background: #26af26;border: #26af26 1px solid;	border-radius: 4px;color: #FFF;display: block;margin: 15px 0px;padding: 10px 50px;cursor: pointer;
-	}
-	#chat-box {background: #fff8f8;border: 1px solid #ffdddd;border-radius: 4px;border-bottom-left-radius:0px;border-bottom-right-radius: 0px;min-height: 300px;padding: 10px;overflow: auto;
-	}
-	.chat-box-html{color: #09F;margin: 10px 0px;font-size:0.8em;}
-	.chat-box-message{color: #09F;padding: 5px 10px; background-color: #fff;border: 1px solid #ffdddd;border-radius:4px;display:inline-block;}
-	.chat-input{border: 1px solid #ffdddd;border-top: 0px;width: 100%;box-sizing: border-box;padding: 10px 8px;color: #191919;
-	}
-	</style>	
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script>  
-	function showMessage(messageHTML) {
-		$('#chat-box').append(messageHTML);
-	}
+<?php 
+session_start();
+require 'controllers/functions.php';
+$auth=checkAuth();
+if($auth==false)
+{
+	header("Location: index.php");
+}  
+		include("headerlink.php");
+		include("header.php"); 
+ ?>
 
-	$(document).ready(function(){
-
-		var websocket = new WebSocket("ws://localhost:8090/gulugulu/controllers/php-socket.php"); 
-		websocket.onopen = function(event) { 
-			showMessage("<div class='chat-connection-ack'>Connection is established!</div>");		
-		}
-		websocket.onmessage = function(event) {
-			var Data = JSON.parse(event.data);
-			//console.log(event);
-			if(Data.message_type=="chat-box-html")
-			{
-				if($('#chat-user').val()=="harry" || $('#chat-user').val()=="krishna")
-				showMessage("<div class='"+Data.message_type+"'>"+Data.message+"</div>");
-			}
-			else
-			{
-					showMessage("<div class='"+Data.message_type+"'>"+Data.message+"</div>");
-			}
+		
+		<div class="container p-3 text-center text-secondary" style="margin-bottom: -2em;background-color: #f0ededa3">
+			<p>
+				<button type="button" class="btn btn-info btn-sm btnHome">
+				<span class="fas fa-home"></span>
+				</button>
+				<button type="button" class="btn btn-info btn-sm kkk"  > 
+				<span class="fas fa-plus"></span> New Group
+				</button>
+			</p>
 			
-			$('#chat-message').val('');
-		};
-		
-		websocket.onerror = function(event){
-			showMessage("<div class='error'>Problem due to some Error</div>");
-		};
-		websocket.onclose = function(event){
-			showMessage("<div class='chat-connection-ack'>Connection Closed</div>");
-		}; 
-		
-		$('#frmChat').on("submit",function(event){
-			event.preventDefault();
-			$('#chat-user').attr("type","hidden");		
-			var messageJSON = {
-				chat_user: $('#chat-user').val(),
-				chat_message: $('#chat-message').val()
-			};
-			websocket.send(JSON.stringify(messageJSON));
-		});
-	});
+		</div>
+		<div id="IndexDynamicContent" style="display:none;">
+			<div class="container  p-3 border-bottom text-secondary loginContent" style="background-color: #f0ededa3">
+				<div class="container formwidth" >
+					<div class="text-center">
+						<span>
+							<h6>
+								New Group
+							</h6>
+						</span>
+					</div>
+					<form action="#" class="needs-validation" id="createGroupForm" method="post">
+						<div class="row d-flex justify-content-center">
+							<div class="form-group col-lg-9 col-xl-9 col-sm-12 col-md-12" >
+								<span class="text-danger errormsg"></span><br>
+								<input type="hidden" name="mode" value="create">
+								<input type="hidden" name="groupid">
+								<input
+							type="text"
+							class="form-control groupname"
+							placeholder="Enter Group Name"
+							maxlength="25"
+							name="uname"
+							required
+						/><span class="usrnmmsg"></span>
+							</div>
+						</div>
+						
+						<div class="row d-flex justify-content-center text-center">
+							
+								<div class="row" style="display: contents;">
+									
+										<button type="submit" class="btn btn-primary btn-sm btncreateGroupSubmit m-1">
+									Submit
+								</button>
+								<button type="submit" class="btn btn-danger btn-sm btnCancelNewGroup m-1">
+									Cancel
+								</button>
+									
+							
+							</div><br>
+							 
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="container  p-3 border-bottom text-secondary loginContent" style="background-color:#f0ededa3">
+			<div class="row">
+			      <div class="col-sm-3">
+			      	  <ul class="list-group grouplist anyClass">
+			      	  			<center><p style="margin-top: 10em;">You have no groups.</p></center>
+			          </ul>
+			      </div>
+			      <div class="col-sm-9 groupmessagecontainer" style="padding-left: 0px;
+                       padding-right: 0px;background-color: ghostwhite;">
+    				<div class="groupmessageBox border-bottom">
+    					<center><p style="padding-top: 11em;">Group's Messages will be displayed here.</p></center>
+				   	
+			      	</div>
+			      	<form action="#" class="needs-validation" id="groupMsgForm" method="post" style="display: none;">
+			      	<div class="row d-flex pt-2 justify-content-center" style="
+						    width: 100%;
+						    margin-left: 0px;
+						    height: auto;">
+			      				 <input type="hidden" name="" class="txtgroupid">
+								<textarea
+							type="text"
+							class="form-control txtgrpmsg"
+							placeholder="Type Your Message here.."
+							name="pswd"
+							required></textarea>
+							
+							
+								<button type="submit" class="btn btn-primary btngroupMsgFormSubmit">
+									<span class="fas fa-paper-plane"></span>
+								</button>
+							
+					</div>
+				</form>
+			      </div>
+	    	</div>
+		</div>
+		<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+  Launch demo modal
+</button> -->
 
-
-
-
-	</script>
-	</head>
-	<body>
-		<form name="frmChat" id="frmChat">
-			<div id="chat-box" dataid=""></div>
-			<input type="text" name="chat-user" id="chat-user" placeholder="Name" class="chat-input" required />
-			<input type="text" name="chat-message" id="chat-message" placeholder="Message"  class="chat-input chat-message" required />
-			<input type="submit" id="btnSend" name="send-chat-message" value="Send" >
-		</form>
-</body>
-</html>
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+		<script type="text/javascript" src="js/controls.js"></script>
+		<script type="text/javascript" src="js/groupchat.js"></script>
+		<?php include("footer.php"); ?>

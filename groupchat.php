@@ -81,7 +81,7 @@ if($auth==false)
     					<center><p style="padding-top: 11em;">Group's Messages will be displayed here.</p></center>
 				   	
 			      	</div>
-			      	<form action="#" class="needs-validation" id="groupMsgForm" method="post">
+			      	<form action="#" class="needs-validation" id="groupMsgForm" method="post" style="display: none;">
 			      	<div class="row d-flex pt-2 justify-content-center" style="
 						    width: 100%;
 						    margin-left: 0px;
@@ -100,6 +100,7 @@ if($auth==false)
 								</button>
 							
 					</div>
+				</form>
 			      </div>
 	    	</div>
 		</div>

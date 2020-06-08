@@ -105,8 +105,22 @@ $("#groupMsgForm").submit(function (e) {
 	}
 	let groupMSG = $("#groupMsgForm").find(".txtgrpmsg").val();
 	let groupid = $("#groupMsgForm").find(".txtgroupid").val();
-	$(".groupmessageBox").append(`<center><span class="spinner-border spinner-border-sm"></span></center>`);
-			
+	//$(".groupmessageBox").append(`<center><span class="spinner-border spinner-border-sm"></span></center>`);
+	let datetime=new Date();
+	let Messagebx='\
+				<div class="containerr-r" data-id="">\
+	      			<span style="margin-right: 1em;float: right;">\
+      						<span class="" style="font-size: .7em;">'+_constantClient.UserName+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(datetime)+' </i> <span class="fa fa-chevron-down restrictVisitor dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+								<div class="dropdown-menu" style="padding:0">\
+								  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
+								</div>\
+      				</span><br>\
+	      			<div class="containerr sendbground">\
+	      				<p class="margin_bottom_0">'+groupMSG+'</p>\
+	      			</div>\
+      			</div>';
+      		$('.groupmessagelist').append(Messagebx);
+      		divScrollBottom($('.groupmessagelist'));
 		let data = { savegroupmsg: true, groupMSG: groupMSG ,groupid : groupid};
 		$.ajax({
 			type: "POST",
@@ -136,6 +150,7 @@ $(document).on('click',".grouplist li", function(){
 	$('.grouplist li').removeClass('active');
 	$('.groupMenuDrpdown').hide();
 	$(this).find('.groupMenuDrpdown').show();
+	$("#groupMsgForm").show();
 	$("#groupMsgForm").find(".txtgroupid").val($(this).attr('dataid'));
 	$(this).addClass('active');
 	displayGroupMessage($(this).attr('dataid'));
@@ -145,7 +160,7 @@ $(document).on('click',".grouplist li", function(){
 		$('.grouplist').hide();
 	}
 })
-$(document).on('click',".groupmessageBox .fa-chevron-left", function(){
+$(document).on('click',".groupmessageBox .btnfa-chevron-left", function(){
 	if($(window).width()<=576)
 	{
 		$('.groupmessagecontainer').hide();
@@ -165,7 +180,7 @@ function displayGroupMessage(groupid){
 				let groupmsgbox_header='<div class="groupmsgBox-header" groupid="'+groupid+'" style="width: 100%;\
 	    				height: 33px;">\
 	    					<div class="d-flex justify-content-between">\
-							    <div class="p-1 text-light"><span class="fa fa-chevron-left restrictVisitor"></span></div>\
+							    <div class="p-1 text-light btnfa-chevron-left" style="width:25px"><span class="fa fa-chevron-left restrictVisitor"></span></div>\
 							    <div class="p-1 text-light hgroupname">'+result[0].GroupName+'</div>\
 							    <div class="p-1 text-light dropleft dropdown">\
 									<span class="" data-toggle="dropdown"><i class="fa fa-cog" aria-hidden="true"></i></span>\
@@ -327,3 +342,48 @@ $(document).on('click',".btnRenameGroup", function(){
 	form.find(".errormsg").html("");
 	
 });
+ 
+$(document).on('click',".kkk", function(){
+	// type=["form, notification", alert]
+	let modal=buildModal();
+	
+ }); 
+
+ function buildModal()
+ {
+ 	let modal=$(`<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				     
+				    </div>
+				  </div>
+				</div>`);
+ 	$("body").append(modal);
+ 	addStyleInModal(modal);
+ 	return modal;
+ }
+
+function addStyleInModal(modal)
+{
+	modal.removeAttr("aria-hidden");
+	modal.attr("aria-modal","true");
+	modal.css({"padding-right":"15px","display":"block"});
+	modal.addClass("show");
+	$("body").append('<div class="modal-backdrop fade show"></div>').addClass("modal-open");
+	modal.on("click",".close",function(){
+		modal.remove();
+		$("body").find(".modal-backdrop").remove();
+		$("body").removeClass("modal-open").removeAttr("style");	
+	});
+}
