@@ -47,7 +47,13 @@
 	    					<div class="d-flex justify-content-between">
 							    <div class="p-1 text-light" style="width:25px"></div>
 							    <div class="p-1 text-light"><?php echo  $res[0]->GroupName; ?></div>
-							    <div class="p-1 text-light"><i class="pr-2 fa fa-cog" aria-hidden="true"></i></div>
+							    <div class="p-1 text-light dropleft dropdown">
+									<span class="" data-toggle="dropdown"><i class="pr-2 fa fa-cog" aria-hidden="true"></i></span>
+										<div class="dropdown-menu" style=font-size:13px;>
+									    	<a class="dropdown-item btnCopyGrouplink popup" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i><span class="popuptext myPlPopup" id="">Copied</span></a>
+									    </div>
+									</i>
+								</div>
 							</div>
 						</div>
 				      	<div class="anyClass groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">

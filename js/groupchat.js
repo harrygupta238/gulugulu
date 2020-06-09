@@ -186,7 +186,7 @@ function displayGroupMessage(groupid){
 							    <div class="p-1 text-light dropleft dropdown">\
 									<span class="" data-toggle="dropdown"><i class="pr-2 fa fa-cog" aria-hidden="true"></i></span>\
 										<div class="dropdown-menu" style=font-size:13px;>\
-									    	<a class="dropdown-item btnCopyGrouplink" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i></a>\
+									    	<a class="dropdown-item btnCopyGrouplink popup" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i><span class="popuptext myPlPopup" id="">Copied</span></a>\
 									    	<a class="dropdown-item btnRenameGroup restrictElement" href="#">Rename <i class="fa fa-edit" aria-hidden="true"></i></a>\
 									    	<a class="dropdown-item btnDeleteGroup restrictElement" href="#">Delete Group<i class="fa fa-trash" aria-hidden="true"></i></a>\
 									    </div>\
@@ -252,89 +252,6 @@ function displayGroupMessage(groupid){
 	});
 }
 
-function displayVisitorGroupMessage(groupid){
-	let data = { getGroupMessageList: true ,groupid:groupid};
-	$.ajax({
-		type: "POST",
-		url: "controllers/controller.php",
-		data: data,
-		success: function (response) {
-			if (response) {
-				let result=response;
-				result=JSON.parse(result);
-				let groupmsgbox_header='<div class="groupmsgBox-header" groupid="'+groupid+'" style="width: 100%;\
-	    				height: 33px;">\
-	    					<div class="d-flex justify-content-between">\
-							    <div class="p-1 text-light btnfa-chevron-left" style="width:25px"><span class="fa fa-chevron-left restrictElement"></span></div>\
-							    <div class="p-1 text-light hgroupname">'+result[0].GroupName+'</div>\
-							    <div class="p-1 text-light dropleft dropdown">\
-									<span class="" data-toggle="dropdown"><i class="fa fa-cog" aria-hidden="true"></i></span>\
-										<div class="dropdown-menu" style=font-size:13px;>\
-									    	<a class="dropdown-item btnCopyGrouplink" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i></a>\
-									    	<a class="dropdown-item btnRenameGroup restrictElement" href="#">Rename <i class="fa fa-edit" aria-hidden="true"></i></a>\
-									    	<a class="dropdown-item btnDeleteGroup restrictedElement" href="#">Delete Group<i class="fa fa-trash" aria-hidden="true"></i></a>\
-									    </div>\
-									</i>\
-								</div>\
-							</div>\
-						</div>';
-				if(result[0].Messages!=undefined)
-				{
-					let Messages=result[0].Messages;
-					if(result && result.length>0)
-					{ 
-						
-						let MessageList='';
-						for(let i=0;i<Messages.length;i++)
-						{	 
-							if(Messages[i].From==_constantClient.UserName)
-							 MessageList+='\
-							<div class="containerr-r" data-id="'+Messages[i]._id.$oid+'">\
-				      			<span style="margin-right: 1em;float: right;">\
-			      						<span class="" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
-											<div class="dropdown-menu" style="padding:0">\
-											  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
-											</div>\
-			      				</span><br>\
-				      			<div class="containerr sendbground">\
-				      				<p class="margin_bottom_0">'+Messages[i].Message+'</p>\
-				      			</div>\
-			      			</div>';
-						     else
-							 MessageList+='\
-							<div class="containerr-l" data-id="'+Messages[i]._id.$oid+'">\
-		      					<span style="margin-left: 1em;">\
-		      						<span class="" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
-									<div class="dropdown-menu" style="padding:0">\
-									  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
-									</div>\
-		      					</span>\
-		      					<div class="containerr recbground">\
-		      						<p class="margin_bottom_0">'+Messages[i].Message+'</p>\
-		      					</div>\
-		      				</div>';
-						}
-						let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">\
-				      		'+MessageList+'\
-				      	</div>';
-						$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);
-						divScrollBottom($('.groupmessagelist'));
-						restrictedElement();
-
-					}
-				}
-				else
-				{
-					let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">\
-				      		<center><p style="margin-top: 10em;">this chat is empty.</p></center>\
-				      	</div>';
-					$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);
-
-				}
-			}
-		}
-	});
-}
 
 $(document).on('click',".btnGroupRefreshMsg", function(){
 	let groupid=$(this).closest(".row").find(".txtgroupid").val();
@@ -351,8 +268,10 @@ $(document).on('click',".btnCopyGrouplink", function(e){
 	temp.val(copyText).select();
 	document.execCommand("copy");
 	temp.remove();
-	$(this).attr("title", 'Copied: ' + copyText);
-	buildModal({type:"alert",content:"Group Link has been copied. Invite your friends to join this Groupchat."});
+	$(this).find(".myPlPopup").toggleClass("show");
+    setTimeout(function(){
+    	$(".myPlPopup").toggleClass("show");
+    }, 1000);
 });
 
 $(document).on('click',".btnDeleteGroup", function(e){

@@ -16,9 +16,10 @@ if($auth==false)
 			<span class="text-center"> Click button to copy your profile link:
 				<span class="profilelink bg-white" style="padding:5px;display: none">
 			    </span>
-				<button data-toggle="tooltip" data-placement="right" title="Click here to copy your profile link" type="button" class="btn btn-dark btnCopy btn-sm ml-1">
+				<span class="btn btn-dark btnCopy btn-sm ml-1 popup" data-toggle="tooltip" data-placement="right" title="copy to clipboard">
 					<span class="fas fa-copy" aria-hidden="true"></span>
-				</button>
+					<span class="popuptext myPlPopup" id="">Copied</span>
+				</span>
 				 
 			</span><br>
 				

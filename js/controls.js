@@ -347,9 +347,14 @@ $(document).on("click", ".btnCopy", function () {
 	temp.val(copyText).select();
 	document.execCommand("copy");
 	temp.remove();
-	$(this).attr("title", 'Copied: ' + copyText);
-	buildModal({type:"alert", content:"Your Profile Link has been copied."})
+	//$(this).attr("title", 'Copied: ' + copyText);
+	$(this).find(".myPlPopup").toggleClass("show");
+    setTimeout(function(){
+    	$(".myPlPopup").toggleClass("show");
+    }, 1000);
+	//buildModal({type:"alert", content:"Your Profile Link has been copied."})
 });
+
 
 $(document).on("click", ".btnplinkhome", function () {
 	window.location.href = logouthref;
