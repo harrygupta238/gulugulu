@@ -27,7 +27,7 @@ var wsUri =protocol+ "localhost:8090/controllers/php-socket.php";
 		        			MessageHtml='\
 		        			<div class="containerr-l" data-id="'+Data.MessageID+'">\
 		      					<span style="margin-left: 1em;">\
-		      						<span class="text-success" style="font-size: .7em;">'+Data.SenderUserName+'</span>, <i class="fas fa-clock" style="font-size: .7em"> 1m ago </i> <span class="fa fa-chevron-down restrictVisitor dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+		      						<span class="text-success" style="font-size: .7em;">'+Data.SenderUserName+'</span>, <i class="fas fa-clock" style="font-size: .7em"> 1m ago </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
 									<div class="dropdown-menu" style="padding:0">\
 									  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
 									</div>\
@@ -38,6 +38,7 @@ var wsUri =protocol+ "localhost:8090/controllers/php-socket.php";
 		      				</div>';
 		            		$('.groupmessagelist').append(MessageHtml);
 		            		restrictVisitor();
+		            		restrictedElement();
 		            		divScrollBottom($('.groupmessagelist'));
 		        		}
 		           		

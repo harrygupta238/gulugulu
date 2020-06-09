@@ -110,7 +110,7 @@ $("#groupMsgForm").submit(function (e) {
 	let Messagebx='\
 				<div class="containerr-r" data-id="">\
 	      			<span style="margin-right: 1em;float: right;">\
-      						<span class="" style="font-size: .7em;">'+_constantClient.UserName+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(datetime)+' </i> <span class="fa fa-chevron-down restrictVisitor dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+      						<span class="" style="font-size: .7em;">'+_constantClient.UserName+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(datetime)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
 								<div class="dropdown-menu" style="padding:0">\
 								  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
 								</div>\
@@ -181,14 +181,14 @@ function displayGroupMessage(groupid){
 				let groupmsgbox_header='<div class="groupmsgBox-header" groupid="'+groupid+'" style="width: 100%;\
 	    				height: 33px;">\
 	    					<div class="d-flex justify-content-between">\
-							    <div class="p-1 text-light btnfa-chevron-left" style="width:25px"><span class="fa fa-chevron-left restrictVisitor"></span></div>\
+							    <div class="p-1 text-light btnfa-chevron-left" style="width:25px"><span class="fa fa-chevron-left restrictElement"></span></div>\
 							    <div class="p-1 text-light hgroupname">'+result[0].GroupName+'</div>\
 							    <div class="p-1 text-light dropleft dropdown">\
-									<span class="" data-toggle="dropdown"><i class="fa fa-cog" aria-hidden="true"></i></span>\
+									<span class="" data-toggle="dropdown"><i class="pr-2 fa fa-cog" aria-hidden="true"></i></span>\
 										<div class="dropdown-menu" style=font-size:13px;>\
 									    	<a class="dropdown-item btnCopyGrouplink" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i></a>\
-									    	<a class="dropdown-item btnRenameGroup" href="#">Rename <i class="fa fa-edit" aria-hidden="true"></i></a>\
-									    	<a class="dropdown-item btnDeleteGroup" href="#">Delete Group<i class="fa fa-trash" aria-hidden="true"></i></a>\
+									    	<a class="dropdown-item btnRenameGroup restrictElement" href="#">Rename <i class="fa fa-edit" aria-hidden="true"></i></a>\
+									    	<a class="dropdown-item btnDeleteGroup restrictElement" href="#">Delete Group<i class="fa fa-trash" aria-hidden="true"></i></a>\
 									    </div>\
 									</i>\
 								</div>\
@@ -207,7 +207,7 @@ function displayGroupMessage(groupid){
 							 MessageList+='\
 							<div class="containerr-r" data-id="'+Messages[i]._id.$oid+'">\
 				      			<span style="margin-right: 1em;float: right;">\
-			      						<span class="" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictVisitor dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+			      						<span class="" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
 											<div class="dropdown-menu" style="padding:0">\
 											  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
 											</div>\
@@ -220,7 +220,7 @@ function displayGroupMessage(groupid){
 							 MessageList+='\
 							<div class="containerr-l" data-id="'+Messages[i]._id.$oid+'">\
 		      					<span style="margin-left: 1em;">\
-		      						<span class="" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictVisitor dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+		      						<span class="" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
 									<div class="dropdown-menu" style="padding:0">\
 									  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
 									</div>\
@@ -235,7 +235,92 @@ function displayGroupMessage(groupid){
 				      	</div>';
 						$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);
 						divScrollBottom($('.groupmessagelist'));
-						restrictVisitor();
+						restrictedElement();
+
+					}
+				}
+				else
+				{
+					let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">\
+				      		<center><p style="margin-top: 10em;">this chat is empty.</p></center>\
+				      	</div>';
+					$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);
+
+				}
+			}
+		}
+	});
+}
+
+function displayVisitorGroupMessage(groupid){
+	let data = { getGroupMessageList: true ,groupid:groupid};
+	$.ajax({
+		type: "POST",
+		url: "controllers/controller.php",
+		data: data,
+		success: function (response) {
+			if (response) {
+				let result=response;
+				result=JSON.parse(result);
+				let groupmsgbox_header='<div class="groupmsgBox-header" groupid="'+groupid+'" style="width: 100%;\
+	    				height: 33px;">\
+	    					<div class="d-flex justify-content-between">\
+							    <div class="p-1 text-light btnfa-chevron-left" style="width:25px"><span class="fa fa-chevron-left restrictElement"></span></div>\
+							    <div class="p-1 text-light hgroupname">'+result[0].GroupName+'</div>\
+							    <div class="p-1 text-light dropleft dropdown">\
+									<span class="" data-toggle="dropdown"><i class="fa fa-cog" aria-hidden="true"></i></span>\
+										<div class="dropdown-menu" style=font-size:13px;>\
+									    	<a class="dropdown-item btnCopyGrouplink" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i></a>\
+									    	<a class="dropdown-item btnRenameGroup restrictElement" href="#">Rename <i class="fa fa-edit" aria-hidden="true"></i></a>\
+									    	<a class="dropdown-item btnDeleteGroup restrictedElement" href="#">Delete Group<i class="fa fa-trash" aria-hidden="true"></i></a>\
+									    </div>\
+									</i>\
+								</div>\
+							</div>\
+						</div>';
+				if(result[0].Messages!=undefined)
+				{
+					let Messages=result[0].Messages;
+					if(result && result.length>0)
+					{ 
+						
+						let MessageList='';
+						for(let i=0;i<Messages.length;i++)
+						{	 
+							if(Messages[i].From==_constantClient.UserName)
+							 MessageList+='\
+							<div class="containerr-r" data-id="'+Messages[i]._id.$oid+'">\
+				      			<span style="margin-right: 1em;float: right;">\
+			      						<span class="" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+											<div class="dropdown-menu" style="padding:0">\
+											  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
+											</div>\
+			      				</span><br>\
+				      			<div class="containerr sendbground">\
+				      				<p class="margin_bottom_0">'+Messages[i].Message+'</p>\
+				      			</div>\
+			      			</div>';
+						     else
+							 MessageList+='\
+							<div class="containerr-l" data-id="'+Messages[i]._id.$oid+'">\
+		      					<span style="margin-left: 1em;">\
+		      						<span class="" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+									<div class="dropdown-menu" style="padding:0">\
+									  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
+									</div>\
+		      					</span>\
+		      					<div class="containerr recbground">\
+		      						<p class="margin_bottom_0">'+Messages[i].Message+'</p>\
+		      					</div>\
+		      				</div>';
+						}
+						let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">\
+				      		'+MessageList+'\
+				      	</div>';
+						$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);
+						divScrollBottom($('.groupmessagelist'));
+						restrictedElement();
+
 					}
 				}
 				else

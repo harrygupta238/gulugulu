@@ -374,6 +374,15 @@ function restrictVisitor()
 	}
 }
 
+function restrictedElement(){
+	if(window.location.pathname==_constantClient.rootdir+"/groupvisitor.php")
+	{
+		if($(".spnGroupAdmin").text()!=_constantClient.UserName || _constantClient.UserType=='visitor')
+	{
+		$(".restrictElement").remove();
+	}
+	}
+}
 
 $(document).on("click",".btnNewMsgBox", function(){
 	$(".btnInBox").removeClass("active");
