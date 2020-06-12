@@ -36,20 +36,36 @@ $("#createGroupForm").submit(function (e) {
 			url: "controllers/controller.php",
 			data: data,
 			success: function (response) {
+				let res
+				if(typeof(JSON.parse(response)=="object"))
+				{
+					res=JSON.parse(response);
+				}
 				if (response == "groupname_exists") {
 					let message = '<span class="text-danger error"><small>Group already exists.</small></span>';
 					$(".errormsg").removeClass("text-success").addClass("text-danger");
 					$("#createGroupForm").find(".errormsg").html(message);
 					$(".btncreateGroupSubmit").find(".spinner-border").remove();
 				}
-				else if (response == "inserted") {
+				else if (res.message == "inserted") {
 					$(".btncreateGroupSubmit").find(".spinner-border").remove();
 					let message = '<small>Group created successfully.</small>';
 					$("#createGroupForm").find(".errormsg").removeClass("text-danger").addClass("text-success");
 					$("#createGroupForm").find(".errormsg").html(message);
 					$("#createGroupForm").find(".groupname").val("");
-					getGroupList();
-					displayGroupMessage(groupid);
+					if(data.mode=="create")
+					{
+						let group='<li dataid="'+res.groupid.$oid+'" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">\
+								    '+data.groupname+'\
+								</li>';
+					$('.grouplist').prepend(group);
+					}
+					else if(data.mode=="edit")
+					{
+						getGroupList();
+						displayGroupMessage(groupid);
+					}
+					
 					$("#IndexDynamicContent").hide();
 				}
 				else if (response == "insert_failed") {
@@ -150,7 +166,7 @@ $(document).on('click',".grouplist li", function(){
 	$('.grouplist li').removeClass('active');
 	$('.groupMenuDrpdown').hide();
 	$(this).find('.groupMenuDrpdown').show();
-	$(".groupmessageBox").html('<center><img src="images/Spin-1s-200px.gif" width="200" height="200" style="margin-top: 5em;"></center>');
+	$(".groupmessageBox").html('<center><img src="images/Spin-1s-200px.gif" width="150" height="150" style="margin-top: 7.5em;"></center>');
 	$("#groupMsgForm").find(".txtgroupid").val($(this).attr('dataid'));
 	$(this).addClass('active');
 	displayGroupMessage($(this).attr('dataid'));
@@ -186,9 +202,9 @@ function displayGroupMessage(groupid){
 							    <div class="p-1 text-light dropleft dropdown">\
 									<span class="" data-toggle="dropdown"><i class="pr-2 fa fa-cog" aria-hidden="true"></i></span>\
 										<div class="dropdown-menu" style=font-size:13px;>\
-									    	<a class="dropdown-item btnCopyGrouplink popup" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i><span class="popuptext myPlPopup" id="">Copied</span></a>\
-									    	<a class="dropdown-item btnRenameGroup restrictElement" href="#">Rename <i class="fa fa-edit" aria-hidden="true"></i></a>\
-									    	<a class="dropdown-item btnDeleteGroup restrictElement" href="#">Delete Group<i class="fa fa-trash" aria-hidden="true"></i></a>\
+									    	<span class="dropdown-item btnCopyGrouplink popup" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i><span class="popuptext myPlPopup" id="">Copied</span></span>\
+									    	<span class="dropdown-item btnRenameGroup restrictElement" href="#">Rename <i class="fa fa-edit" aria-hidden="true"></i></span>\
+									    	<span class="dropdown-item btnDeleteGroup restrictElement" href="#">Delete Group<i class="fa fa-trash" aria-hidden="true"></i></span>\
 									    </div>\
 									</i>\
 								</div>\
@@ -207,7 +223,7 @@ function displayGroupMessage(groupid){
 							 MessageList+='\
 							<div class="containerr-r" data-id="'+Messages[i]._id.$oid+'">\
 				      			<span style="margin-right: 1em;float: right;">\
-			      						<span class="" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+			      						<span class="" style="font-size: .7em;"> you </span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
 											<div class="dropdown-menu" style="padding:0">\
 											  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
 											</div>\

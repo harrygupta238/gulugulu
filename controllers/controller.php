@@ -178,7 +178,8 @@ if(isset($_POST["creategroup"]))
 		$response=createGroup($group);
 		if($response)
 		{
-			echo $response;
+			echo json_encode($response);
+			 
 		}
 	}
 	else if($mode=="edit")
@@ -190,7 +191,7 @@ if(isset($_POST["creategroup"]))
 		    "Owner"=>$owner
 		  ];
 		$response=updateGroupName($group);
-	    echo $response;
+	    echo json_encode($response);
 	}
 
 }

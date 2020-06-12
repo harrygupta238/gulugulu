@@ -197,7 +197,7 @@ date_default_timezone_set('Asia/Kolkata');
           if($result)
           {
             $result="inserted";
-            return $result;
+            return ["message"=>$result,"groupid"=>$group["_id"]];
           }
           else
           {
@@ -324,7 +324,7 @@ date_default_timezone_set('Asia/Kolkata');
             if($result)
             {
               $result="inserted";
-              return $result;
+              return ["message"=>$result];
             }
             else
             {
