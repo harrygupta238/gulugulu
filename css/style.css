@@ -237,12 +237,22 @@ width: 3em;
   color:inherit;
 }
 .anyClass {
-        height:417px;
+        height:412px;
         overflow-y: scroll;
       }
-      .groupmessageBox {
-        height:452px;
+      .anyClass2 {
+        height:326px;
+        overflow-y: scroll;
+       padding-bottom: 5px;
       }
+      .groupmessageBox {
+        height:360px;
+      }
+      .anyClass3 {
+    height: 327px;
+    overflow-y: scroll;
+    padding-bottom: 5px;
+}
 
             
         
@@ -501,4 +511,8 @@ width: 3em;
   
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
+}
+.footer_links a
+{
+  color:antiquewhite;
 }

@@ -17,21 +17,15 @@ if($res=="-")
 			<div class="container">
 				<div class="row d-flex justify-content-center">
 					<div class=" col-lg-8 col-xl-8 col-sm-12 col-md-12">
-						<!-- <h4>
-						Gulu-Gulu is a platform, where people can share their
-						feelings with their friends secretly.
-						</h4> -->
+					
 						<p>
-							<!-- <button type="button" class="btn btn-outline-danger btnplinkhome">
-								Signup
-							</button> -->
 							<button type="button" class="btn btn-primary btnplinkhome btn-sm">
 							<span class="fas fa-home"></span>	Home
 							</button>
 						</p>  
           
 					<p class="text-secondary">
-						So, what are you waiting for, it's time to do some  <span class="text-danger">Gulu-Gulu</span> with your loved ones.
+						So, what are you waiting for, it's time to do some  <span class="text-danger">GuluGulu</span> with your loved ones.
 					</p>
 					<p class="text-secondary">
 						Don't worry your friend will not be able to see who shared this message to him/her.
@@ -47,7 +41,7 @@ if($res=="-")
 					<div class="row d-flex justify-content-center">
 						<div class="form-group col-lg-8 col-xl-8 col-sm-12 col-md-12" >
 							<span class="text-danger errormsg"></span><br>
-						<!-- <label for="uname">Username:</label> -->
+						
 							<input
 								type="hidden"
 								class="form-control username"
@@ -76,26 +70,7 @@ if($res=="-")
 					</div>
 				</form>
 			</div>
-			<!-- <div
-				class="container bg-dark p-3 my-3  text-center text-white"
-				style="font-family: 'Fredoka One';"
-			>
-				<ul class="list-group">
-					<li class="list-group-item list-group-item-danger">
-						* To recieve messages you must signup and get your
-						profile share-link.
-					</li>
-					<li class="list-group-item list-group-item-danger">
-						* Share your profile link on social media or with your friends so your<br>
-						friends can share their feelings with you secretly.
-					</li>
-					<li class="list-group-item list-group-item-danger">
-						* Use Gulu-Gulu to share your feelings to your friends
-						secretly.
-					</li>
-				</ul>
-			</div>
-			</div> -->
+			
 								
 			<?php include("footer.php");  ?>
 			<script type="text/javascript" src="js/controls.js"></script>

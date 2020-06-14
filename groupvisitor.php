@@ -56,7 +56,7 @@
 								</div>
 							</div>
 						</div>
-				      	<div class="anyClass groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">
+				      	<div class="anyClass3 groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">
 				      		<?php 
 			      		if($res!="-")
 			      		{
@@ -108,12 +108,12 @@
 						    margin-left: 0px;
 						    height: auto;">
 			      				 <input type="hidden" name="" class="txtgroupid" value="<?php echo @$gid; ?>">
-								<textarea
+								<input
 							type="text"
 							class="form-control txtgrpmsg"
 							placeholder="Type Your Message here.."
 							name="pswd"
-							required></textarea>
+							required></input>
 							
 							
 								<button type="submit" class="btn btn-primary btngroupMsgFormSubmit">

@@ -246,7 +246,7 @@ function displayGroupMessage(groupid){
 		      					</div>\
 		      				</div>';
 						}
-						let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">\
+						let groupmessagelist='<div class="anyClass2 groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">\
 				      		'+MessageList+'\
 				      	</div>';
 						$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);
@@ -257,7 +257,7 @@ function displayGroupMessage(groupid){
 				}
 				else
 				{
-					let groupmessagelist='<div class="anyClass groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">\
+					let groupmessagelist='<div class="anyClass2 groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">\
 				      		<center><p style="margin-top: 10em;">this chat is empty.</p></center>\
 				      	</div>';
 					$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);

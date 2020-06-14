@@ -37,7 +37,7 @@ var wsUri =protocol+ "localhost:8090/controllers/php-socket.php";
 		      					</div>\
 		      				</div>';
 		            		$('.groupmessagelist').append(MessageHtml);
-		            		restrictVisitor();
+		            		
 		            		restrictedElement();
 		            		divScrollBottom($('.groupmessagelist'));
 		        		}

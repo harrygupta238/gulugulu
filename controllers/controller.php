@@ -126,7 +126,7 @@ if(isset($_POST["getAllMessageList"]))
 	<?php }} ?> 
 	<p class="inbox_content text-light border-bottom b-3 p-3">
 	     hi <span class="text-info"><?php echo $_SESSION["LoggedInUserName"]; ?></span>,<br>
-		 Greetings! from <span class="text-warning">Gulu-Gulu</span> team,
+		 Greetings! from <span class="text-warning">GuluGulu</span> team,
 		 hope you are enjoying this platform. The messages you will recieve will be displayed here.
 		 <br>-thanks and regards							        
 		    	</p>  

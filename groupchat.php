@@ -86,12 +86,12 @@ if($auth==false)
 						    margin-left: 0px;
 						    height: auto;">
 			      				 <input type="hidden" name="" class="txtgroupid">
-								<textarea
+								<input
 							type="text"
 							class="form-control txtgrpmsg"
 							placeholder="Type Your Message here.."
 							name="pswd"
-							required></textarea>
+							required></input>
 							
 							
 								<button type="submit" class="btn btn-primary btngroupMsgFormSubmit">

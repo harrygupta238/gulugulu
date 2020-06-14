@@ -5,6 +5,11 @@
 		<meta charset="utf-8" />
 		<link rel='shortcut icon' type='image/x-icon' href='images/aaaa.ico' />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta property="og:url"                content="https://www.gulugulu.co" />
+		<meta property="og:type"               content="Anonymous Feedbacks & Chatrooms Services" />
+		<meta property="og:title"              content="Anonymous Feedbacks & Chatrooms Services" />
+		<meta property="og:description"        content="GuluGulu is an online platform for Anonymous feedback and Chatrooms Services" />
+		<meta property="og:image"              content="https://www.gulugulu.co/images/gulugulu.png" />
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-169186936-1"></script>
 		<script>

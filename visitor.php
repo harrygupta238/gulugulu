@@ -19,7 +19,7 @@ setVisitorCookie();
 				</button></span></p>
 						<p>
 						Hey, What are you waiting for, it's time to do some  
-							<span class="" style="color: #24305E">Gulu-Gulu</span> with your loved ones.
+							<span class="" style="color: #24305E">GuluGulu</span> with your loved ones.
 					
 						</p>
 						<p>

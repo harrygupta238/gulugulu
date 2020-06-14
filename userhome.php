@@ -47,7 +47,7 @@ if($auth==false)
 					<div id="copy_content" class="col-lg-8 col-xl-8 col-sm-12 col-md-12">
 						<p>
 						Hey, what are you waiting for, it's time to do some  
-						<span class="text-danger">Gulu-Gulu</span> with your loved ones.
+						<span class="text-danger">GuluGulu</span> with your loved ones.
 						</p>
 						<p>Copy the above profile-link and share on social media, tell your friends to share their thoughts about you secretly. </p>
 						<p>
@@ -109,9 +109,9 @@ if($auth==false)
 											<p class="text-light border-bottom b-3 p-3 m-4 inbox_content">
 												<i class="fas fa-clock" style="font-size: .7em"> <?php
 												echo calDatetimeDiff($msg->CreateDate);
-												  ?></i><br>
+												  ?></i><a href="#" class="btnpreviewfeedback float-right" data-id="<?php echo $msg->_id; ?>" ><i class="fa fa-download" style="font-size: 1em;margin-top: 0px;    color: aqua;cursor: pointer;float: right;"></i></a><br>
 												<?php echo $msg->Message; ?><br>
-												<a href="#" class="btnpreviewfeedback" data-id="<?php echo $msg->_id; ?>" ><i class="fa fa-download" style="font-size: 1em;margin-top: -40px;cursor: pointer;float: right;"></i></a>
+												
 												      
 									    	</p>
 											<div class="ppppp" style="width: 100%;text-align: center;">
@@ -129,8 +129,8 @@ if($auth==false)
 											<!-- </div> -->
 								<?php }} ?> 
 								<p class="inbox_content text-light border-bottom pb-3 p-3">
-								     hi <span class="text-info"><?php echo $_SESSION["LoggedInUserName"]; ?></span>,<br>
-									 Greetings! from <span class="" style="color: #b8f7f6;">Gulu-Gulu</span> team,
+								     hi <span class="" style="color:aqua;"><?php echo $_SESSION["LoggedInUserName"]; ?></span>,<br>
+									 Greetings! from <span class="" style="color:aqua;">GuluGulu</span> team,
 									 hope you are enjoying this platform. The messages you will recieve will be displayed here.
 									 <br>-thanks and regards
 

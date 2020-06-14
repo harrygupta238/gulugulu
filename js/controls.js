@@ -414,10 +414,10 @@ function generateImageOfMsg(){
 	let dataid=element.attr("dwnld-id");
 	html2canvas(element, { 
 		onrendered: function(canvas) {   
-			var imgageData =canvas.toDataURL("image/png").replace( 
-			    /^data:image\/png/, "data:application/octet-stream");
+			var imgageData =canvas.toDataURL("image/svg").replace( 
+			    /^data:image\/svg/, "data:application/octet-stream");
 				let tt=element.closest("#inboxMsg").find("[data-id='"+dataid+"']");
-			    tt.attr("download","abcdefg.png").attr( 
+			    tt.attr("download","abcdefg.svg").attr( 
 			    "href", imgageData);
 			    element.hide();
 		} 
