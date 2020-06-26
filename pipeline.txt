@@ -55,4 +55,22 @@
    - admin can delete group chats, and also the selected messages recieved in groups.
 7. there are three type ofrestriction html elements
   1. restrictVisitor : for visitior only but other users can see.
-  2. restricted: both visitors and other users can not see it. 
+  2. restricted: both visitors and other users can not see it.
+
+=========================================================
+1. when user scroll chatbox
+   - get the skipcount
+   - call displayGroupMessage2()
+   - take the result from above function
+   - build the message containers
+   - prepend the containers to messaglist.
+   - increase the skipcount
+
+2. when user click on list item
+   - call displayGroupMessage2()
+   - skipcount will be 0
+   - take the result from above function
+   - build the message header
+   - build the message containers 
+   - append the combined message header and message containers
+3. 

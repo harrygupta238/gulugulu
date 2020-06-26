@@ -123,20 +123,7 @@ $("#groupMsgForm").submit(function (e) {
 	let groupid = $("#groupMsgForm").find(".txtgroupid").val();
 	//$(".groupmessageBox").append(`<center><span class="spinner-border spinner-border-sm"></span></center>`);
 	let datetime=new Date();
-	let Messagebx='\
-				<div class="containerr-r" data-id="">\
-	      			<span style="margin-right: 1em;float: right;">\
-      						<span class="" style="font-size: .7em;">'+_constantClient.UserName+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(datetime)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
-								<div class="dropdown-menu" style="padding:0">\
-								  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
-								</div>\
-      				</span><br>\
-	      			<div class="containerr sendbground">\
-	      				<p class="margin_bottom_0">'+groupMSG+'</p>\
-	      			</div>\
-      			</div>';
-      		$('.groupmessagelist').append(Messagebx);
-      		divScrollBottom($('.groupmessagelist'));
+	
 		let data = { savegroupmsg: true, groupMSG: groupMSG ,groupid : groupid};
 		$.ajax({
 			type: "POST",
@@ -146,7 +133,21 @@ $("#groupMsgForm").submit(function (e) {
 					let result2=JSON.parse(result);
 				if (result2.response == "inserted") {
 					$("#groupMsgForm").find(".txtgrpmsg").val('');
-					displayGroupMessage(groupid);
+					let Messagebx='\
+					<div class="containerr-r" data-id="'+result2._id.$oid+'">\
+		      			<span style="margin-right: 1em;float: right;">\
+	      						<span class="" style="font-size: .7em;">'+_constantClient.UserName+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(datetime)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+									<div class="dropdown-menu" style="padding:0">\
+									  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
+									</div>\
+	      				</span><br>\
+		      			<div class="containerr sendbground">\
+		      				<p class="margin_bottom_0">'+groupMSG+'</p>\
+		      			</div>\
+	      			</div>';
+      		         $('.groupmessagelist').append(Messagebx);
+      		          restrictedElement();
+      		         divScrollBottom($('.groupmessagelist'));
 					var messageJSON = {
 						MessageType: _constantClient.GroupChat,
 						MessageID:result2._id.$oid,
@@ -169,91 +170,40 @@ $(document).on('click',".grouplist li", function(){
 	$(".groupmessageBox").html('<center><img src="images/Spin-1s-200px.gif" width="150" height="150" style="margin-top: 7.5em;"></center>');
 	$("#groupMsgForm").find(".txtgroupid").val($(this).attr('dataid'));
 	$(this).addClass('active');
-	displayGroupMessage($(this).attr('dataid'));
-	$("#groupMsgForm").show();
-	if($(window).width()<=576)
-	{
-		$('.groupmessagecontainer').show();
-		$('.grouplist').hide();
-	}
-})
-$(document).on('click',".groupmessageBox .btnfa-chevron-left", function(){
-	if($(window).width()<=576)
-	{
-		$('.groupmessagecontainer').hide();
-		$('.grouplist').show();
-	}
-})
-function displayGroupMessage(groupid){
-	let data = { getGroupMessageList: true ,groupid:groupid};
-	$.ajax({
-		type: "POST",
-		url: "controllers/controller.php",
-		data: data,
-		success: function (response) {
-			if (response) {
+	let groupid=$(this).attr('dataid');
+	let gpname=$(this).text();
+	displayGroupMessage2(groupid,function(response){
+		if (response) {
 				let result=response;
 				result=JSON.parse(result);
-				let groupmsgbox_header='<div class="groupmsgBox-header" groupid="'+groupid+'" style="width: 100%;\
-	    				height: 33px;">\
-	    					<div class="d-flex justify-content-between">\
-							    <div class="p-1 text-light btnfa-chevron-left" style="width:25px"><span class="fa fa-chevron-left restrictElement"></span></div>\
-							    <div class="p-1 text-light hgroupname">'+result[0].GroupName+'</div>\
-							    <div class="p-1 text-light dropleft dropdown">\
-									<span class="" data-toggle="dropdown"><i class="pr-2 fa fa-cog" aria-hidden="true"></i></span>\
-										<div class="dropdown-menu" style=font-size:13px;>\
-									    	<span class="dropdown-item btnCopyGrouplink popup" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i><span class="popuptext myPlPopup" id="">Copied</span></span>\
-									    	<span class="dropdown-item btnRenameGroup restrictElement" href="#">Rename <i class="fa fa-edit" aria-hidden="true"></i></span>\
-									    	<span class="dropdown-item btnDeleteGroup restrictElement" href="#">Delete Group<i class="fa fa-trash" aria-hidden="true"></i></span>\
-									    </div>\
-									</i>\
-								</div>\
-							</div>\
-						</div>';
-				if(result[0].Messages!=undefined)
+				let groupmsgbox_header=buildGroupmsgbox_header({groupid:groupid,gpname:gpname,msgskipcount:"0"});
+				if(result.length>0)
 				{
-					let Messages=result[0].Messages;
-					if(result && result.length>0)
-					{ 
-						
-						let MessageList='';
-						for(let i=0;i<Messages.length;i++)
-						{	 
-							if(Messages[i].From==_constantClient.UserName)
-							 MessageList+='\
-							<div class="containerr-r" data-id="'+Messages[i]._id.$oid+'">\
-				      			<span style="margin-right: 1em;float: right;">\
-			      						<span class="" style="font-size: .7em;"> you </span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
-											<div class="dropdown-menu" style="padding:0">\
-											  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
-											</div>\
-			      				</span><br>\
-				      			<div class="containerr sendbground">\
-				      				<p class="margin_bottom_0">'+Messages[i].Message+'</p>\
-				      			</div>\
-			      			</div>';
-						     else
-							 MessageList+='\
-							<div class="containerr-l" data-id="'+Messages[i]._id.$oid+'">\
-		      					<span style="margin-left: 1em;">\
-		      						<span class="" style="font-size: .7em;">'+Messages[i].From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages[i].CreateDate)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
-									<div class="dropdown-menu" style="padding:0">\
-									  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
-									</div>\
-		      					</span>\
-		      					<div class="containerr recbground">\
-		      						<p class="margin_bottom_0">'+Messages[i].Message+'</p>\
-		      					</div>\
-		      				</div>';
-						}
+						let MessageList=buildMessageContainersList(result);
 						let groupmessagelist='<div class="anyClass2 groupmessagelist" id="groupmessagelist" style="background-color:#ffff;">\
 				      		'+MessageList+'\
 				      	</div>';
 						$('.groupmessageBox').html(groupmsgbox_header+groupmessagelist);
 						divScrollBottom($('.groupmessagelist'));
+						
+						$(document).find('.groupmessagelist').on("scroll",function(){
+							if($(this).scrollTop()==0)
+							{
+								let groupid=$(document).find(".groupmsgBox-header").attr("groupid");
+								$(".groupmessagelist").prepend('<center><img class="loader" src="images/Spin-1s-200px.gif" width="20" height="20" style="margin-top: 1em;"></center>');
+								displayGroupMessage2(groupid, function(response){
+									if(response){
+										let result=JSON.parse(response);
+				                        let MessageList=buildMessageContainersList(result);
+				                        $(".groupmessagelist").find(".loader").remove();
+				                        $(".groupmessagelist").prepend(MessageList);
+				                        incGpMsgSkipCount(groupid);
+				                        restrictedElement();
+									}
+								});
+							}
+						});
 						restrictedElement();
-
-					}
 				}
 				else
 				{
@@ -264,10 +214,69 @@ function displayGroupMessage(groupid){
 
 				}
 			}
+	});
+	$("#groupMsgForm").show();
+	if($(window).width()<=576)
+	{
+		$('.groupmessagecontainer').show();
+		$('.grouplist').hide();
+	}
+})
+
+$(document).find('.groupmessagelist').on("scroll",function(){
+	if($(this).scrollTop()==0)
+	{
+		let groupid=$(document).find(".groupmsgBox-header").attr("groupid");
+		$(".groupmessagelist").prepend('<center><img class="loader" src="images/Spin-1s-200px.gif" width="20" height="20" style="margin-top: 1em;"></center>');
+		displayGroupMessage2(groupid, function(response){
+			if(response){
+				let result=JSON.parse(response);
+                let MessageList=buildMessageContainersList(result);
+                $(".groupmessagelist").find(".loader").remove();
+                $(".groupmessagelist").prepend(MessageList);
+                incGpMsgSkipCount(groupid);
+                restrictedElement();
+			}
+		});
+	}
+});
+$(document).on('click',".groupmessageBox .btnfa-chevron-left", function(){
+	if($(window).width()<=576)
+	{
+		$('.groupmessagecontainer').hide();
+		$('.grouplist').show();
+	}
+})
+
+function displayGroupMessage2(groupid, callback){
+	let msgskipcount=$('.groupmsgBox-header[groupid="'+groupid+'"]').attr("data-msgskipcount");
+	if(msgskipcount)
+	 msgskipcount= parseInt(msgskipcount);
+	if(msgskipcount==undefined)
+		msgskipcount=0;
+	else
+		msgskipcount+=1;
+	let data = { getGroupMessageList2: true ,groupid:groupid, msgskipcount:msgskipcount};
+	$.ajax({
+		type: "POST",
+		url: "controllers/controller.php",
+		data: data,
+		success: function (response) {
+			callback(response);
 		}
 	});
 }
 
+function incGpMsgSkipCount(groupid){
+	let msgskipcount= $('.groupmsgBox-header[groupid="'+groupid+'"]').attr("data-msgskipcount");
+	if(msgskipcount)
+	 msgskipcount= parseInt(msgskipcount);
+	if(msgskipcount==undefined)
+		msgskipcount=0;
+	else
+		msgskipcount+=1;
+	$('.groupmsgBox-header[groupid="'+groupid+'"]').attr("data-msgskipcount",msgskipcount);
+}
 
 $(document).on('click',".btnGroupRefreshMsg", function(){
 	let groupid=$(this).closest(".row").find(".txtgroupid").val();
@@ -322,6 +331,12 @@ function divScrollBottom(div){
      div.scrollTop(div[0].scrollHeight);
 }
 
+
+// $(document).find('.anyClass').scroll(function(){
+// 	alert("hello32");
+// });
+
+
 if($('.groupmessagelist').length>0)
  divScrollBottom($('.groupmessagelist'));
 
@@ -370,4 +385,59 @@ $(document).on('click',".kkk", function(){
 	let modal=buildModal({type:"notification", content:"Your Profile Link has been copied."});
 	
  }); 
+
+function buildMessageContainersList(result){
+	let MessageList='';
+	for(let i=0;i<result.length;i++)
+	{	 
+		let Messages=JSON.parse(result[i]).Messages;
+		if(Messages.From==_constantClient.UserName)
+		 MessageList+='\
+		<div class="containerr-r" data-id="'+Messages._id.$oid+'">\
+  			<span style="margin-right: 1em;float: right;">\
+						<span class="" style="font-size: .7em;"> you </span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages.CreateDate)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+						<div class="dropdown-menu" style="padding:0">\
+						  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
+						</div>\
+				</span><br>\
+  			<div class="containerr sendbground">\
+  				<p class="margin_bottom_0">'+Messages.Message+'</p>\
+  			</div>\
+			</div>';
+	     else
+		 MessageList+='\
+		<div class="containerr-l" data-id="'+Messages._id.$oid+'">\
+				<span style="margin-left: 1em;">\
+					<span class="" style="font-size: .7em;">'+Messages.From+'</span>, <i class="fas fa-clock" style="font-size: .7em"> '+ calDatetimeDiff(Messages.CreateDate)+' </i> <span class="fa fa-chevron-down restrictElement dropdown" data-toggle="dropdown" style="font-size: .7em;"></span>\
+				<div class="dropdown-menu" style="padding:0">\
+				  <a class="dropdown-item btnGpMsgDelete" href="#">remove</a>\
+				</div>\
+				</span>\
+				<div class="containerr recbground">\
+					<p class="margin_bottom_0">'+Messages.Message+'</p>\
+				</div>\
+			</div>';
+	}
+	return MessageList;
+}
+
+function buildGroupmsgbox_header(param){
+	let groupmsgbox_header='<div class="groupmsgBox-header" groupid="'+param.groupid+'" data-msgskipcount="'+param.msgskipcount+'" style="width: 100%;\
+	    				height: 33px;">\
+	    					<div class="d-flex justify-content-between">\
+							    <div class="p-1 text-light btnfa-chevron-left" style="width:25px"><span class="fa fa-chevron-left restrictElement"></span></div>\
+							    <div class="p-1 text-light hgroupname">'+param.gpname+'</div>\
+							    <div class="p-1 text-light dropleft dropdown">\
+									<span class="" data-toggle="dropdown"><i class="pr-2 fa fa-cog" aria-hidden="true"></i></span>\
+										<div class="dropdown-menu" style=font-size:13px;>\
+									    	<span class="dropdown-item btnCopyGrouplink popup" data-toggle="tooltip" data-placement="right" title="copy to clipboard" href="#">Copy Group Link <i class="fa fa-copy" aria-hidden="true"></i><span class="popuptext myPlPopup" id="">Copied</span></span>\
+									    	<span class="dropdown-item btnRenameGroup restrictElement" href="#">Rename <i class="fa fa-edit" aria-hidden="true"></i></span>\
+									    	<span class="dropdown-item btnDeleteGroup restrictElement" href="#">Delete Group<i class="fa fa-trash" aria-hidden="true"></i></span>\
+									    </div>\
+									</i>\
+								</div>\
+							</div>\
+						</div>';
+	return groupmsgbox_header;
+}
 

@@ -6,16 +6,9 @@
 	setVisitorCookie();
 
 	$res=validate_groupid(new MongoDB\BSON\ObjectID($gid));
-	$res1;
 	if($res=="-")
 	{
 		header("Location: index.php");
-	}
-	else
-	{
-		$msgskipcount=0;
-		$res1=getMessageByLimit(new MongoDB\BSON\ObjectID($gid),$msgskipcount);
-		//var_dump($res1);
 	}
 	if(@$_SESSION["LoggedInUserName"])
 	{
@@ -43,7 +36,7 @@
 			      <div class="col-sm-12" style="padding-left: 0px;
     padding-right: 0px;background-color: ghostwhite;">
     				<div class="groupmessageBox border-bottom">
-    					<div class="groupmsgBox-header" groupid="<?php echo @$gid; ?>" data-msgskipcount="0"  style="width: 100%;
+    					<div class="groupmsgBox-header" groupid="<?php echo @$gid; ?>"  style="width: 100%;
 	    				height: 33px;">
 	    					<div class="d-flex justify-content-between">
 							    <div class="p-1 text-light" style="width:25px"></div>
@@ -64,21 +57,19 @@
 			      			if(@$_SESSION["LoggedInUserName"])
 			      				{$username= $_SESSION["LoggedInUserName"];}
 			      			else {$username= @$_COOKIE["RandomUserName"];}
-			      			//$Messages=@$res[0]->Messages;
-			      			for($i=0;$i<count($res1);$i++) {
-			      				$resArr=json_decode($res1[$i],true);
-			      				$message=$resArr["Messages"];
-			      				if($message["From"]==$username)
+			      			$Messages=@$res[0]->Messages;
+			      			foreach ($Messages as $message) {
+			      				if($message->From==$username)
 			      				{
 			      				# code...
 			      	 ?>
 
-			      		<div class="containerr-r" data-id="<?php echo $message["_id"]['$oid']; ?>">
+			      		<div class="containerr-r" data-id="<?php echo $message->_id; ?>">
 			      			<span style="margin-right: 1em;float: right;">
-		      						<span class="" style="font-size: .7em;"><?php echo $message["From"];?></span>, <i class="fas fa-clock" style="font-size: .7em"> <?php echo calDatetimeDiff($message["CreateDate"]); ?></i>
+		      						<span class="" style="font-size: .7em;"><?php echo $message->From;?></span>, <i class="fas fa-clock" style="font-size: .7em"> <?php echo calDatetimeDiff($message->CreateDate); ?></i>
 		      				</span><br>
 			      			<div class="containerr sendbground">
-			      				<p class="margin_bottom_0"><?php echo $message["Message"]; ?></p>
+			      				<p class="margin_bottom_0"><?php echo $message->Message; ?></p>
 			      			</div>
 			      		</div>
 		      		<?php 
@@ -87,12 +78,12 @@
 		      				    {
 		      		?>      
 		      				
-		      				<div class="containerr-l" data-id="<?php echo $message["_id"]['$oid']; ?>">
+		      				<div class="containerr-l" data-id="<?php echo $message->_id; ?>">
 		      					<span style="margin-left: 1em;">
-		      						<span class="" style="font-size: .7em;"><?php echo $message["From"];?></span>, <i class="fas fa-clock" style="font-size: .7em"> <?php echo calDatetimeDiff($message["CreateDate"]); ?></i>
+		      						<span class="" style="font-size: .7em;"><?php echo $message->From;?></span>, <i class="fas fa-clock" style="font-size: .7em"> <?php echo calDatetimeDiff($message->CreateDate); ?></i>
 		      					</span>
 		      					<div class="containerr recbground">
-		      						<p class="margin_bottom_0"><?php echo $message["Message"]; ?>
+		      						<p class="margin_bottom_0"><?php echo $message->Message; ?>
 		      						</p>
 		      					</div>
 		      				</div>

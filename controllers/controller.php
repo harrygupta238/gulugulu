@@ -241,6 +241,15 @@ if(isset($_POST["getGroupMessageList"]))
 	echo json_encode($response);
 	//echo json_decode(json_encode($response), FALSE);
 }
+if(isset($_POST["getGroupMessageList2"]))
+{
+	$groupid=$_POST["groupid"];
+	$msgskipcount=$_POST["msgskipcount"];
+	$msgskipcount=$msgskipcount*10;
+	$response=getMessageByLimit(new MongoDB\BSON\ObjectID($groupid),$msgskipcount);
+	echo json_encode($response);
+	//echo json_decode(json_encode($response), FALSE);
+}
 
 if(isset($_POST["getLoggedinUserData"]))
 {

@@ -401,4 +401,54 @@ date_default_timezone_set('Asia/Kolkata');
     }
   }
 ///calDatetimeDiff("2020-05-17 12:22:03");
+  function getMessageByLimit($groupid, $skip){
+    $db=ConnectDB();
+    $DBName=$GLOBALS["DB"].".GGgroups";
+    $command = new MongoDB\Driver\Command([
+    'aggregate' => 'GGgroups',
+    'pipeline' => [
+      [
+        '$match'=> ["_id"=>new MongoDB\BSON\ObjectID($groupid)]
+      ],
+      [
+        '$project'=> 
+        [
+          '_id'=> 0,
+          'Messages'=>1
+        ]
+      ],
+      [ 
+        '$unwind' => '$Messages'
+      ],
+      [ '$sort' => ["Messages._id"=>-1]],
+      [ '$skip' => $skip],
+      [ '$limit' => 10],
+      [ '$sort' => ["Messages._id"=>1]],
+    ],
+        'cursor' => new stdClass,
+    ]);
+    $messageslist = @$db->executeCommand($GLOBALS["DB"], $command);
+    //var_dump($messageslist);
+    //var_dump($messageslist);
+    $messageslistArr=array();
+    foreach ($messageslist as $messages) {
+      $messagesObj=json_encode($messages);
+      array_push($messageslistArr,$messagesObj);
+     
+    }
+    // var_dump($messageslistArr);
+    // echo "<br><br>";
+    // print_r($messageslistArr);
+    for($i=0;$i<count($messageslistArr);$i++)
+    {
+      //var_dump(json_decode($messageslistArr[$i],true));
+      $abc=json_decode($messageslistArr[$i],true);
+      $bcd=$abc["Messages"];
+      //var_dump($bcd);
+      //echo $bcd["_id"]['$oid']."<br><br>";
+       //echo $bcd["Message"]."<br><br>";
+    }
+   return $messageslistArr;
+      }
+//getMessageByLimit(new MongoDB\BSON\ObjectID("5ec91bcc382309243265a454"),0);
  ?>
