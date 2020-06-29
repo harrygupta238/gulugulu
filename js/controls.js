@@ -317,21 +317,31 @@ $("#sndmsgForm").submit(function (e) {
 		type: "POST",
 		url: "controllers/controller.php",
 		data: data,
-		success: function (response) {
-			if (response == "failed") {
-				let message = '<small>Message sending failed, please try again.</small>';
+		success: function (result) {
+			 result=JSON.parse(result);
+			if (result.response == "failed") {
+				let message = '<small>Message sending failed, Please try again.</small>';
 				$(".errormsg").removeClass("text-success").addClass("text-danger");
-				//$(".errormsg").html(message);
 				buildModal({type:"alert",content:message});
 				$(".btnMsgSubmit").find(".spinner-border").remove();
 			}
-			else if (response == "inserted") {
+			else if (result.response == "inserted") {
+				
 				let message = 'Your message successfully sent to : ' + toUsername + '';
 				$(".errormsg").removeClass("text-danger").addClass("text-success");
-				//$(".errormsg").html(message);
 				buildModal({type:"alert",content:message});
+				var messageJSON = {
+						MessageType: _constantClient.OneWayFeedback,
+						MessageID:result._id.$oid,
+						MessageTime: result.CreateDate,
+						To : result.To,
+						From : result.From,
+						Message: result.Message
+					};
+				websocket.send(JSON.stringify(messageJSON));
 				$(".btnMsgSubmit").find(".spinner-border").remove();
 				$("#sndmsgForm").find(".message").val("");
+
 			}
 		},
 		error: function (err) {
@@ -400,10 +410,18 @@ $(document).on("click",".btnNewMsgBox", function(){
 
 	var getCanvas; 
 $(document).on("click",".btnpreviewfeedback", function(){
-	let t=$(this);
+	if($(window).width()>=720)
+	{
+		let t=$(this);
 	let dataid=t.attr("data-id");
 	t.closest("#inboxMsg").find("[dwnld-id]").hide();
 	t.closest("#inboxMsg").find("[dwnld-id='"+dataid+"']").show();
+	}
+	else
+	{
+		buildModal({type:"alert",content:"Download feature is availble only in Desktop Mode."});
+	}
+	
 });
 
 function generateImageOfMsg(){
@@ -419,12 +437,21 @@ function generateImageOfMsg(){
 				let tt=element.closest("#inboxMsg").find("[data-id='"+dataid+"']");
 			    tt.attr("download","abcdefg.png").attr( 
 			    "href", imgageData);
-			    element.hide();
+			     element.hide();
+			    //document.body.appendChild(canvas);
 		} 
 	}); 
 });
 }
-generateImageOfMsg();
+if($(window).width()>=720)
+	{
+		generateImageOfMsg();
+	}
+else
+{
+	$(".ppppp").hide();
+}
+
 
 
 

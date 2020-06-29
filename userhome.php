@@ -33,7 +33,7 @@ if($auth==false)
 					Sent  
 				</button>
 				<button type="button" id="btnGroupChatpage" data-toggle="tooltip" data-placement="top" title="Group Chat" class="btn btn-info btn-sm btnGroupChatpage mt-1">
-					GroupChat <span class="fas fa-users" aria-hidden="true"></span> 
+					Chat Rooms <span class="fas fa-users" aria-hidden="true"></span> 
 				</button>
 				<button type="button" id="logout" data-toggle="tooltip" data-placement="top" title="logout" class="btn btn-danger btn-sm btnHome mt-1">
 				 <span class="fas fa-sign-out-alt" aria-hidden="true"></span> 
@@ -110,9 +110,7 @@ if($auth==false)
 												<i class="fas fa-clock" style="font-size: .7em"> <?php
 												echo calDatetimeDiff($msg->CreateDate);
 												  ?></i><a href="#" class="btnpreviewfeedback float-right" data-id="<?php echo $msg->_id; ?>" ><i class="fa fa-download" style="font-size: 1em;margin-top: 0px;    color: aqua;cursor: pointer;float: right;"></i></a><br>
-												<?php echo $msg->Message; ?><br>
-												
-												      
+												<?php echo $msg->Message; ?><br>  
 									    	</p>
 											<div class="ppppp" style="width: 100%;text-align: center;">
 												<div dwnld-id="<?php echo $msg->_id; ?>" class="card-deck card-text downloadfeedbackbox rounded-lg" style="display: inline-block; width: 60%">
@@ -123,10 +121,10 @@ if($auth==false)
 				                                         <span class="dwnld_msg_logo">Gulu<i class="fas fa-comments"></i>Gulu<span>
                                                     </div>
                                                 </div>
-											</div>
+											</div> 
                                                 
 									 
-											<!-- </div> -->
+											
 								<?php }} ?> 
 								<p class="inbox_content text-light border-bottom pb-3 p-3">
 								     hi <span class="" style="color:aqua;"><?php echo $_SESSION["LoggedInUserName"]; ?></span>,<br>

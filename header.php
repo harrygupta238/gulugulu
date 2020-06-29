@@ -4,7 +4,7 @@
 			   <span class="text-light"><a id="gulugulu" href="index.php">Gulu<i class="fas fa-comments"></i>Gulu</a></span>
             </h1>
 			<p style="font-size: 14px;">
-				 <span id="header_cont">Discuss & share feedbacks with your friends Anonymously.</span>
+				 <span id="header_cont">Anonymous Messaging & Chat Rooms</span>
 			</p>
 		</div>
 	

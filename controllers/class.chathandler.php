@@ -91,14 +91,26 @@ class ChatHandler {
 	function convertSocketdataIntoArray($messageObj) {
 		if(gettype($messageObj)=="object")
 		{
-			$messageArray = array(
+			if($messageObj->MessageType=="GroupChat"){
+				$messageArray = array(
 			'MessageType'=>$messageObj->MessageType,
 			'GroupID'=>$messageObj->GroupID,
 			'SenderUserName'=>$messageObj->SenderUserName,
 			'Message'=>$messageObj->Message,
 			'MessageID'=>$messageObj->MessageID,
-			'MessageTime'=>$messageObj->MessageTime
-		);
+			'MessageTime'=>$messageObj->MessageTime);
+			}
+			else if($messageObj->MessageType=="OneWayFeedback"){
+				$messageArray = array(
+			'MessageType'=>$messageObj->MessageType,
+			'To'=>$messageObj->To,
+			'From'=>$messageObj->From,
+			'Message'=>$messageObj->Message,
+			'MessageID'=>$messageObj->MessageID,
+			'MessageTime'=>$messageObj->MessageTime);
+			}
+			
+		
 		$chatMessage = $this->seal(json_encode($messageArray));
 		return $chatMessage;
 		}

@@ -91,7 +91,8 @@ if(isset($_POST["sendMsg"]))
 	$response=saveMessage($messageData);
 	if($response)
 	{
-		echo $response;
+		$messageData["response"]=$response;
+		echo json_encode($messageData);
 	}
 }
 
