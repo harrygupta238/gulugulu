@@ -5,6 +5,12 @@ require 'controllers/functions.php';
 		include("headerlink.php");
 		include("header.php");
  ?>
+ <div class="container p-3 text-center text-secondary" style="background-color: rgba(240, 237, 237, 0.65)">
+			
+    <div class="p-2 "><button type="button" class="btn btn-info btn-sm btnHome">
+				<span class="fas fa-home"></span>
+				</button></div>
+  </div>
 		<div id="visitor_body_part" class="text-center container p-3 border-top text-secondary">
 			<div class="container">
 				<div class="row d-flex justify-content-center">
@@ -14,7 +20,7 @@ require 'controllers/functions.php';
 						<p><i class="fa fa-envelope" aria-hidden="true"></i>: krishnanand8081@gmail.com, gulugulu.2g@gmail.com</p>
 						<p>Mobile : +91-7906307683, +91-7895344376</p>
 						<p>Or you can contact us through below form:</p>
-						<form action="#" class="needs-validation" id="sndmsgForm" method="post">
+				<form action="#" class="needs-validation" id="contactusForm" method="post">
 					<div class="row d-flex justify-content-center">
 						<div class="form-group col-lg-8 col-xl-8 col-sm-12 col-md-12" >
 							<span class="text-danger errormsg"></span>
@@ -51,7 +57,7 @@ require 'controllers/functions.php';
 					</div>
 					<div class="row d-flex justify-content-center text-center">
 						<div class="form-group col-lg-4 col-xl-4 col-sm-4 col-md-4">
-							<button type="submit" class="btn btn-primary btn-sm btnMsgSubmit">
+							<button type="submit" class="btn btn-primary btn-sm btncontactusSubmit">
 								<span class="fas fa-paper-plane"></span> Send
 							</button>
 						</div>

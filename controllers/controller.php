@@ -95,7 +95,38 @@ if(isset($_POST["sendMsg"]))
 		echo json_encode($messageData);
 	}
 }
-
+if(isset($_POST["contactusForm"]))
+{
+	$email=$_POST["email"];
+	$phone=$_POST["phone"];
+	$message=$_POST["message"];
+	if(isset($_SESSION["LoggedInUserName"]))
+	{
+		$fromUsername=$_SESSION["LoggedInUserName"];
+	}
+	else if($_COOKIE["RandomUserName"])
+	{
+		$fromUsername=$_COOKIE["RandomUserName"];
+	}
+	else
+	{
+		$fromUsername="Anonymous";
+	}
+	$messageData =
+	  [
+	  	'_id'=> new MongoDB\BSON\ObjectID,
+	    'Email'=> $email,
+	    'Phone'=>$phone,
+	    "Message"=>$message,
+	    "CreateDate"=> date('Y-m-d H:i:s')
+	  ];
+	$response=savecontactusMessage($messageData);
+	if($response)
+	{
+		$messageData["response"]=$response;
+		echo json_encode($messageData);
+	}
+}
 
 if(isset($_POST["getAllMessageList"]))
 {

@@ -5,13 +5,19 @@ require 'controllers/functions.php';
 		include("headerlink.php");
 		include("header.php");
  ?>
+ <div class="container p-3 text-center text-secondary" style="background-color: rgba(240, 237, 237, 0.65)">
+			
+    <div class="p-2 "><button type="button" class="btn btn-info btn-sm btnHome">
+				<span class="fas fa-home"></span>
+				</button></div>
+  </div>
 		<div id="visitor_body_part" class="container p-3 border-top text-secondary">
 			<div class="container">
 				<div class="row d-flex justify-content-center">
 					<div class=" col-lg-8 col-xl-8 col-sm-12 col-md-12">
-						<br><br>
+					
 						<p class="text-dark">What is GuluGulu?</p>
-						<p>GuluGulu is an online platform for anonymous messaging and group chats. It is created by <a href="https://www.facebook.com/harry.gupta.315" target="_blank">Krishna Nand</a> with help of his friends <a href="https://www.instagram.com/aadi_0204/?hl=en" target="_blank">Vishal Gupta</a>, <a href="https://www.facebook.com/profile.php?id=100003515278231" target="_blank">Vishal Kumar</a> and <a href="https://www.facebook.com/profile.php?id=100009409841899">Niray Kumar Ray.</a> </p>
+						<p>GuluGulu is an online platform for Anonymous Messaging and Chat Rooms. It is created by <a href="https://www.facebook.com/harry.gupta.315" target="_blank">Krishna Nand</a> with help of his friends <a href="https://www.instagram.com/aadi_0204/?hl=en" target="_blank">Vishal Gupta</a>, <a href="https://www.facebook.com/profile.php?id=100003515278231" target="_blank">Vishal Kumar</a> and <a href="https://www.facebook.com/profile.php?id=100009409841899">Niray Kumar Ray.</a> </p>
 
 						<p class="text-dark">What is purpose of GuluGulu?</p>
 						<p>The purpose of GuluGulu is to provide an online platform where people can share anonymous feedbacks with each other. </p>

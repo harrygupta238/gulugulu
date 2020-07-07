@@ -196,8 +196,13 @@ $(document).on('click',".grouplist li", function(){
 										let result=JSON.parse(response);
 				                        let MessageList=buildMessageContainersList(result);
 				                        $(".groupmessagelist").find(".loader").remove();
+				                        let prevmsgid=$(".groupmessagelist").find("[data-id]:first").attr("data-id");
 				                        $(".groupmessagelist").prepend(MessageList);
+				                        let cont=$(".groupmessagelist");
+				                        let el=$(".groupmessagelist").find('[data-id="'+prevmsgid+'"]');
 				                        incGpMsgSkipCount(groupid);
+				                        if(MessageList!="")
+				                        cont.animate({scrollTop: cont.scrollTop() + (el.offset().top - cont.offset().top)});
 				                        restrictedElement();
 									}
 								});

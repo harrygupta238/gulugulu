@@ -112,14 +112,16 @@ if($auth==false)
 												  ?></i><a href="#" class="btnpreviewfeedback float-right" data-id="<?php echo $msg->_id; ?>" ><i class="fa fa-download" style="font-size: 1em;margin-top: 0px;    color: aqua;cursor: pointer;float: right;"></i></a><br>
 												<?php echo $msg->Message; ?><br>  
 									    	</p>
-											<div class="ppppp" style="width: 100%;text-align: center;">
-												<div dwnld-id="<?php echo $msg->_id; ?>" class="card-deck card-text downloadfeedbackbox rounded-lg" style="display: inline-block; width: 60%">
-													<div class="card-body text-center" style="min-height: 100px;">
+											<div class="InboxImgContainer" style="width: 100%;text-align: center;">
+												<div dwnld-id="<?php echo $msg->_id; ?>" class="card-deck card-text downloadfeedbackbox rounded-lg" style="display: inline-block;">
+													<div class="card-body text-center" style="min-height: 250px;">
 														<p><?php echo $msg->Message; ?></p>
 													</div>
-													<div class="text-center">
-				                                         <span class="dwnld_msg_logo">Gulu<i class="fas fa-comments"></i>Gulu<span>
+													<div class="text-center ml-1">
+														<span style="font-size:10px">Recieved on</span>
+				                                         <span class="dwnld_msg_logo"> Gulu<i class="fas fa-comments"></i>Gulu<span>
                                                     </div>
+                                                    
                                                 </div>
 											</div> 
                                                 

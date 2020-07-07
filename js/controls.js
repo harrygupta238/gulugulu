@@ -61,6 +61,7 @@ $(document).on("click", ".btnHome", function () {
 });
 $("#signupForm").submit(function (e) {
 	e.preventDefault();
+	$(".btnSignupSubmit").find(".spinner-border").remove();
 	let el = $("#signupForm").find(".error").length;
 	if (el > 0) {
 		return;
@@ -104,6 +105,7 @@ $("#signupForm").submit(function (e) {
 
 $("#loginForm").submit(function (e) {
 	e.preventDefault();
+	$(".btnLoginSubmit").find(".spinner-border").remove();
 	$(".error").remove();
 	let username = $(this).find(".username").val().toLowerCase().trim();
 	let password = $(this).find(".password").val();
@@ -301,9 +303,51 @@ $(document).on("input", "#sndmsgForm .username", function () {
 
 });
 
+$("#contactusForm").submit(function (e) {
+	e.preventDefault();
+	$(".btncontactusSubmit").find(".spinner-border").remove();
+	let el = $(this).find(".error").length;
+	if (el > 0) {
+		return;
+	}
+	let formcontainer=$("#contactusForm");
+	let email = $(this).find(".email").val().toLowerCase().trim();
+	let phone = $(this).find(".phone").val();
+	let message = $(this).find(".message").val();
+	//alert(toUsername+" "+message);
+	$(".btncontactusSubmit").append(btnloader);
+	let data = { contactusForm: true, email: email,phone:phone, message: message };
+	$.ajax({
+		type: "POST",
+		url: "controllers/controller.php",
+		data: data,
+		success: function (result) {
+			 result=JSON.parse(result);
+			if (result.response == "failed") {
+				let message = '<small>Message sending failed, Please try again.</small>';
+				$(".errormsg").removeClass("text-success").addClass("text-danger");
+				buildModal({type:"alert",content:message});
+				$(".btncontactusSubmit").find(".spinner-border").remove();
+			}
+			else if (result.response == "inserted") {
+				
+				let message = 'Sent Successfully. Thanks for showing interest in Us.';
+				$(".errormsg").removeClass("text-danger").addClass("text-success");
+				buildModal({type:"alert",content:message});
+				$(".btncontactusSubmit").find(".spinner-border").remove();
+				formcontainer.find(".form-control").val("");
+
+			}
+		},
+		error: function (err) {
+			console.log("error :" + err);
+		}
+	});
+});
 
 $("#sndmsgForm").submit(function (e) {
 	e.preventDefault();
+	$(".btnMsgSubmit").find(".spinner-border").remove();
 	let el = $(this).find(".error").length;
 	if (el > 0) {
 		return;
@@ -410,17 +454,12 @@ $(document).on("click",".btnNewMsgBox", function(){
 
 	var getCanvas; 
 $(document).on("click",".btnpreviewfeedback", function(){
-	if($(window).width()>=720)
-	{
-		let t=$(this);
+	
+	let t=$(this);
 	let dataid=t.attr("data-id");
 	t.closest("#inboxMsg").find("[dwnld-id]").hide();
-	t.closest("#inboxMsg").find("[dwnld-id='"+dataid+"']").show();
-	}
-	else
-	{
-		buildModal({type:"alert",content:"Download feature is availble only in Desktop Mode."});
-	}
+	//t.closest("#inboxMsg").find("[dwnld-id='"+dataid+"']").show();
+	
 	
 });
 
@@ -443,15 +482,15 @@ function generateImageOfMsg(){
 	}); 
 });
 }
-if($(window).width()>=720)
-	{
-		generateImageOfMsg();
-	}
-else
-{
-	$(".ppppp").hide();
-}
-
+// if($(window).width()>=720)
+// 	{
+// 		generateImageOfMsg();
+// 	}
+// else
+// {
+// 	$(".ppppp").hide();
+// }
+generateImageOfMsg();
 
 
 

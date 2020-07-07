@@ -115,6 +115,24 @@ date_default_timezone_set('Asia/Kolkata');
 		}
         
   }
+    function savecontactusMessage($message){
+      $db=ConnectDB();
+      $DBName=$GLOBALS["DB"].".ContactUS";
+      $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->insert($message);
+    $result=$db->executeBulkWrite($DBName, $bulk);
+    if($result)
+    {
+      $result="inserted";
+        return $result;
+    }
+    else
+    {
+      $result="failed";
+        return $result;
+    }
+        
+  }
 
   function getAllMessageList(){
   	  $db=ConnectDB();

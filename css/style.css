@@ -1,5 +1,15 @@
 /* All css goes here */
- 
+ @media screen and (max-width:719px) {
+    .InboxImgContainer > .downloadfeedbackbox{
+      width: 100%;
+    }
+ }
+ @media screen and (min-width:720px) {
+    .InboxImgContainer > .downloadfeedbackbox{
+      width: 60%;
+    }
+
+ }
    @media screen and (max-width:420px) {
     .txtgrpmsg {
       font-size: 13px;
@@ -228,14 +238,7 @@ width: 3em;
 
 
 /* customization of visitor page:*/
-#visitor_body_part{
-  background-color: rgba(240, 237, 237, 0.65);
-  /* background-color: red; */
-  padding: 1em;
-  border: .1px grey;
-  box-shadow: inset 0px 0px 0px 0px #efefe8;
-  color:inherit;
-}
+
 .anyClass {
   height:412px;
   overflow-y: scroll;
@@ -454,8 +457,8 @@ width: 3em;
     float: right;
   }
 .dwnld_msg_logo {
-  color:rgb(246, 246, 246);
-  font-size: 11px;;
+  color:#b8f7f6;
+  font-size: 14px;;
 }
 .groupmsgBox-header{
   background-color: #17a2b8!important;
