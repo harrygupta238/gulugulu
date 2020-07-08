@@ -1,8 +1,8 @@
 <?php 
 date_default_timezone_set('Asia/Kolkata');
  $GLOBALS["DB"] = "mydb";
-  $GLOBALS["LoggedInUserName"] = "LoggedInUserName";
-  $GLOBALS["RandomUserName"] = "RandomUserName";
+  $GLOBALS["lggedinusrnm"] = "lggedinusrnm";
+  $GLOBALS["rndmusrnm"] = "rndmusrnm";
 
   function ConnectDB(){
   	try{
@@ -41,7 +41,9 @@ date_default_timezone_set('Asia/Kolkata');
 			if($result)
 			{
 				$_SESSION["userid"]=$user["_id"];
-				$_SESSION["LoggedInUserName"]=$user["UserName"];
+				$_SESSION["lggedinusrnm"]=$user["UserName"];
+        setcookie("lggedinusrnm", $user["UserName"], time() + (86400 * 300), "/");
+        setcookie("rndmusrnm", "", time() - 3600, "/");
 				$result="inserted";
         		return $result;
 			}
@@ -78,8 +80,9 @@ date_default_timezone_set('Asia/Kolkata');
         if(count($rows)>0)
         {
         	$_SESSION["userid"]=$rows[0]->_id;
-        	$_SESSION["LoggedInUserName"]=$rows[0]->UserName;
-          setcookie("RandomUserName", "", time() - 3600, "/");
+        	$_SESSION["lggedinusrnm"]=$rows[0]->UserName;
+          setcookie("rndmusrnm", "", time() - 3600, "/");
+          setcookie("lggedinusrnm", $rows[0]->UserName, time() + (86400 * 300), "/");
         	$result="success";
         	return $result;
         }
@@ -91,8 +94,12 @@ date_default_timezone_set('Asia/Kolkata');
   }
 
   function checkAuth(){
-  	if(isset($_SESSION["userid"]))
-  		return true;
+    if(isset($_SESSION["lggedinusrnm"]))
+      return true;
+    else if(isset($_COOKIE["lggedinusrnm"])){
+      $_SESSION["lggedinusrnm"]=$_COOKIE["lggedinusrnm"];
+      return true;
+    }
   	else
   		return false;
   }
@@ -157,7 +164,7 @@ date_default_timezone_set('Asia/Kolkata');
   function getAllMessageOfLoggedInUser(){
   		$db=ConnectDB();
 	  	$DBName=$GLOBALS["DB"].".Messages";
-      $filter = ['$or' => [['To'=>$_SESSION["LoggedInUserName"]],['From'=>$_SESSION["LoggedInUserName"]]]]; 
+      $filter = ['$or' => [['To'=>$_SESSION["lggedinusrnm"]],['From'=>$_SESSION["lggedinusrnm"]]]]; 
       $options = [
           'sort' => ['CreateDate' => -1],
       ];
@@ -193,7 +200,7 @@ date_default_timezone_set('Asia/Kolkata');
   }
   function logout()
   {
-  	unset($_SESSION["LoggedInUserName"]);
+  	unset($_SESSION["lggedinusrnm"]);
   	unset($_SESSION["userid"]);
   }
 
@@ -228,7 +235,7 @@ date_default_timezone_set('Asia/Kolkata');
  function getGroupList(){
       $db=ConnectDB();
       $DBName=$GLOBALS["DB"].".GGgroups";
-      $filter = ['Owner'=>$_SESSION["LoggedInUserName"],"IsActive"=>true]; 
+      $filter = ['Owner'=>$_SESSION["lggedinusrnm"],"IsActive"=>true]; 
       $options = [
           'sort' => ['CreateDate' => -1],
       ];
@@ -290,9 +297,23 @@ date_default_timezone_set('Asia/Kolkata');
           }
     }
    function setVisitorCookie(){
-      if(!isset($_SESSION["LoggedInUserName"])  && !isset($_COOKIE["RandomUserName"]))
+      if(!isset($_SESSION["lggedinusrnm"])  && !isset($_COOKIE["rndmusrnm"]))
       {
-        setcookie("RandomUserName", "visitor-".randomNumberGenerator(), time() + (86400 * 300), "/");
+        $db=ConnectDB();
+        $DBName=$GLOBALS["DB"].".GGusers";
+        $bulk = new MongoDB\Driver\BulkWrite;
+        $visitorid="visitor-".randomNumberGenerator();
+        $user =
+        [
+          '_id'=> new MongoDB\BSON\ObjectID,
+          'UserName'=> $visitorid,
+          "CreateDate"=> date('Y-m-d H:i:s'),
+          "IsActive"=>true,
+          "Status"=>true
+        ];
+        $bulk->insert($user);
+        $result=$db->executeBulkWrite($DBName, $bulk);
+        setcookie("rndmusrnm", $visitorid, time() + (86400 * 300), "/");
       }
    }
 

@@ -11,7 +11,7 @@ if($auth==false)
  ?>
 		<div class="container p-3 border-top text-secondary userhome_body">
 			<p class="text-center">You are logged in as : <span class="text-info"> 
-			<?php echo $_SESSION["LoggedInUserName"]; ?> </span><br>
+			<?php echo $_SESSION["lggedinusrnm"]; ?> </span><br>
 			
 			<span class="text-center"> Click button to copy your profile link:
 				<span class="profilelink bg-white" style="padding:5px;display: none">
@@ -102,7 +102,7 @@ if($auth==false)
 									@$messages=getAllMessageList();
 									//var_dump($messages);
 									foreach (@$messages as $msg) {
-										if($msg->To==$_SESSION["LoggedInUserName"])
+										if($msg->To==$_SESSION["lggedinusrnm"])
 										{
 									?>
 											
@@ -114,7 +114,7 @@ if($auth==false)
 									    	</p>
 											<div class="InboxImgContainer" style="width: 100%;text-align: center;">
 												<div dwnld-id="<?php echo $msg->_id; ?>" class="card-deck card-text downloadfeedbackbox rounded-lg" style="display: inline-block;">
-													<div class="card-body text-center" style="min-height: 250px;">
+													<div class="card-body text-center">
 														<p><?php echo $msg->Message; ?></p>
 													</div>
 													<div class="text-center ml-1">
@@ -129,7 +129,7 @@ if($auth==false)
 											
 								<?php }} ?> 
 								<p class="inbox_content text-light border-bottom pb-3 p-3">
-								     hi <span class="" style="color:aqua;"><?php echo $_SESSION["LoggedInUserName"]; ?></span>,<br>
+								     hi <span class="" style="color:aqua;"><?php echo $_SESSION["lggedinusrnm"]; ?></span>,<br>
 									 Greetings! from <span class="" style="color:aqua;">GuluGulu</span> team,
 									 hope you are enjoying this platform. The messages you will recieve will be displayed here.
 									 <br>-thanks and regards
@@ -140,7 +140,7 @@ if($auth==false)
 							<div id="sentboxMsg" style="display: none;">
 								<?php
 								    foreach (@$messages as $msg) {
-										if($msg->From==$_SESSION["LoggedInUserName"])
+										if($msg->From==$_SESSION["lggedinusrnm"])
 										{
 								    ?>
 								    <p class="sent_content text-dark border-bottom b-3 p-3">

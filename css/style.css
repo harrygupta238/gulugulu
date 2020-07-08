@@ -3,10 +3,18 @@
     .InboxImgContainer > .downloadfeedbackbox{
       width: 100%;
     }
+    .InboxImgContainer > .downloadfeedbackbox > .card-body
+    {
+      min-height: 320px;
+    }
  }
  @media screen and (min-width:720px) {
     .InboxImgContainer > .downloadfeedbackbox{
       width: 60%;
+    }
+    .InboxImgContainer > .downloadfeedbackbox > .card-body
+    {
+      min-height: 250px;
     }
 
  }

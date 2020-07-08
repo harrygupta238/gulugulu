@@ -195,7 +195,7 @@ $(document).on('click',".grouplist li", function(){
 									if(response){
 										let result=JSON.parse(response);
 				                        let MessageList=buildMessageContainersList(result);
-				                        $(".groupmessagelist").find(".loader").remove();
+				                        $(".groupmessagelist").find(".loader").closest("center").remove();
 				                        let prevmsgid=$(".groupmessagelist").find("[data-id]:first").attr("data-id");
 				                        $(".groupmessagelist").prepend(MessageList);
 				                        let cont=$(".groupmessagelist");
@@ -237,9 +237,14 @@ $(document).find('.groupmessagelist').on("scroll",function(){
 			if(response){
 				let result=JSON.parse(response);
                 let MessageList=buildMessageContainersList(result);
-                $(".groupmessagelist").find(".loader").remove();
-                $(".groupmessagelist").prepend(MessageList);
+                $(".groupmessagelist").find(".loader").closest("center").remove();
+                let prevmsgid=$(".groupmessagelist").find("[data-id]:first").attr("data-id");
+	            $(".groupmessagelist").prepend(MessageList);
+	            let cont=$(".groupmessagelist");
+	            let el=$(".groupmessagelist").find('[data-id="'+prevmsgid+'"]');
                 incGpMsgSkipCount(groupid);
+				if(MessageList!="")
+				   cont.animate({scrollTop: cont.scrollTop() + (el.offset().top - cont.offset().top)});
                 restrictedElement();
 			}
 		});
@@ -378,7 +383,7 @@ $(document).on('click',".btnRenameGroup", function(){
 	form.find("h6").html("Update Group Name");
 	form.find("[name='mode']").val("edit");
 	form.find("[name='groupid']").val(groupid);
-	form.find(".groupname").val(groupname);
+	form.find(".groupname").val(groupname.trim());
 	form.find(".btncreateGroupSubmit").html("update");
 	form.find(".usrnmmsg").html("");
 	form.find(".errormsg").html("");

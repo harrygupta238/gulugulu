@@ -30,7 +30,9 @@ if(isset($_POST["signup"]))
 	  	'_id'=> new MongoDB\BSON\ObjectID,
 	    'UserName'=> $username,
 	    'Password'=> $password,
-	    "CreateDate"=> date('Y-m-d H:i:s')
+	    "CreateDate"=> date('Y-m-d H:i:s'),
+	    "IsActive"=>true,
+	    "Status"=>true
 	  ];
 	$response=signup($user);
 	if($response)
@@ -68,13 +70,13 @@ if(isset($_POST["sendMsg"]))
 {
 	$toUsername=$_POST["toUsername"];
 	$message=$_POST["message"];
-	if(isset($_SESSION["LoggedInUserName"]))
+	if(isset($_SESSION["lggedinusrnm"]))
 	{
-		$fromUsername=$_SESSION["LoggedInUserName"];
+		$fromUsername=$_SESSION["lggedinusrnm"];
 	}
-	else if($_COOKIE["RandomUserName"])
+	else if($_COOKIE["rndmusrnm"])
 	{
-		$fromUsername=$_COOKIE["RandomUserName"];
+		$fromUsername=$_COOKIE["rndmusrnm"];
 	}
 	else
 	{
@@ -100,13 +102,13 @@ if(isset($_POST["contactusForm"]))
 	$email=$_POST["email"];
 	$phone=$_POST["phone"];
 	$message=$_POST["message"];
-	if(isset($_SESSION["LoggedInUserName"]))
+	if(isset($_SESSION["lggedinusrnm"]))
 	{
-		$fromUsername=$_SESSION["LoggedInUserName"];
+		$fromUsername=$_SESSION["lggedinusrnm"];
 	}
-	else if($_COOKIE["RandomUserName"])
+	else if($_COOKIE["rndmusrnm"])
 	{
-		$fromUsername=$_COOKIE["RandomUserName"];
+		$fromUsername=$_COOKIE["rndmusrnm"];
 	}
 	else
 	{
@@ -136,7 +138,7 @@ if(isset($_POST["getAllMessageList"]))
 	<div id="inboxMsg"> 
 <?php
 		foreach ($messages as $msg) {
-			if($msg->To==$_SESSION["LoggedInUserName"])
+			if($msg->To==$_SESSION["lggedinusrnm"])
 			{
 		?>
 				
@@ -157,7 +159,7 @@ if(isset($_POST["getAllMessageList"]))
 				</div>
 	<?php }} ?> 
 	<p class="inbox_content text-light border-bottom b-3 p-3">
-	     hi <span class="text-info"><?php echo $_SESSION["LoggedInUserName"]; ?></span>,<br>
+	     hi <span class="text-info"><?php echo $_SESSION["lggedinusrnm"]; ?></span>,<br>
 		 Greetings! from <span class="text-warning">GuluGulu</span> team,
 		 hope you are enjoying this platform. The messages you will recieve will be displayed here.
 		 <br>-thanks and regards							        
@@ -166,7 +168,7 @@ if(isset($_POST["getAllMessageList"]))
 <div id="sentboxMsg">
 	<?php
 	    foreach ($messages as $msg) {
-			if($msg->From==$_SESSION["LoggedInUserName"])
+			if($msg->From==$_SESSION["lggedinusrnm"])
 			{
 	    ?>
 	    <p class="sent_content text-dark border-bottom b-3 p-3">
@@ -184,13 +186,13 @@ if(isset($_POST["creategroup"]))
 	$groupname=$_POST["groupname"];
 	$groupid=$_POST["groupid"];
 	$mode=$_POST["mode"];
-	if(isset($_SESSION["LoggedInUserName"]))
+	if(isset($_SESSION["lggedinusrnm"]))
 		{
-			$owner=$_SESSION["LoggedInUserName"];
+			$owner=$_SESSION["lggedinusrnm"];
 		}
-		else if($_COOKIE["RandomUserName"])
+		else if($_COOKIE["rndmusrnm"])
 		{
-			$owner=$_COOKIE["RandomUserName"];
+			$owner=$_COOKIE["rndmusrnm"];
 		}
 		else
 		{
@@ -239,13 +241,13 @@ if(isset($_POST["savegroupmsg"]))
 {
 	$groupMSG=$_POST["groupMSG"];
 	$groupid=$_POST["groupid"];
-	if(isset($_SESSION["LoggedInUserName"]))
+	if(isset($_SESSION["lggedinusrnm"]))
 	{
-		$owner=$_SESSION["LoggedInUserName"];
+		$owner=$_SESSION["lggedinusrnm"];
 	}
-	else if($_COOKIE["RandomUserName"])
+	else if($_COOKIE["rndmusrnm"])
 	{
-		$owner=$_COOKIE["RandomUserName"];
+		$owner=$_COOKIE["rndmusrnm"];
 	}
 	else
 	{
@@ -285,24 +287,23 @@ if(isset($_POST["getGroupMessageList2"]))
 
 if(isset($_POST["getLoggedinUserData"]))
 {
-	if(isset($_SESSION['LoggedInUserName']))
+	if(isset($_SESSION['lggedinusrnm']))
 	{
 		$userdata =
 	  [
-	  	'_id'=> $_SESSION["userid"],
-	    'username'=> $_SESSION["LoggedInUserName"],
+	    'username'=> $_SESSION["lggedinusrnm"],
 	    'type'=>'loggedin'
 	 
 	  ];
 	  echo json_encode($userdata);
 
 	}
-	else if(isset($_COOKIE["RandomUserName"]))
+	else if(isset($_COOKIE["rndmusrnm"]))
 	{
 		$userdata =
 	  [
 	  	'type'=>'visitor',
-	    'username'=> $_COOKIE["RandomUserName"]
+	    'username'=> $_COOKIE["rndmusrnm"]
 	 
 	  ];
 	  echo json_encode($userdata);

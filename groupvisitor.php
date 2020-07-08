@@ -17,9 +17,9 @@
 		$res1=getMessageByLimit(new MongoDB\BSON\ObjectID($gid),$msgskipcount);
 		//var_dump($res1);
 	}
-	if(@$_SESSION["LoggedInUserName"])
+	if(@$_SESSION["lggedinusrnm"])
 	{
-		if($res[0]->Owner==$_SESSION["LoggedInUserName"])
+		if($res[0]->Owner==$_SESSION["lggedinusrnm"])
 		{
 			header("Location: groupchat.php");
 		}
@@ -34,7 +34,7 @@
     <div class="p-2 "><button type="button" class="btn btn-info btn-sm btnHome">
 				<span class="fas fa-home"></span>
 				</button></div>
-    <div class="p-2 "><p>You: <span class="text-info genVisitorUsername"><?php if(@$_SESSION["LoggedInUserName"]){echo @$_SESSION["LoggedInUserName"];}else {echo @$_COOKIE["RandomUserName"];} ?></span></p></div>
+    <div class="p-2 "><p>You: <span class="text-info genVisitorUsername"><?php if(@$_SESSION["lggedinusrnm"]){echo @$_SESSION["lggedinusrnm"];}else {echo @$_COOKIE["rndmusrnm"];} ?></span></p></div>
   </div>
 		</div>
 		
@@ -61,9 +61,9 @@
 				      		<?php 
 			      		if($res!="-")
 			      		{
-			      			if(@$_SESSION["LoggedInUserName"])
-			      				{$username= $_SESSION["LoggedInUserName"];}
-			      			else {$username= @$_COOKIE["RandomUserName"];}
+			      			if(@$_SESSION["lggedinusrnm"])
+			      				{$username= $_SESSION["lggedinusrnm"];}
+			      			else {$username= @$_COOKIE["rndmusrnm"];}
 			      			//$Messages=@$res[0]->Messages;
 			      			for($i=0;$i<count($res1);$i++) {
 			      				$resArr=json_decode($res1[$i],true);

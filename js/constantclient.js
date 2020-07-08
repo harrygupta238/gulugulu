@@ -13,7 +13,6 @@ function getLoggedinUserData(){
 			let userdata=JSON.parse(response);
 			if(userdata.type=='loggedin')
 			{	
-			_constantClient.UserID=userdata._id.$oid;
 			_constantClient.UserName=userdata.username;
 			_constantClient.UserType='loggedin';
 			}
