@@ -97,6 +97,7 @@ date_default_timezone_set('Asia/Kolkata');
     if(isset($_SESSION["lggedinusrnm"]))
       return true;
     else if(isset($_COOKIE["lggedinusrnm"])){
+      if(!@$_SESSION["logout"])
       $_SESSION["lggedinusrnm"]=$_COOKIE["lggedinusrnm"];
       return true;
     }
@@ -202,6 +203,10 @@ date_default_timezone_set('Asia/Kolkata');
   {
   	unset($_SESSION["lggedinusrnm"]);
   	unset($_SESSION["userid"]);
+    $_SESSION["logout"]="logout";
+    setcookie("rndmusrnm", "", time() - 3600, "/");
+    setcookie("lggedinusrnm", "", time() - 3600, "/");
+    
   }
 
   function createGroup($group){
@@ -297,7 +302,7 @@ date_default_timezone_set('Asia/Kolkata');
           }
     }
    function setVisitorCookie(){
-      if(!isset($_SESSION["lggedinusrnm"])  && !isset($_COOKIE["rndmusrnm"]))
+      if(!isset($_SESSION["lggedinusrnm"]) && !isset($_COOKIE["lggedinusrnm"]) && !isset($_COOKIE["rndmusrnm"]))
       {
         $db=ConnectDB();
         $DBName=$GLOBALS["DB"].".GGusers";

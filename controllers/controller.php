@@ -298,6 +298,16 @@ if(isset($_POST["getLoggedinUserData"]))
 	  echo json_encode($userdata);
 
 	}
+	else if(isset($_COOKIE["lggedinusrnm"]))
+	{
+		$userdata =
+	  [
+	  	'type'=>'loggedin',
+	    'username'=> $_COOKIE["lggedinusrnm"]
+	 
+	  ];
+	  echo json_encode($userdata);
+	}
 	else if(isset($_COOKIE["rndmusrnm"]))
 	{
 		$userdata =
