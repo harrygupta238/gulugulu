@@ -125,6 +125,7 @@ $("#groupMsgForm").submit(function (e) {
 	let datetime=new Date();
 	
 		let data = { savegroupmsg: true, groupMSG: groupMSG ,groupid : groupid};
+		$("#groupMsgForm").find(".txtgrpmsg").val('');
 		$.ajax({
 			type: "POST",
 			url: "controllers/controller.php",
@@ -132,7 +133,6 @@ $("#groupMsgForm").submit(function (e) {
 			success: function (result) {
 					let result2=JSON.parse(result);
 				if (result2.response == "inserted") {
-					$("#groupMsgForm").find(".txtgrpmsg").val('');
 					let Messagebx='\
 					<div class="containerr-r" data-id="'+result2._id.$oid+'">\
 		      			<span style="margin-right: 1em;float: right;">\
