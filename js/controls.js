@@ -342,14 +342,14 @@ $("#contactusForm").submit(function (e) {
 		success: function (result) {
 			 result=JSON.parse(result);
 			if (result.response == "failed") {
-				let message = '<small>Message sending failed, Please try again.</small>';
+				let message = '<p><small>Message sending failed, Please try again.</small></p>';
 				$(".errormsg").removeClass("text-success").addClass("text-danger");
 				buildModal({type:"alert",content:message});
 				$(".btncontactusSubmit").find(".spinner-border").remove();
 			}
 			else if (result.response == "inserted") {
 				
-				let message = 'Sent Successfully. Thanks for showing interest in Us.';
+				let message = '<p>Sent Successfully. Thanks for showing interest in Us.</p>';
 				$(".errormsg").removeClass("text-danger").addClass("text-success");
 				buildModal({type:"alert",content:message});
 				$(".btncontactusSubmit").find(".spinner-border").remove();
@@ -382,14 +382,14 @@ $("#sndmsgForm").submit(function (e) {
 		success: function (result) {
 			 result=JSON.parse(result);
 			if (result.response == "failed") {
-				let message = '<small>Message sending failed, Please try again.</small>';
+				let message = '<p><small>Message sending failed, Please try again.</small></p>';
 				$(".errormsg").removeClass("text-success").addClass("text-danger");
 				buildModal({type:"alert",content:message});
 				$(".btnMsgSubmit").find(".spinner-border").remove();
 			}
 			else if (result.response == "inserted") {
 				
-				let message = 'Your message successfully sent to : ' + toUsername + '';
+				let message = '<p>Your message successfully sent to : ' + toUsername + '</p>';
 				$(".errormsg").removeClass("text-danger").addClass("text-success");
 				buildModal({type:"alert",content:message});
 				var messageJSON = {
@@ -403,7 +403,6 @@ $("#sndmsgForm").submit(function (e) {
 				websocket.send(JSON.stringify(messageJSON));
 				$(".btnMsgSubmit").find(".spinner-border").remove();
 				$("#sndmsgForm").find(".message").val("");
-
 			}
 		},
 		error: function (err) {

@@ -13,34 +13,23 @@ if($res=="-")
 		include("header.php"); 
 
  ?>
-		<div class="profilelink_page container p-3 border-top text-center">
+		<div class="container p-3 border-top text-center" style="background-color: rgba(240, 237, 237, 0.65)">
 			<div class="container">
 				<div class="row d-flex justify-content-center">
 					<div class=" col-lg-8 col-xl-8 col-sm-12 col-md-12">
-					
 						<p>
 							<button type="button" class="btn btn-primary btnplinkhome btn-sm">
-							<span class="fas fa-home"></span>	Home
+							<span class="fas fa-home"></span>
 							</button>
 						</p>  
-          
-					<p class="text-secondary">
-						So, what are you waiting for, it's time to do some  <span class="text-danger">GuluGulu</span> with your loved ones.
-					</p>
-					<p class="text-secondary">
-						Don't worry your friend will not be able to see who shared this message to him/her.
-					</p>
-					<p class="text-secondary">Your message will be sent to : <span class="text-success"><?php echo $un; ?></span></p>	
-					</div>
-				</div>
-			</div>
-		</div>
-			<div class="profilelink_page container p-3 border-bottom">
-				<div class="container">
-				<form action="#" class="needs-validation" id="sndmsgForm" method="post">
+						
+						<p class="text-secondary">Your message will be sent to : <span class="text-success"><?php echo $un; ?></span></p>
+						<p class="text-secondary">Don't worry your friend will not be able to see who shared this message to him/her.</p>
+							
+						<form action="#" class="needs-validation" id="sndmsgForm" method="post">
 					<div class="row d-flex justify-content-center">
 						<div class="form-group col-lg-8 col-xl-8 col-sm-12 col-md-12" >
-							<span class="text-danger errormsg"></span><br>
+							<span class="text-danger errormsg"></span>
 						
 							<input
 								type="hidden"
@@ -52,7 +41,7 @@ if($res=="-")
 								value="<?php echo $un; ?>"
 							/>
 							<span class="usrnmmsg"></span>
-					</div>
+					     </div>
 					</div>
 					<div class="row d-flex justify-content-center">
 						<div class="form-group col-lg-8 col-xl-8 col-sm-12 col-md-12">
@@ -63,17 +52,24 @@ if($res=="-")
 					</div>
 					<div class="row d-flex justify-content-center text-center">
 						<div class="form-group col-lg-4 col-xl-4 col-sm-4 col-md-4">
-							<button type="submit" class="btn btn-danger btnMsgSubmit btn-sm">
-								<span class="fas fa-paper-plane"></span> Send
+							
+							<button type="submit" class="btn btn-sm btn-primary btnMsgSubmit">
+								 Send <span class="fas fa-paper-plane"></span>
 							</button>
 						</div>
 					</div>
 				</form>
+					</div>
+				</div>
 			</div>
-			
-								
+		</div>
+		<div class=" container p-3 border-bottom" style="background-color: rgba(240, 237, 237, 0.65)">
+			<div class="container">
+				<p class="text-secondary text-center">
+					Write some appealing message here..
+				</p>
+			</div>
+		</div>
+				<script type="text/javascript" src="js/controls.js"></script>				
 			<?php include("footer.php");  ?>
-			<script type="text/javascript" src="js/controls.js"></script>
 			
-	</body>
-</html>

@@ -79,7 +79,7 @@ if($auth==false)
 					</div>
 					<div class="row d-flex justify-content-center text-center">
 						<div class="form-group col-lg-4 col-xl-4 col-sm-4 col-md-4">
-							<button type="submit" class="btn btn-primary btnMsgSubmit">
+							<button type="submit" class="btn btn-sm btn-primary btnMsgSubmit">
 								 Send <span class="fas fa-paper-plane"></span>
 							</button>
 						</div>
