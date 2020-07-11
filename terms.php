@@ -26,18 +26,6 @@ require 'controllers/functions.php';
 							<li>There is no charge/fees for using our platform.</li>
 							<li>We do not monitor user's chats.</li>
 						</ul>
-						
-						<br><br>
-						<div class="ppppp" style="width: 100%;text-align: center;">
-							<div dwnld-id="5ef8d2e038230934c12aca44" class="card-deck card-text downloadfeedbackbox rounded-lg" style="display: inline-block; width: 60%">
-								<div class="card-body text-center" style="min-height: 250px;">
-									<p>hello</p>
-								</div>
-								<div class="text-center">
-                                     <span class="dwnld_msg_logo">Gulu<i class="fas fa-comments"></i>Gulu<span>
-                                </span></span></div>
-                            </div>
-						</div>
 					</div>
 				</div>
 				

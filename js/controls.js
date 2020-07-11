@@ -6,7 +6,97 @@ var groupchatpagehref = hostorigin +_constantClient.rootdir +"/groupchat.php";
 var btnloader = '<span class="spinner-border spinner-border-sm"></span>';
 let groupsharelink = hostorigin + _constantClient.rootdir +"/groupvisitor.php?g=";
 
+// ===================== js for userhome.php===============================
+if(window.location.pathname==_constantClient.rootdir+"/userhome.php"){
+	let wlcmmessage=`<p class="text-center">Welcome to <span style="color: #24305E">GuluGulu</span>,<br>
+Are you new here?<br>
+Share your profile-link/Username on social media or with friends,<br> 
+so your friends could share their thoughts about you.<br>
+and the fun part is you won't be able to know who sent you the messages.
+</p>`;
+	buildModal({type:"alert", content:wlcmmessage});
+	$(document).on("click", ".btnGroupChatpage", function () {
+	window.location.href = groupchatpagehref;
+	});
+	$(document).on("click",".btnInBox", function(){
+	window.location.reload();
+	});
+$(document).on("click", ".btnSentBox", function () {
+	$(".btnInBox").removeClass("active");
+	$(".btnSentBox").removeClass("active");
+	$(".btnNewMsgBox").removeClass("active");
+	$(this).addClass("active");
+	$(".newMsgBox").hide();
+	$(".inboxsentbox").show();
 
+	let data = { getAllMessageList: true };
+	let btnMsgCtrl = $(this);
+	$(".errormsg").html("");
+	$(".msgBox").html('<center><div class="spinner-border text-danger mt-3"></div></center>');
+	$.ajax({
+		type: "POST",
+		url: "controllers/controller.php",
+		data: data,
+		success: function (response) {
+			$(".msgBox").html(response);
+			let abc = $(this).hasClass("btnInBox");
+			let bcd = $(this).hasClass("btnSentBox");
+			if (btnMsgCtrl.hasClass("btnInBox")) {
+				$(".btnInBox").addClass("active");
+				$(".btnSentBox").removeClass("active");
+				$("#inboxMsg").show();
+				$("#sentboxMsg").hide();
+			}
+			else if (btnMsgCtrl.hasClass("btnSentBox")) {
+				$(".btnInBox").removeClass("active");
+				$(".btnSentBox").addClass("active");
+				$("#inboxMsg").hide();
+				$("#sentboxMsg").show();
+			}
+			
+		}
+	});
+});
+
+$(document).on("click", ".btnCopy", function () {
+	var copyText = $(document).find(".profilelink").text();
+	let temp = $("<input>");
+	$("body").append(temp);
+	temp.val(copyText).select();
+	document.execCommand("copy");
+	temp.remove();
+	//$(this).attr("title", 'Copied: ' + copyText);
+	$(this).find(".myPlPopup").toggleClass("show");
+    setTimeout(function(){
+    	$(".myPlPopup").toggleClass("show");
+    }, 1000);
+	//buildModal({type:"alert", content:"Your Profile Link has been copied."})
+});
+
+
+$(document).on("click",".btnNewMsgBox", function(){
+	$(".btnInBox").removeClass("active");
+	$(".btnSentBox").removeClass("active");
+	$(this).addClass("active");
+
+	$(".inboxsentbox").hide();
+	$(".newMsgBox").show();
+});
+$(document).on("click",".btnpreviewfeedback", function(){
+	
+	let t=$(this);
+	let dataid=t.attr("data-id");
+	t.closest("#inboxMsg").find("[dwnld-id]").hide();
+	//t.closest("#inboxMsg").find("[dwnld-id='"+dataid+"']").show();
+});
+
+generateImageOfMsg();
+}
+
+	
+
+// ===================== js for index.php===============================
+if(window.location.pathname==_constantClient.rootdir+"/index.php"){
 
 $(document).on("click", ".btnLogin", function () {
 	//$(".defaultContent").hide();
@@ -29,35 +119,8 @@ $(document).on("click", ".btnSignup", function () {
 	$(".btnLogin").removeClass("active");
 	$(".errormsg").html("");
 });
-
-$(document).on("click", "#logout", function () {
-	$("#logout").append(btnloader);
-	let data = { logout: true };
-	$.ajax({
-		type: "POST",
-		url: "controllers/controller.php",
-		data: data,
-		success: function (response) {
-			if (response) {
-
-				window.location.href = logouthref;
-			}
-		},
-		error: function (error) {
-			console.log(error);
-		}
-	});
-});
-
 $(document).on("click", ".btnGoAnonymous", function () {
 	window.location.href = anonymoususerhref;
-});
-
-$(document).on("click", ".btnGroupChatpage", function () {
-	window.location.href = groupchatpagehref;
-});
-$(document).on("click", ".btnHome", function () {
-	window.location.href = userhomehref;
 });
 $("#signupForm").submit(function (e) {
 	e.preventDefault();
@@ -132,30 +195,6 @@ $("#loginForm").submit(function (e) {
 	});
 });
 
-// function redirectToUserHome(page)
-// {
-// 	let data={redirectToUserHome:true};
-// 	$.ajax({
-// 	    type: "POST",
-// 	    url: "controllers/controller.php",
-// 	    data: data,
-// 	    success: function(response) {
-// 	    	 if(response=="failed")
-// 	    	{
-// 	    		let message='<small>Username or Password is incorrect.</small>';
-// 	    		$(".errormsg").html(message);
-// 	    	}
-// 	    	else if(response=="success")
-// 	    	{
-// 	    		window.location.href = window.location.href+"/userhome.php";
-// 	    	}
-// 	    },
-// 	    error: function(err){
-// 	    	console.log("error :"+err)
-// 	    }
-// 	  });
-// }
-
 $(document).on("input", "#signupForm .username", function () {
 	$(".error, .text-success").remove();
 
@@ -172,21 +211,6 @@ $(document).on("input", "#signupForm .username", function () {
 		}
 	});
 });
-
-function isUsernameExist(username, callback) {
-	let data = { username_validation: true, username: username };
-	$.ajax({
-		type: "POST",
-		url: "controllers/controller.php",
-		data: data,
-		success: function (response) {
-			if (response) {
-				callback(response);
-			}
-		}
-	});
-}
-
 function validateUserName(username, usernameCtrl, callback) {
 	let isValid = true;
 	if (username.includes(" ")) {
@@ -229,58 +253,52 @@ function validateUserName(username, usernameCtrl, callback) {
 		}
 	});
 }
-
 $(document).on("input", ".password, .cpassword", function () {
 	$(this).closest('.form-group').find(".error").remove();
 });
 
-// $(document).on("click",".btnSentBox", function(){
-// 	$(".btnInBox").removeClass("active");
-// 	$(".btnSentBox").addClass("active");
+}
 
-// 	$("#inboxMsg").hide();
-// 	$("#sentboxMsg").show();
-// });
-
-$(document).on("click",".btnInBox", function(){
-	window.location.reload();
-});
-$(document).on("click", ".btnSentBox", function () {
-	$(".btnInBox").removeClass("active");
-	$(".btnSentBox").removeClass("active");
-	$(".btnNewMsgBox").removeClass("active");
-	$(this).addClass("active");
-	$(".newMsgBox").hide();
-	$(".inboxsentbox").show();
-
-	let data = { getAllMessageList: true };
-	let btnMsgCtrl = $(this);
-	$(".errormsg").html("");
-	$(".msgBox").html('<center><div class="spinner-border text-danger mt-3"></div></center>');
+// ===================== js for multiple pages ===============================
+$(document).on("click", "#logout", function () {
+	$("#logout").append(btnloader);
+	let data = { logout: true };
 	$.ajax({
 		type: "POST",
 		url: "controllers/controller.php",
 		data: data,
 		success: function (response) {
-			$(".msgBox").html(response);
-			let abc = $(this).hasClass("btnInBox");
-			let bcd = $(this).hasClass("btnSentBox");
-			if (btnMsgCtrl.hasClass("btnInBox")) {
-				$(".btnInBox").addClass("active");
-				$(".btnSentBox").removeClass("active");
-				$("#inboxMsg").show();
-				$("#sentboxMsg").hide();
+			if (response) {
+				window.location.href = logouthref;
 			}
-			else if (btnMsgCtrl.hasClass("btnSentBox")) {
-				$(".btnInBox").removeClass("active");
-				$(".btnSentBox").addClass("active");
-				$("#inboxMsg").hide();
-				$("#sentboxMsg").show();
-			}
-			
+		},
+		error: function (error) {
+			console.log(error);
 		}
 	});
 });
+
+
+
+$(document).on("click", ".btnHome", function () {
+	window.location.href = userhomehref;
+});
+
+
+function isUsernameExist(username, callback) {
+	let data = { username_validation: true, username: username };
+	$.ajax({
+		type: "POST",
+		url: "controllers/controller.php",
+		data: data,
+		success: function (response) {
+			if (response) {
+				callback(response);
+			}
+		}
+	});
+}
+
 
 
 
@@ -394,103 +412,8 @@ $("#sndmsgForm").submit(function (e) {
 	});
 });
 
-$(document).on("click", ".btnCopy", function () {
-	var copyText = $(document).find(".profilelink").text();
-	let temp = $("<input>");
-	$("body").append(temp);
-	temp.val(copyText).select();
-	document.execCommand("copy");
-	temp.remove();
-	//$(this).attr("title", 'Copied: ' + copyText);
-	$(this).find(".myPlPopup").toggleClass("show");
-    setTimeout(function(){
-    	$(".myPlPopup").toggleClass("show");
-    }, 1000);
-	//buildModal({type:"alert", content:"Your Profile Link has been copied."})
-});
-
 
 $(document).on("click", ".btnplinkhome", function () {
 	window.location.href = logouthref;
 });
-//$(location).attr('href',url);
-$(document).on("click", ".btnPopup", function () {
-	
-		let abc=$("<div id='pop-window'></div>");
-		abc.appendTo('body');
-		$("#pop-window").html('<div class="popcontent"><div class="d-flex justify-content-center">\
-  <div class="spinner-border" role="status">\
-    <span class="sr-only">Loading...</span>\
-  </div>\
-</div></div>');
-});
-
-function restrictVisitor()
-{
-	if(_constantClient.UserType=='visitor')
-	{
-		$(".restrictVisitor").remove();
-	}
-}
-
-function restrictedElement(){
-	if(window.location.pathname==_constantClient.rootdir+"/groupvisitor.php")
-	{
-		if($(".spnGroupAdmin").text()!=_constantClient.UserName || _constantClient.UserType=='visitor')
-	{
-		$(".restrictElement").remove();
-	}
-	}
-}
-
-$(document).on("click",".btnNewMsgBox", function(){
-	$(".btnInBox").removeClass("active");
-	$(".btnSentBox").removeClass("active");
-	$(this).addClass("active");
-
-	$(".inboxsentbox").hide();
-	$(".newMsgBox").show();
-});
-
-	var getCanvas; 
-$(document).on("click",".btnpreviewfeedback", function(){
-	
-	let t=$(this);
-	let dataid=t.attr("data-id");
-	t.closest("#inboxMsg").find("[dwnld-id]").hide();
-	//t.closest("#inboxMsg").find("[dwnld-id='"+dataid+"']").show();
-	
-	
-});
-
-function generateImageOfMsg(){
-	let lengthh=$(document).find('[dwnld-id]').length;
-	$(document).find('[dwnld-id]').each(function(){
-	$(this).show();
-	let element=$(this);
-	let dataid=element.attr("dwnld-id");
-	html2canvas(element, { 
-		onrendered: function(canvas) {   
-			var imgageData =canvas.toDataURL("image/png").replace( 
-			    /^data:image\/png/, "data:application/octet-stream");
-				let tt=element.closest("#inboxMsg").find("[data-id='"+dataid+"']");
-			    tt.attr("download","abcdefg.png").attr( 
-			    "href", imgageData);
-			     element.hide();
-			    //document.body.appendChild(canvas);
-		} 
-	}); 
-});
-}
-// if($(window).width()>=720)
-// 	{
-// 		generateImageOfMsg();
-// 	}
-// else
-// {
-// 	$(".ppppp").hide();
-// }
-generateImageOfMsg();
-
-
 

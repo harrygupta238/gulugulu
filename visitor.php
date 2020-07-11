@@ -14,20 +14,13 @@ setVisitorCookie();
 			<div class="container">
 				<div class="row d-flex justify-content-center">
 					<div class=" col-lg-8 col-xl-8 col-sm-12 col-md-12">
-					<p class="text-center p-3">You are logged in as : <span class="text-info">Visitor  &nbsp;&nbsp;<button type="button" id="logout" data-toggle="tooltip" data-placement="top" title="logout" class="btn btn-danger btn-sm btnHome mt-1">
-				 <span class="fas fa-sign-out-alt" aria-hidden="true"></span> 
-				</button></span></p>
-						<p>
-						Hey, What are you waiting for, it's time to do some  
-							<span class="" style="color: #24305E">GuluGulu</span> with your loved ones.
-					
-						</p>
+					<p class="text-center p-3 border-bottom">You : <span class="text-info"><?php echo @$_COOKIE["rndmusrnm"]; ?></span></p>
 						<p>
 						Enter the username of your friend in username field, and fill up the message box with your message you want to tell your friend secretly.
-					</p>
+						</p>
 						<p>
 						Don't worry your friend will not be able to see who shared this message to him/her.
-					</p>
+						</p>
 					</div>
 				</div>
 				<form action="#" class="needs-validation" id="sndmsgForm" method="post">

@@ -9,8 +9,8 @@ if($auth==false)
 		include("headerlink.php");
 		include("header.php"); 
  ?>
-		<div class="container p-3 border-top text-secondary userhome_body">
-			<p class="text-center">You are logged in as : <span class="text-info"> 
+		<div class="container p-3 border-top border-bottom text-secondary userhome_body">
+			<p class="text-center">You : <span class="text-info"> 
 			<?php echo $_SESSION["lggedinusrnm"]; ?> </span><br>
 			
 			<span class="text-center"> Click button to copy your profile link:
@@ -32,7 +32,7 @@ if($auth==false)
 				<button type="button" data-toggle="tooltip" data-placement="top" title="Sent Messages"  class="btn btn-info btn-sm mt-1 btnSentBox">
 					Sent  
 				</button>
-				<button type="button" id="btnGroupChatpage" data-toggle="tooltip" data-placement="top" title="Group Chat" class="btn btn-info btn-sm btnGroupChatpage mt-1">
+				<button type="button" id="btnGroupChatpage" data-toggle="tooltip" data-placement="top" title="Chat Rooms" class="btn btn-info btn-sm btnGroupChatpage mt-1">
 					Chat Rooms <span class="fas fa-users" aria-hidden="true"></span> 
 				</button>
 				<button type="button" id="logout" data-toggle="tooltip" data-placement="top" title="logout" class="btn btn-danger btn-sm btnHome mt-1">
@@ -45,11 +45,7 @@ if($auth==false)
 			<div class="container">
 				<div class="row d-flex justify-content-center">
 					<div id="copy_content" class="col-lg-8 col-xl-8 col-sm-12 col-md-12">
-						<p>
-						Hey, what are you waiting for, it's time to do some  
-						<span class="text-danger">GuluGulu</span> with your loved ones.
-						</p>
-						<p>Copy the above profile-link and share on social media, tell your friends to share their thoughts about you secretly. </p>
+						
 						<p>
 						Enter the username of your friend in username field, and fill up the message box with your message you want to tell your friend secretly.
 						</p>
@@ -84,20 +80,20 @@ if($auth==false)
 					<div class="row d-flex justify-content-center text-center">
 						<div class="form-group col-lg-4 col-xl-4 col-sm-4 col-md-4">
 							<button type="submit" class="btn btn-primary btnMsgSubmit">
-								<span class="fas fa-paper-plane"></span> Send
+								 Send <span class="fas fa-paper-plane"></span>
 							</button>
 						</div>
 					</div>
 				</form>
 			</div>
-			<hr>
 		</div>
 
-			<div class="container border-top border-bottom p-3 inboxsentbox text-white userhome_body">
+			<div class="container border-bottom p-3 inboxsentbox text-secondary  userhome_body">
 				<div class="">
 					<div class="row d-flex justify-content-center">
 						<div class="col-lg-8 col-xl-8 col-sm-12 col-md-12 msgBox">
-							<div id="inboxMsg" class="">
+							
+							<div id="inboxMsg" class="text-white">
 								<?php  
 									@$messages=getAllMessageList();
 									//var_dump($messages);

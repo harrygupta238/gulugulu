@@ -12,12 +12,27 @@ if($auth==false)
 
 		
 		<div class="container p-3 text-center text-secondary" style="margin-bottom: -2em;background-color: #f0ededa3">
-			<p>
-				<button type="button" class="btn btn-info btn-sm btnHome">
+			<p class="text-center">You are logged in as : <span class="text-info"> 
+			<?php echo $_SESSION["lggedinusrnm"]; ?> </span><br>
+			
+			<span class="text-center"> Click button to copy your profile link:
+				<span class="profilelink bg-white" style="padding:5px;display: none">
+			    </span>
+				<span class="btn btn-dark btnCopy btn-sm ml-1 popup" data-toggle="tooltip" data-placement="right" title="copy to clipboard">
+					<span class="fas fa-copy" aria-hidden="true"></span>
+					<span class="popuptext myPlPopup" id="">Copied</span>
+				</span>
+				 
+			</span><br>
+
+				<button type="button" data-toggle="tooltip" data-placement="top" title="Home" class="btn btn-info btn-sm btnHome">
 				<span class="fas fa-home"></span>
 				</button>
-				<button type="button" class="btn btn-info btn-sm btnNewGroup">
+				<button type="button" data-toggle="tooltip" data-placement="top" title="New Group" class="btn btn-info btn-sm btnNewGroup">
 				<span class="fas fa-plus"></span> New Group
+				</button>
+				<button type="button" id="logout" data-toggle="tooltip" data-placement="top" title="logout" class="btn btn-danger btn-sm btnHome">
+				 <span class="fas fa-sign-out-alt" aria-hidden="true"></span> 
 				</button>
 			</p>
 			

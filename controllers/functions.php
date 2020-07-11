@@ -204,7 +204,6 @@ date_default_timezone_set('Asia/Kolkata');
   	unset($_SESSION["lggedinusrnm"]);
   	unset($_SESSION["userid"]);
     $_SESSION["logout"]="logout";
-    setcookie("rndmusrnm", "", time() - 3600, "/");
     setcookie("lggedinusrnm", "", time() - 3600, "/");
     
   }

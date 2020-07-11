@@ -1,3 +1,4 @@
+
  const _constantClient={};
 _constantClient.rootdir="/gulugulu";
 _constantClient.OneWayFeedback="OneWayFeedback";
@@ -58,7 +59,7 @@ function calDatetimeDiff(dt1)
 				  <div class="modal-dialog" role="document">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <p>${param.content}</p>
+				        ${param.content}
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							          <span aria-hidden="true">&times;</span>
 				        </button>
@@ -109,5 +110,40 @@ function addStyleInModal(modal)
 		$("body").removeClass("modal-open").removeAttr("style");	
 	});
 }
+function restrictVisitor()
+{
+	if(_constantClient.UserType=='visitor')
+	{
+		$(".restrictVisitor").remove();
+	}
+}
 
+function restrictedElement(){
+	if(window.location.pathname==_constantClient.rootdir+"/groupvisitor.php")
+	{
+		if($(".spnGroupAdmin").text()!=_constantClient.UserName || _constantClient.UserType=='visitor')
+	{
+		$(".restrictElement").remove();
+	}
+	}
+}
+function generateImageOfMsg(){
+	let lengthh=$(document).find('[dwnld-id]').length;
+	$(document).find('[dwnld-id]').each(function(){
+	$(this).show();
+	let element=$(this);
+	let dataid=element.attr("dwnld-id");
+	html2canvas(element, { 
+		onrendered: function(canvas) {   
+			var imgageData =canvas.toDataURL("image/png").replace( 
+			    /^data:image\/png/, "data:application/octet-stream");
+				let tt=element.closest("#inboxMsg").find("[data-id='"+dataid+"']");
+			    tt.attr("download","abcdefg.png").attr( 
+			    "href", imgageData);
+			     element.hide();
+			    //document.body.appendChild(canvas);
+		} 
+	}); 
+});
+}
 
