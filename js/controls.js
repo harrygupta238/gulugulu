@@ -16,10 +16,10 @@ and the fun part is you won't be able to know who sent you the messages.
 </p>`;
 	buildModal({type:"alert", content:wlcmmessage});
 	$(document).on("click", ".btnGroupChatpage", function () {
-	window.location.href = groupchatpagehref;
+	 window.location.href = groupchatpagehref;
 	});
 	$(document).on("click",".btnInBox", function(){
-	window.location.reload();
+	 window.location.reload();
 	});
 $(document).on("click", ".btnSentBox", function () {
 	$(".btnInBox").removeClass("active");
