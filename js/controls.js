@@ -96,7 +96,7 @@ generateImageOfMsg();
 	
 
 // ===================== js for index.php===============================
-if(window.location.pathname==_constantClient.rootdir+"/index.php"){
+if(window.location.pathname==_constantClient.rootdir+"/index.php" || window.location.pathname==_constantClient.rootdir+"/"){
 
 $(document).on("click", ".btnLogin", function () {
 	//$(".defaultContent").hide();
