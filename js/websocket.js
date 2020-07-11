@@ -19,7 +19,7 @@ var wsUri =protocol+ "localhost:8090/controllers/php-socket.php";
 		        case "OneWayFeedback":
 		        	if(_constantClient.UserName==Data.To){
 		        		MessageHtml=`<p class="text-dark border-bottom b-3 p-3 m-4 inbox_content" style="background-color:#b8f7f6;">
-												<i class="fas fa-clock" style="font-size: .7em"> 1m ago</i><a href="#" class="btnpreviewfeedback float-right" data-id="${Data.MessageID}" ><i class="fa fa-download" style="font-size: 1em;margin-top: 0px;color: black;cursor: pointer;float: right;"></i></a><br>
+												<i class="fas fa-clock" style="font-size: .7em"> 1m ago</i><br>
 												${Data.Message}<br>  
 									    	</p>`;
 						$('#inboxMsg').prepend(MessageHtml);
